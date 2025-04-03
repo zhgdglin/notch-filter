@@ -18,10 +18,11 @@
 #include "max3221.h"  // RS232
 #include "ds1302.h"   // RTC
 #include "demodu.h"
+//#include "notch.h"    //滤波器
 
 
 
-#define BUFF_SIZE (2500)  // 缓存数组的大小   
+#define BUFF_SIZE (100)  // 缓存数组的大小   
 
 
 
@@ -53,6 +54,10 @@ extern	volatile uint32_t Wakeup_signal_Low_cnt;
 	
 extern  float  AD7767_Ping[BUFF_SIZE];  
 extern  float  AD7767_Pang[BUFF_SIZE];
+extern  float  output_Ping[BUFF_SIZE];
+extern  float  output_Pang[BUFF_SIZE];
+extern  float  fre_ping[BUFF_SIZE];
+extern  float  fre_pang[BUFF_SIZE];
 extern  float  *p_sd;     			//    SD卡写入
 extern  float  *p_ad_begin; 
 

@@ -72,3 +72,6 @@ bjc_2\ad7767.o: ../user/ds1302.h
 bjc_2\ad7767.o: ../user/demodu.h
 bjc_2\ad7767.o: ../Core/Inc/tim.h
 bjc_2\ad7767.o: ../Core/Inc/spi.h
+bjc_2\ad7767.o: ../Core/Inc/usart.h
+bjc_2\ad7767.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h
+bjc_2\ad7767.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart_ex.h

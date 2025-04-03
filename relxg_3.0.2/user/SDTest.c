@@ -181,7 +181,7 @@ void SD_Write_Dat(void)
 	{
 
 		SD_cnt++;
-		if(SD_cnt >= 1000 + 1) // 测试1000个
+		if(SD_cnt >= 10 + 1) // 测试1000个
 		{
 			return;
 		}
@@ -195,7 +195,8 @@ void SD_Write_Dat(void)
 		//SD_ctreate_new_file();
 		
 		//f_lseek(&fnew,f_size(&fnew));  // 调整写入指针位置
-		res_sd = f_write(&fnew, AD7767_Ping , BUFF_SIZE*4, &fnum);   // 第三个变量是写入的字节数  4096 x 4   修改 BUFF_SIZE
+		//res_sd = f_write(&fnew, AD7767_Ping , BUFF_SIZE*4, &fnum);   // 第三个变量是写入的字节数  4096 x 4   修改 BUFF_SIZE
+		//res_sd = f_write(&fnew, AD7767_Ping, BUFF_SIZE*4, &fnum);	
 		printf("f_write  Ping %s \r\n", FR_Table[res_sd]);
 		if(res_sd != FR_OK)
 			{
@@ -219,7 +220,7 @@ void SD_Write_Dat(void)
 	else if((Pang_full_flag == 1) && (p_sd!=NULL))//&&(Po_Buf_Send_Package_Finish_Flag == true)
 	{
 		SD_cnt++;
-		if(SD_cnt >= 1000 + 1) // 测试1000个
+		if(SD_cnt >= 10 + 1) // 测试1000个
 		{
 			return;
 		}
@@ -238,7 +239,8 @@ void SD_Write_Dat(void)
 //			 Error_Handler();
 //			}
 		//	f_lseek(&fnew,f_size(&fnew));  // 调整写入指针位置
-		res_sd = f_write(&fnew, AD7767_Pang, BUFF_SIZE*4, &fnum);  
+		res_sd = f_write(&fnew, AD7767_Pang, BUFF_SIZE*4, &fnum);
+		//res_sd = f_write(&fnew, output_Pang, BUFF_SIZE*4, &fnum);		
 		printf("f_write  Pang %s \r\n", FR_Table[res_sd]);
 		if(res_sd != FR_OK)
 			{

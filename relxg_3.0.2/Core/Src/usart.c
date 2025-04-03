@@ -235,9 +235,9 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 int fputc(int ch, FILE *f)
 {
 	#ifdef USE_RS232
-		return HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, 0xFFFF);
+		return HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
 	#else 
-		return HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);   
+		return HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, 0xFFFF);   
 	#endif
 
 }
