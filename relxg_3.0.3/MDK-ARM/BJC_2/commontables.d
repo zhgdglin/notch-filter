@@ -1,0 +1,12 @@
+bjc_2\commontables.o: ..\CMSIS\Source\CommonTables\CommonTables.c
+bjc_2\commontables.o: ..\CMSIS\Source\CommonTables\arm_common_tables.c
+bjc_2\commontables.o: ..\CMSIS\Include\arm_math.h
+bjc_2\commontables.o: ..\CMSIS\Include\cmsis_compiler.h
+bjc_2\commontables.o: E:\mdk\ARM\ARMCC\Bin\..\include\stdint.h
+bjc_2\commontables.o: ..\CMSIS\Include\cmsis_armcc.h
+bjc_2\commontables.o: E:\mdk\ARM\ARMCC\Bin\..\include\string.h
+bjc_2\commontables.o: E:\mdk\ARM\ARMCC\Bin\..\include\math.h
+bjc_2\commontables.o: E:\mdk\ARM\ARMCC\Bin\..\include\float.h
+bjc_2\commontables.o: ..\CMSIS\Include\arm_common_tables.h
+bjc_2\commontables.o: ..\CMSIS\Source\CommonTables\arm_const_structs.c
+bjc_2\commontables.o: ..\CMSIS\Include\arm_const_structs.h

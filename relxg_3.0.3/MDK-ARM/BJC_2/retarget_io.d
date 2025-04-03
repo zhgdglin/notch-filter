@@ -1,0 +1,9 @@
+bjc_2\retarget_io.o: E:\mdk\ARM\PACK\Keil\ARM_Compiler\1.7.2\Source\retarget_io.c
+bjc_2\retarget_io.o: E:\mdk\ARM\ARMCC\Bin\..\include\string.h
+bjc_2\retarget_io.o: E:\mdk\ARM\ARMCC\Bin\..\include\stdint.h
+bjc_2\retarget_io.o: E:\mdk\ARM\ARMCC\Bin\..\include\stdio.h
+bjc_2\retarget_io.o: E:\mdk\ARM\ARMCC\Bin\..\include\stdlib.h
+bjc_2\retarget_io.o: E:\mdk\ARM\ARMCC\Bin\..\include\assert.h
+bjc_2\retarget_io.o: E:\mdk\ARM\ARMCC\Bin\..\include\rt_sys.h
+bjc_2\retarget_io.o: .\RTE\_BJC_2\RTE_Components.h
+bjc_2\retarget_io.o: E:\mdk\ARM\PACK\Keil\ARM_Compiler\1.7.2\Include\EventRecorder.h
