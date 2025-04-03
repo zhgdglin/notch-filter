@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Produced by Beyond Compare 4 from Scooter Software -->
+<BCSessions Version="1" MinVersion="1">
+	<TSessionFolder>
+		<Items>
+			<TSessionFolder>
+				<Items>
+					<TDirCompareSession Value="同步256ms长度-32ByteBus">
+						<LastModified Value="2022-08-29 16:31:34"/>
+						<Specs>
+							<Left Value="C:\Users\sunyubo\Desktop\水面船-潜标\01_水面船工程\同步256ms长度-32ByteBus"/>
+							<Right Value="C:\Users\sunyubo\Desktop\水面船-潜标\01_水面船工程_jiawei\同步256ms长度-32ByteBus"/>
+						</Specs>
+					</TDirCompareSession>
+				</Items>
+			</TSessionFolder>
+		</Items>
+	</TSessionFolder>
+</BCSessions>

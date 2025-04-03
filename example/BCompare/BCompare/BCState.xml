@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Produced by Beyond Compare 4 from Scooter Software -->
+<BCState Version="1" MinVersion="1">
+	<TBcState>
+		<FirstStartup Value="False"/>
+		<FormPositions>
+			<TViewFrame Value="32;32;1664;907;;120"/>
+		</FormPositions>
+	</TBcState>
+	<TDirCompareState>
+		<LeftMRUSpecs>
+			<_0 Value="C:\Users\57147\Desktop\jidi\MASS_6144_fenzhen_dipin_yuanban"/>
+			<_1 Value="C:\Users\sunyubo\Desktop\水面船-潜标\01_水面船工程\同步256ms长度-32ByteBus"/>
+		</LeftMRUSpecs>
+		<LogHeight Value="0"/>
+		<RightMRUSpecs>
+			<_0 Value="H:\大连试验\1#潜标\Node1同步256ms长度-32ByteBus-6vPP\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus"/>
+			<_1 Value="C:\Users\sunyubo\Desktop\水面船-潜标\01_水面船工程_jiawei\同步256ms长度-32ByteBus"/>
+		</RightMRUSpecs>
+		<ShowToolbar Value="False"/>
+	</TDirCompareState>
+	<THomeState>
+		<SessionType Value="TDirCompareSession"/>
+	</THomeState>
+	<TTextCompareState>
+		<LeftMRUSpecs>
+			<_0 Value="C:\Users\57147\Desktop\jidi\MASS_6144_fenzhen_dipin_yuanban\USER\main.c"/>
+			<_1 Value="C:\Users\57147\Desktop\jidi\MASS_6144_fenzhen_dipin_yuanban\USER\main.h"/>
+			<_2 Value="C:\Users\57147\Desktop\jidi\MASS_6144_fenzhen_dipin_yuanban\SOFTWARE\sys_init.c"/>
+			<_3 Value="C:\Users\57147\Desktop\jidi\MASS_6144_fenzhen_dipin_yuanban\HARDWARE\TIMER\timer.c"/>
+			<_4 Value="C:\Users\57147\Desktop\jidi\MASS_6144_fenzhen_dipin_yuanban\HARDWARE\TIMER\timer.h"/>
+			<_5 Value="C:\Users\57147\Desktop\jidi\MASS_6144_fenzhen_dipin_yuanban\HARDWARE\RTC\rtc.h"/>
+			<_6 Value="C:\Users\57147\Desktop\jidi\MASS_6144_fenzhen_dipin_yuanban\HARDWARE\RTC\rtc.c"/>
+			<_7 Value="C:\Users\57147\Desktop\jidi\MASS_6144_fenzhen_dipin_yuanban\HARDWARE\LED\led.c"/>
+			<_8 Value="C:\Users\57147\Desktop\jidi\MASS_6144_fenzhen_dipin_yuanban\HARDWARE\LED\led.h"/>
+		</LeftMRUSpecs>
+		<MRUFonts>
+			<_0 Value="Consolas;10"/>
+		</MRUFonts>
+		<RightMRUSpecs>
+			<_0 Value="H:\大连试验\1#潜标\Node1同步256ms长度-32ByteBus-6vPP\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\USER\main.c"/>
+			<_1 Value="H:\大连试验\1#潜标\Node1同步256ms长度-32ByteBus-6vPP\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\USER\main.h"/>
+			<_2 Value="H:\大连试验\1#潜标\Node1同步256ms长度-32ByteBus-6vPP\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\SOFTWARE\sys_init.c"/>
+			<_3 Value="H:\大连试验\1#潜标\Node1同步256ms长度-32ByteBus-6vPP\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\HARDWARE\TIMER\timer.c"/>
+			<_4 Value="H:\大连试验\1#潜标\Node1同步256ms长度-32ByteBus-6vPP\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\HARDWARE\TIMER\timer.h"/>
+			<_5 Value="H:\大连试验\1#潜标\Node1同步256ms长度-32ByteBus-6vPP\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\HARDWARE\RTC\rtc.h"/>
+			<_6 Value="H:\大连试验\1#潜标\Node1同步256ms长度-32ByteBus-6vPP\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\HARDWARE\RTC\rtc.c"/>
+			<_7 Value="H:\大连试验\1#潜标\Node1同步256ms长度-32ByteBus-6vPP\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\HARDWARE\LED\led.c"/>
+			<_8 Value="H:\大连试验\1#潜标\Node1同步256ms长度-32ByteBus-6vPP\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\HARDWARE\LED\led.h"/>
+		</RightMRUSpecs>
+	</TTextCompareState>
+</BCState>

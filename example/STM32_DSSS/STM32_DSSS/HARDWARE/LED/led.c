@@ -1,0 +1,105 @@
+#include "led.h"
+	
+
+//初始化PB0,PB1为输出.并使能这两个口的时钟		    
+//LED IO初始化
+void LED_Init(void)
+{
+	GPIO_InitTypeDef GPIO_Initure;
+	__HAL_RCC_GPIOH_CLK_ENABLE();
+
+	GPIO_Initure.Pin=GPIO_PIN_4;
+	GPIO_Initure.Mode=GPIO_MODE_OUTPUT_PP;
+	GPIO_Initure.Pull=GPIO_PULLUP;
+	GPIO_Initure.Speed=GPIO_SPEED_FREQ_VERY_HIGH;
+	HAL_GPIO_Init(GPIOH,&GPIO_Initure);
+
+	HAL_GPIO_WritePin(GPIOH,GPIO_PIN_4,GPIO_PIN_SET);
+	
+	//配置传输方向GPIO-->PI10
+	__HAL_RCC_GPIOI_CLK_ENABLE();
+	GPIO_Initure.Pin=GPIO_PIN_10|GPIO_PIN_11|GPIO_PIN_1|GPIO_PIN_2;
+	GPIO_Initure.Mode=GPIO_MODE_OUTPUT_PP;
+	GPIO_Initure.Pull=GPIO_PULLUP;
+	GPIO_Initure.Speed=GPIO_SPEED_FREQ_VERY_HIGH;
+	HAL_GPIO_Init(GPIOI,&GPIO_Initure);	
+
+	//ADC前端放大倍数配置
+	//PC6,PG14,PG13,PC1,PA1-->G4,G3,G2,G1,G0 一级放大
+	//PB11,PA7,PC4,PC5,PA2 -->G4,G3,G2,G1,G0 二级放大
+	__HAL_RCC_GPIOA_CLK_ENABLE();
+	GPIO_Initure.Pin=GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_7;
+	GPIO_Initure.Mode=GPIO_MODE_OUTPUT_PP;
+	GPIO_Initure.Pull=GPIO_PULLUP;
+	GPIO_Initure.Speed=GPIO_SPEED_FREQ_VERY_HIGH;
+	HAL_GPIO_Init(GPIOA,&GPIO_Initure);
+	
+	__HAL_RCC_GPIOB_CLK_ENABLE();
+	GPIO_Initure.Pin=GPIO_PIN_11;
+	GPIO_Initure.Mode=GPIO_MODE_OUTPUT_PP;
+	GPIO_Initure.Pull=GPIO_PULLUP;
+	GPIO_Initure.Speed=GPIO_SPEED_FREQ_VERY_HIGH;
+	HAL_GPIO_Init(GPIOB,&GPIO_Initure);
+	
+	__HAL_RCC_GPIOC_CLK_ENABLE();
+	GPIO_Initure.Pin=GPIO_PIN_1|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6;
+	GPIO_Initure.Mode=GPIO_MODE_OUTPUT_PP;
+	GPIO_Initure.Pull=GPIO_PULLUP;
+	GPIO_Initure.Speed=GPIO_SPEED_FREQ_VERY_HIGH;
+	HAL_GPIO_Init(GPIOC,&GPIO_Initure);
+	
+	__HAL_RCC_GPIOG_CLK_ENABLE();
+	GPIO_Initure.Pin=GPIO_PIN_13|GPIO_PIN_14;
+	GPIO_Initure.Mode=GPIO_MODE_OUTPUT_PP;
+	GPIO_Initure.Pull=GPIO_PULLUP;
+	GPIO_Initure.Speed=GPIO_SPEED_FREQ_VERY_HIGH;
+	HAL_GPIO_Init(GPIOG,&GPIO_Initure);
+	
+	//一级放大
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_6,GPIO_PIN_RESET);	//G4
+	HAL_GPIO_WritePin(GPIOG,GPIO_PIN_14,GPIO_PIN_RESET);//G3
+	HAL_GPIO_WritePin(GPIOG,GPIO_PIN_13,GPIO_PIN_RESET);	//G2
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_SET); //G1
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,GPIO_PIN_SET);	//G0
+	
+	//二级放大
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_11,GPIO_PIN_RESET);//G4
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_7,GPIO_PIN_RESET);	//G3
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_4,GPIO_PIN_RESET);		//G2
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_5,GPIO_PIN_SET);	//G1
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,GPIO_PIN_SET);	//G0
+}
+
+void POWER_AMP_ON_ZZ_NEW(void)
+{
+	IIC_Start();
+	IIC_Send_Byte(0x40);
+	IIC_Wait_Ack();
+	IIC_Send_Byte(0x1F);
+	IIC_Wait_Ack();
+	IIC_Stop();
+	delay_ms(10);
+}
+
+void POWER_AMP_OFF_ZZ_NEW(void)
+{
+	IIC_Start();
+	IIC_Send_Byte(0x40);
+	IIC_Wait_Ack();
+	IIC_Send_Byte(0x00);
+	IIC_Wait_Ack();
+	IIC_Stop();
+	delay_ms(10);
+}
+
+
+
+
+
+
+
+
+
+
+
+

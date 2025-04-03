@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Produced by Beyond Compare 4 from Scooter Software -->
+<BCState Version="1" MinVersion="1">
+	<TBcState>
+		<FirstStartup Value="False"/>
+		<FormPositions>
+			<TViewFrame Value="165;217;2341;1495;;192"/>
+		</FormPositions>
+	</TBcState>
+	<TDirCompareState>
+		<LeftMRUSpecs>
+			<_0 Value="C:\Users\sunyubo\Desktop\水面船-潜标\01_水面船工程\同步256ms长度-32ByteBus"/>
+		</LeftMRUSpecs>
+		<LogHeight Value="0"/>
+		<RightMRUSpecs>
+			<_0 Value="C:\Users\sunyubo\Desktop\水面船-潜标\01_水面船工程_jiawei\同步256ms长度-32ByteBus"/>
+		</RightMRUSpecs>
+		<ShowToolbar Value="False"/>
+	</TDirCompareState>
+	<THomeState>
+		<SessionType Value="TDirCompareSession"/>
+	</THomeState>
+	<TTextCompareState>
+		<LeftMRUSpecs>
+			<_0 Value="C:\Users\sunyubo\Desktop\水面船-潜标\01_水面船工程\同步256ms长度-32ByteBus\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\SOFTWARE\demodulate.c"/>
+			<_1 Value="C:\Users\sunyubo\Desktop\水面船-潜标\01_水面船工程\同步256ms长度-32ByteBus\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\HARDWARE\LED\led.c"/>
+			<_2 Value="C:\Users\sunyubo\Desktop\水面船-潜标\01_水面船工程\同步256ms长度-32ByteBus\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\SOFTWARE\sys_init.c"/>
+			<_3 Value="C:\Users\sunyubo\Desktop\水面船-潜标\01_水面船工程\同步256ms长度-32ByteBus\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\SOFTWARE\function.c"/>
+			<_4 Value="C:\Users\sunyubo\Desktop\水面船-潜标\01_水面船工程\同步256ms长度-32ByteBus\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\SOFTWARE\logic_ctrl.c"/>
+		</LeftMRUSpecs>
+		<MRUFonts>
+			<_0 Value="Consolas;10"/>
+		</MRUFonts>
+		<RightMRUSpecs>
+			<_0 Value="C:\Users\sunyubo\Desktop\水面船-潜标\01_水面船工程_jiawei\同步256ms长度-32ByteBus\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\SOFTWARE\demodulate.c"/>
+			<_1 Value="C:\Users\sunyubo\Desktop\水面船-潜标\01_水面船工程_jiawei\同步256ms长度-32ByteBus\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\HARDWARE\LED\led.c"/>
+			<_2 Value="C:\Users\sunyubo\Desktop\水面船-潜标\01_水面船工程_jiawei\同步256ms长度-32ByteBus\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\SOFTWARE\sys_init.c"/>
+			<_3 Value="C:\Users\sunyubo\Desktop\水面船-潜标\01_水面船工程_jiawei\同步256ms长度-32ByteBus\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\SOFTWARE\function.c"/>
+			<_4 Value="C:\Users\sunyubo\Desktop\水面船-潜标\01_水面船工程_jiawei\同步256ms长度-32ByteBus\_01_CCode\MASS_V2.1-Syn256ms-定帧-32Bus\SOFTWARE\logic_ctrl.c"/>
+		</RightMRUSpecs>
+	</TTextCompareState>
+</BCState>
