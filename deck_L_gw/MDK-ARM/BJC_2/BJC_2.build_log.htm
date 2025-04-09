@@ -1,0 +1,111 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: μVision V5.29.0.0
+Copyright (C) 2019 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: SK qiqi, SYS, LIC=585FJ-URPHB-Z9WG9-4RFLG-24WUM-D8S9C
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.29.0.0
+Toolchain Path:  D:\Work\app\Keil MDK5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.29.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.7.0
+Dialog DLL:      TCM.DLL V1.36.5.0
+ 
+<h2>Project:</h2>
+D:\Doing\releaser\甲板单元\deck_code\deck_L_715\MDK-ARM\BJC_2.uvprojx
+Project File Date:  05/27/2024
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\Work\app\Keil MDK5\ARM\ARMCC\Bin'
+Build target 'BJC_2'
+compiling Key.c...
+..\user\Key.c(122): warning:  #111-D: statement is unreachable
+  				case 0x01: KeyValue = 0x0c; goto over;break;				// 0000 0001   
+..\user\Key.c(123): warning:  #111-D: statement is unreachable
+  				case 0x02: KeyValue = 0x0d; goto over;break;				// 0000 0010
+..\user\Key.c(124): warning:  #111-D: statement is unreachable
+  				case 0x04: KeyValue = 0x0e; goto over;break;				// 0000 0100
+..\user\Key.c(125): warning:  #111-D: statement is unreachable
+  				case 0x08: KeyValue = 0x0f; goto over;break;				// 0000 1000
+..\user\Key.c(126): warning:  #111-D: statement is unreachable
+  				case 0x10: KeyValue = 0x10; goto over;break;				// 0001 0000
+..\user\Key.c(136): warning:  #111-D: statement is unreachable
+  				case 0x01: KeyValue = 0x08; goto over;break;				// 0000 0001 
+..\user\Key.c(137): warning:  #111-D: statement is unreachable
+  				case 0x02: KeyValue = 0x09; goto over;break;				// 0000 0010
+..\user\Key.c(138): warning:  #111-D: statement is unreachable
+  				case 0x04: KeyValue = 0x0a; goto over;break;				// 0000 0100
+..\user\Key.c(139): warning:  #111-D: statement is unreachable
+  				case 0x08: KeyValue = 0x0b; goto over;break;				// 0000 1000
+..\user\Key.c(140): warning:  #111-D: statement is unreachable
+  				case 0x10: KeyValue = 0x20; goto over;break;				// 0001 0000
+..\user\Key.c(150): warning:  #111-D: statement is unreachable
+  				case 0x01: KeyValue = 0x04; goto over;break;				// 0000 0001 
+..\user\Key.c(151): warning:  #111-D: statement is unreachable
+  				case 0x02: KeyValue = 0x05; goto over;break;				// 0000 0010
+..\user\Key.c(152): warning:  #111-D: statement is unreachable
+  				case 0x04: KeyValue = 0x06; goto over;break;				// 0000 0100
+..\user\Key.c(153): warning:  #111-D: statement is unreachable
+  				case 0x08: KeyValue = 0x07; goto over;break;				// 0000 1000
+..\user\Key.c(154): warning:  #111-D: statement is unreachable
+  				case 0x10: KeyValue = 0x40; goto over;break;				// 0001 0000
+..\user\Key.c(164): warning:  #111-D: statement is unreachable
+  				case 0x01: KeyValue = 0x00; goto over;break;				// 0000 0001 
+..\user\Key.c(165): warning:  #111-D: statement is unreachable
+  				case 0x02: KeyValue = 0x01; goto over;break;				// 0000 0010
+..\user\Key.c(166): warning:  #111-D: statement is unreachable
+  				case 0x04: KeyValue = 0x02; goto over;break;				
+..\user\Key.c(167): warning:  #111-D: statement is unreachable
+  				case 0x08: KeyValue = 0x03; goto over;break;			
+..\user\Key.c: 19 warnings, 0 errors
+compiling APP_Work.c...
+..\Drivers\USER\APP\APP_Work.c(86): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		return Battery_Voltage*2.72;  // 2.72= 9/3.3  ，转换成电池电压
+..\Drivers\USER\APP\APP_Work.c: 1 warning, 0 errors
+compiling cmd.c...
+..\user\cmd.c(608): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  					if(recorded_time > 3.3)
+..\user\cmd.c(613): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  					 voltage_temp = recorded_time*2.72; // 转成电压值 
+..\user\cmd.c(694): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  					posture_temp = recorded_time/0.05; // 转成角度
+..\user\cmd.c: 3 warnings, 0 errors
+linking...
+Program Size: Code=52578 RO-data=6414 RW-data=676 ZI-data=11132  
+FromELF: creating hex file...
+"BJC_2\BJC_2.axf" - 0 Error(s), 23 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.6.0.pack
+                ARM.CMSIS.5.6.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.3.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32H7xx_DFP.3.1.0.pack
+                Keil.STM32H7xx_DFP.3.1.0
+                STMicroelectronics STM32H7 Series Device Support and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_BJC_2
+  D:\Work\library\Keil\ARM\CMSIS\5.6.0\CMSIS\Core\Include
+  D:\Work\library\Keil\Keil\STM32H7xx_DFP\3.1.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.3.0
+Build Time Elapsed:  00:00:04
+</pre>
+</body>
+</html>
