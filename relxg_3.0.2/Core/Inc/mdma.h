@@ -30,7 +30,7 @@
 #include "main.h"
 
 /* MDMA transfer handles -----------------------------------------------------*/
-extern MDMA_HandleTypeDef hmdma_mdma_channel0_sdmmc1_dma_endbuffer_0;
+extern MDMA_HandleTypeDef hmdma_mdma_channel40_sdmmc1_dma_endbuffer_0;
 
 /* USER CODE BEGIN Includes */
 

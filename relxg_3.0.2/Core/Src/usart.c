@@ -22,6 +22,7 @@
 
 /* USER CODE BEGIN 0 */
 //#define  USE_RS232
+//uint8_t uart1_rxbuf[10];  // 确保数组长度大于等于 10
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;
@@ -67,7 +68,7 @@ void MX_USART1_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART1_Init 2 */
-
+//	HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 10);
   /* USER CODE END USART1_Init 2 */
 
 }
@@ -235,10 +236,50 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 int fputc(int ch, FILE *f)
 {
 	#ifdef USE_RS232
-		return HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
+		return HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, 0xFFFF);
 	#else 
-		return HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, 0xFFFF);   
+		return HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);   
 	#endif
 
 }
+
+void Uart1_Puts(uint8_t *data,uint32_t data_len)
+{
+	uint32_t i;
+	for(i=0;i<data_len;i++)
+	{
+		USART1->TDR=data[i];
+		while((USART1->ISR&0x40)==0);//等待发送结束
+	}
+}
+
+
+//void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+//{
+//    if (huart->Instance == USART1)
+//    {
+//        // 检查 UART 是否有错误
+//        if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_ORE) || 
+//            __HAL_UART_GET_FLAG(&huart1, UART_FLAG_NE)  || 
+//            __HAL_UART_GET_FLAG(&huart1, UART_FLAG_FE))
+//        {
+//            __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_ORE);
+//            __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_NE);
+//            __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_FE);
+//        }
+
+//        // 使用非阻塞发送
+//        HAL_UART_Transmit_IT(&huart1, uart1_rxbuf, 10);
+
+//        // 重新开启 UART 接收中断
+//        if (HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 10) != HAL_OK)
+//        {
+//            // 发生错误，重启 UART
+//            HAL_UART_DeInit(&huart1);
+//            HAL_UART_Init(&huart1);
+//            HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 10);
+//        }
+//    }
+
+//}
 /* USER CODE END 1 */

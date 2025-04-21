@@ -106,20 +106,12 @@ int main(void)
 
   /* USER CODE BEGIN SysInit */
 	
-		/*启用ITCM */
-		uint32_t *SouceAddr = (uint32_t *)FLASH_BANK1_BASE;
-		uint32_t *DestAddr =  (uint32_t *)D1_DTCMRAM_BASE;
 
-		memcpy(DestAddr, SouceAddr, 0x400);
-		
-		/* 设置中断向量表到ITCM里面 */
-		SCB->VTOR = D1_DTCMRAM_BASE;
-		/*启用ITCM */
 		
 	MX_GPIO_Init();    
 	HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);  // ADC数据关闭，在adc7767_init中开启
-	RS232_Init();
-	MX_USART3_UART_Init();
+	MX_USART1_UART_Init();
+	
 	
 
 	if( 1 == READ_BIT(PWR -> WKUPFR, PWR_WKUPFR_WKUPF1))  // 读取唤醒标志寄存器，判断是否为唤醒状态   //  PWR_WKUPFR
@@ -192,7 +184,7 @@ int main(void)
   MX_ADC3_Init();	// 电池电压
   MX_I2C1_Init(); // MPU6050
   MX_SPI1_Init();	// ADC时序
-  MX_USART1_UART_Init();  //RS232
+  MX_USART3_UART_Init();  //RS232
   MX_FATFS_Init();
   MX_TIM12_Init(); // ADC时钟 1M
   MX_TIM2_Init();   // 5分钟定时，中断14
@@ -200,6 +192,11 @@ int main(void)
 //	//MOTOR_FORWARD;
 	MX_TIM13_Init(); // 电机，中断10   放在后面的 Motor_rotate 中
 	MX_TIM7_Init();  // 1S定时器，中断15
+	
+	__HAL_TIM_CLEAR_IT (&htim7 ,TIM_IT_UPDATE );        // 清除T7标志
+	__HAL_TIM_SET_COUNTER(&htim7, 0);   								// 清零T7计数
+	HAL_TIM_Base_Start_IT (&htim7 );                    // 允许T7中断
+
   MX_TIM4_Init();  // 发射
 
 		/* 开启5分钟定时，如果没有收到指令，则进入休眠 */
@@ -210,8 +207,7 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-
-
+ 
   /* USER CODE BEGIN 2 */
 
   printf("\r\n 初始化完成\r\n");
@@ -227,7 +223,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		APP_Process();
+//		APP_Process();
   }
   /* USER CODE END 3 */
 }
@@ -332,19 +328,17 @@ void MPU_Config(void)
   HAL_MPU_Disable();
   /** Initializes and configures the Region and the memory to be protected
   */
- /* 配置AXI SRAM的MPU属性为Write back, Read allocate，Write allocate */ 
- MPU_InitStruct.Enable           = MPU_REGION_ENABLE; 
- MPU_InitStruct.BaseAddress      = 0x24000000; 
- MPU_InitStruct.Size             = MPU_REGION_SIZE_512KB; 
- MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS; 
- MPU_InitStruct.IsBufferable     = MPU_ACCESS_BUFFERABLE; 
- MPU_InitStruct.IsCacheable      = MPU_ACCESS_CACHEABLE; 
- MPU_InitStruct.IsShareable      = MPU_ACCESS_NOT_SHAREABLE; 
- MPU_InitStruct.Number           = MPU_REGION_NUMBER0; 
- MPU_InitStruct.TypeExtField     = MPU_TEX_LEVEL1; 
- MPU_InitStruct.SubRegionDisable = 0x00; 
- MPU_InitStruct.DisableExec      = MPU_INSTRUCTION_ACCESS_ENABLE; 
- 
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+  MPU_InitStruct.BaseAddress = 0x24000000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_512KB;
+  MPU_InitStruct.SubRegionDisable = 0x0;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
   /* Enables the MPU */
