@@ -30,12 +30,12 @@
 //TIM_HandleTypeDef htim13;		// 30KHz 时基，中断，扫描限位开关和15K电机驱动
 /* USER CODE END 0 */
 
-TIM_HandleTypeDef htim2;		// 2.5S 0.4Hz定时 中断优先最低
-TIM_HandleTypeDef htim4;		// 发射PWM 
-TIM_HandleTypeDef htim6;    // 微秒级延时
-TIM_HandleTypeDef htim7;		// 秒级延时 中断
-TIM_HandleTypeDef htim12;		// ADC时钟 1M  50%
-TIM_HandleTypeDef htim13;		// 30KHz 时基，中断，扫描限位开关和15K电机驱动
+TIM_HandleTypeDef htim2;
+TIM_HandleTypeDef htim4;
+TIM_HandleTypeDef htim6;
+TIM_HandleTypeDef htim7;
+TIM_HandleTypeDef htim12;
+TIM_HandleTypeDef htim13;
 
 /* TIM2 init function */
 void MX_TIM2_Init(void)
@@ -91,36 +91,36 @@ void MX_TIM4_Init(void)
   /* USER CODE BEGIN TIM4_Init 1 */
 	
   /* USER CODE END TIM4_Init 1 */
-//  htim4.Instance = TIM4;
-//  htim4.Init.Prescaler = 0;
-//  htim4.Init.CounterMode = TIM_COUNTERMODE_CENTERALIGNED1;
-//  htim4.Init.Period = 10000-1;
-//  htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-//  htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-//  if (HAL_TIM_OC_Init(&htim4) != HAL_OK)
-//  {
-//    Error_Handler();
-//  }
-//  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-//  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-//  if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK)
-//  {
-//    Error_Handler();
-//  }
-//  sConfigOC.OCMode = TIM_OCMODE_RETRIGERRABLE_OPM1;
-//  sConfigOC.Pulse = 3500-1;
-//  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-//  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-//  if (HAL_TIM_OC_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
-//  {
-//    Error_Handler();
-//  }
-//  sConfigOC.OCMode = TIM_OCMODE_RETRIGERRABLE_OPM2;
-//  sConfigOC.Pulse = 6500-1;
-//  if (HAL_TIM_OC_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
-//  {
-//    Error_Handler();
-//  }
+  htim4.Instance = TIM4;
+  htim4.Init.Prescaler = 0;
+  htim4.Init.CounterMode = TIM_COUNTERMODE_CENTERALIGNED1;
+  htim4.Init.Period = 10000-1;
+  htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_OC_Init(&htim4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_RETRIGERRABLE_OPM1;
+  sConfigOC.Pulse = 3500-1;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  if (HAL_TIM_OC_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_RETRIGERRABLE_OPM2;
+  sConfigOC.Pulse = 6500-1;
+  if (HAL_TIM_OC_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
+  {
+    Error_Handler();
+  }
   /* USER CODE BEGIN TIM4_Init 2 */
   htim4.Instance = TIM4;
   htim4.Init.Prescaler = Timer4_Prescaler;

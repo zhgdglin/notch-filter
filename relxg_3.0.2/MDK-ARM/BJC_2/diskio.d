@@ -12,7 +12,7 @@ bjc_2\diskio.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h
 bjc_2\diskio.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h
 bjc_2\diskio.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h750xx.h
 bjc_2\diskio.o: ../Drivers/CMSIS/Include/core_cm7.h
-bjc_2\diskio.o: E:\mdk\ARM\ARMCC\Bin\..\include\stdint.h
+bjc_2\diskio.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdint.h
 bjc_2\diskio.o: ../Drivers/CMSIS/Include/cmsis_version.h
 bjc_2\diskio.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 bjc_2\diskio.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -20,8 +20,8 @@ bjc_2\diskio.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 bjc_2\diskio.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h
 bjc_2\diskio.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h
 bjc_2\diskio.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-bjc_2\diskio.o: E:\mdk\ARM\ARMCC\Bin\..\include\stddef.h
-bjc_2\diskio.o: E:\mdk\ARM\ARMCC\Bin\..\include\math.h
+bjc_2\diskio.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stddef.h
+bjc_2\diskio.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\math.h
 bjc_2\diskio.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc_ex.h
 bjc_2\diskio.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h
 bjc_2\diskio.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio_ex.h
@@ -52,4 +52,4 @@ bjc_2\diskio.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h
 bjc_2\diskio.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
 bjc_2\diskio.o: ../FATFS/Target/bsp_driver_sd.h
 bjc_2\diskio.o: ../FATFS/Target/fatfs_platform.h
-bjc_2\diskio.o: E:\mdk\ARM\ARMCC\Bin\..\include\stdlib.h
+bjc_2\diskio.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdlib.h

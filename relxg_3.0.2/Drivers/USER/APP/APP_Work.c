@@ -523,7 +523,19 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	
 	
 	 if ( htim->Instance == TIM7) {  // TIM7 1S时基
-		TIM7_1s_Flag = 1;  //			
+		TIM7_1s_Flag = 1;  //	
+		if(da_index>0)
+		{
+			TIM7_cnt++;
+			if(TIM7_cnt == 3)
+			{
+				TIM7_cnt = 0;
+				da_index = 0;
+				memset(da, 0, sizeof(da));  // 清空数组
+				memset(hex, 0, sizeof(hex));  // 清空数组
+				printf("\r\n 检测变量及数组清空成功\r\n");
+			}
+		}
 	 }
 	 
 	 

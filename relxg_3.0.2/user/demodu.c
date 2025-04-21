@@ -1,5 +1,4 @@
 #include "demodu.h"
-#include "usart.h"
 
 #define PI 3.14159265358979323846
 #define SAMPLING_RATE 62500
@@ -10,15 +9,14 @@
 #define FREQ3 11000.0
 #define FREQ4 12000.0
 
-#define THRESHOLD 1.4
-#define MIN_HIGH_SAMPLES 20
-#define MIN_LOW_SAMPLES 300
-#define MAX_COUNT 80
-#define HEX_SIZE (MAX_COUNT / 4)  // 十六进制数组的大小
+#define THRESHOLD 1.2
+#define MIN_HIGH_SAMPLES 10
+#define MIN_LOW_SAMPLES 200
 
-int da[MAX_COUNT];
-int hex[HEX_SIZE] = {0};
+uint8_t da[MAX_COUNT];
+uint8_t hex[HEX_SIZE] = {0};
 int da_index = 0;
+uint16_t TIM7_cnt = 0;
 
 AdaptiveNotchFilter filter1 = {0, 0, 2.0 * PI * 9000 / 62500};
 AdaptiveNotchFilter filter2 = {0, 0, 2.0 * PI * 10000 / 62500};
@@ -27,7 +25,7 @@ AdaptiveNotchFilter filter4 = {0, 0, 2.0 * PI * 12000 / 62500};
 
 
 //将二进制数组（int 类型）转换为十六进制数组（int）
-void binary_to_hex(int binary_array[MAX_COUNT], int hex_array[HEX_SIZE]) {
+void binary_to_hex(uint8_t binary_array[MAX_COUNT], uint8_t hex_array[HEX_SIZE]) {
     for (int i = 0; i < HEX_SIZE; i++) {
         hex_array[i] = 0;  // 初始化为 0
         for (int j = 0; j < 4; j++) {
@@ -68,6 +66,7 @@ SignalState envelope_detection_channel(float filtered_value, SignalState *channe
                 if (*low_count_ch >= MIN_LOW_SAMPLES) {
                     *channel_state = SIGNAL_ENDED;
                     result_state = SIGNAL_ENDED;
+//									printf("%d",*low_count_ch);
                 }
             }
             break;
@@ -108,6 +107,7 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							for (int j = 0; j < HEX_SIZE; j++){  // 每个字节转换为2个十六进制字符
 								printf("%X", hex[j]);
 							}
+							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
 							memset(hex, 0, sizeof(hex));  // 清空数组
@@ -115,12 +115,13 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 						}
         if (state2 == SIGNAL_ENDED) {
             da[da_index++] = 0;
-					da[da_index++] = 1;
+						da[da_index++] = 1;			
             if (da_index >= 80) {
 							binary_to_hex(da,hex);
 							for (int j = 0; j < HEX_SIZE; j++) {  // 每个字节转换为2个十六进制字符
 								printf("%X", hex[j]);
 							}
+							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
 							memset(hex, 0, sizeof(hex));  // 清空数组
@@ -128,12 +129,13 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 				}
         if (state3 == SIGNAL_ENDED) {
             da[da_index++] = 1;
-					da[da_index++] = 0;
+						da[da_index++] = 0;
             if (da_index >= 80) {
 							binary_to_hex(da,hex);
 							for (int j = 0; j < HEX_SIZE; j++) {  // 每个字节转换为2个十六进制字符
 								printf("%X", hex[j]);
 							}
+							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
 							memset(hex, 0, sizeof(hex));  // 清空数组
@@ -147,6 +149,7 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							for (int j = 0; j < HEX_SIZE; j++) {  // 每个字节转换为2个十六进制字符
 								printf("%X", hex[j]);
 							}
+							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
 							memset(hex, 0, sizeof(hex));  // 清空数组

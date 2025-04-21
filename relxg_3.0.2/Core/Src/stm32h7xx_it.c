@@ -62,8 +62,9 @@ extern SPI_HandleTypeDef hspi1;
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim7;
 extern TIM_HandleTypeDef htim13;
-/* USER CODE BEGIN EV */
 
+/* USER CODE BEGIN EV */
+extern UART_HandleTypeDef huart1;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -303,7 +304,9 @@ void TIM7_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-
+void USART1_IRQHandler(void) {
+	HAL_UART_IRQHandler(&huart1);    //调用HAL库中断处理公用函数
+}
 
 /* USER CODE END 1 */
 

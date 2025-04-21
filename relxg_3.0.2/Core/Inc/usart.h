@@ -42,6 +42,8 @@ extern UART_HandleTypeDef huart3;
 void MX_USART1_UART_Init(void);
 void MX_USART3_UART_Init(void);
 
+void Uart1_Puts(uint8_t *data,uint32_t data_len);
+
 /* USER CODE BEGIN Prototypes */
 
 /* USER CODE END Prototypes */

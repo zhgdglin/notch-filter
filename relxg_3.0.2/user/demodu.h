@@ -1,9 +1,10 @@
 #ifndef __Demodu_H__
 #define __Demodu_H__
 
+#include "usart.h"
 
-
-
+#define MAX_COUNT 80
+#define HEX_SIZE (MAX_COUNT / 4)  // 十六进制数组的大小
 
 typedef struct {
     float uc, us;    // 正交权重
@@ -20,11 +21,14 @@ typedef enum {
 
 
 
-
+void process_buffer_and_sum(float *input_buffer, int buffer_size);
 void frm_sych(void);
 void demodu_process(void);
 
-
+extern int da_index;
+extern uint8_t da[MAX_COUNT];
+extern uint8_t hex[HEX_SIZE];
+extern uint16_t TIM7_cnt;
 
 #endif
 

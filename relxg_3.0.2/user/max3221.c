@@ -22,18 +22,18 @@ uint8_t RS232_Rx_Buff = 0;   // 单
 
 void RS232_Init(void)
 {
-		MX_USART1_UART_Init();
+		MX_USART3_UART_Init();
 	  RS232_RX_ENABLE;         // 接收使能
 	  AUTO_PWR_DOWN_ENABLE;    // 无数据断电
-		HAL_UART_Transmit(&huart1, (uint8_t *)RS232_Tx_Data, sizeof(RS232_Tx_Data), 0xFFFF); 
+		HAL_UART_Transmit(&huart3, (uint8_t *)RS232_Tx_Data, sizeof(RS232_Tx_Data), 0xFFFF); 
 }
 
 
 void RS232_Receive(void)
 {
-	 HAL_UART_Receive(&huart1, &RS232_Rx_Buff, 1, 0xFFFF);
+	 HAL_UART_Receive(&huart3, &RS232_Rx_Buff, 1, 0xFFFF);
 	
-	 HAL_UART_Transmit(&huart1, &RS232_Rx_Buff, 1, 0xFFFF);   // 回传指令
+	 HAL_UART_Transmit(&huart3, &RS232_Rx_Buff, 1, 0xFFFF);   // 回传指令
 	
 	 if(RS232_Rx_Buff == 0x56)
 		{
