@@ -6,13 +6,13 @@
 ..\obj\system_stm32h7xx.o: ..\USER\stm32h7xx.h
 ..\obj\system_stm32h7xx.o: ..\USER\stm32h743xx.h
 ..\obj\system_stm32h7xx.o: ..\CORE\core_cm7.h
-..\obj\system_stm32h7xx.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\system_stm32h7xx.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdint.h
 ..\obj\system_stm32h7xx.o: ..\CORE\cmsis_compiler.h
 ..\obj\system_stm32h7xx.o: ..\CORE\cmsis_armcc.h
 ..\obj\system_stm32h7xx.o: ..\USER\system_stm32h7xx.h
 ..\obj\system_stm32h7xx.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal.h
 ..\obj\system_stm32h7xx.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h
-..\obj\system_stm32h7xx.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\system_stm32h7xx.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdio.h
 ..\obj\system_stm32h7xx.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_rcc_ex.h
 ..\obj\system_stm32h7xx.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_gpio.h
 ..\obj\system_stm32h7xx.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_gpio_ex.h

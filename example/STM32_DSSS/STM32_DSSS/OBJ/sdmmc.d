@@ -4,7 +4,7 @@
 ..\obj\sdmmc.o: ..\USER\stm32h7xx.h
 ..\obj\sdmmc.o: ..\USER\stm32h743xx.h
 ..\obj\sdmmc.o: ..\CORE\core_cm7.h
-..\obj\sdmmc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\sdmmc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdint.h
 ..\obj\sdmmc.o: ..\CORE\cmsis_compiler.h
 ..\obj\sdmmc.o: ..\CORE\cmsis_armcc.h
 ..\obj\sdmmc.o: ..\USER\system_stm32h7xx.h
@@ -14,7 +14,7 @@
 ..\obj\sdmmc.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_def.h
 ..\obj\sdmmc.o: ..\USER\stm32h7xx.h
 ..\obj\sdmmc.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h
-..\obj\sdmmc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\sdmmc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdio.h
 ..\obj\sdmmc.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_rcc_ex.h
 ..\obj\sdmmc.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_gpio.h
 ..\obj\sdmmc.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_gpio_ex.h
@@ -93,14 +93,14 @@
 ..\obj\sdmmc.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pcd_ex.h
 ..\obj\sdmmc.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_hcd.h
 ..\obj\sdmmc.o: ..\CORE\core_cm7.h
-..\obj\sdmmc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\string.h
+..\obj\sdmmc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\string.h
 ..\obj\sdmmc.o: ..\HARDWARE\USART\usart.h
 ..\obj\sdmmc.o: ..\SOFTWARE\system.h
-..\obj\sdmmc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
-..\obj\sdmmc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\complex.h
-..\obj\sdmmc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\complex.h
-..\obj\sdmmc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\complex.h
-..\obj\sdmmc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\sdmmc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdbool.h
+..\obj\sdmmc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\complex.h
+..\obj\sdmmc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\complex.h
+..\obj\sdmmc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\complex.h
+..\obj\sdmmc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdlib.h
 ..\obj\sdmmc.o: ..\HARDWARE\LED\led.h
 ..\obj\sdmmc.o: ..\SOFTWARE\system.h
 ..\obj\sdmmc.o: ..\HARDWARE\KEY\key.h
@@ -129,7 +129,7 @@
 ..\obj\sdmmc.o: ..\SOFTWARE\demodulate.h
 ..\obj\sdmmc.o: ..\DSPLIB\Include\arm_math.h
 ..\obj\sdmmc.o: ..\CORE\core_cm7.h
-..\obj\sdmmc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\math.h
+..\obj\sdmmc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\math.h
 ..\obj\sdmmc.o: ..\CORE\core_cm7.h
 ..\obj\sdmmc.o: ..\DSPLIB\Include\arm_const_structs.h
 ..\obj\sdmmc.o: ..\DSPLIB\Include\arm_common_tables.h

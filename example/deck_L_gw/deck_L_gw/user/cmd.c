@@ -74,7 +74,12 @@ const static TIM_FREQUENCE Single_Freq_Data1 [8]=   // bit1¶ÔÓ¦µÄÆµÂÊ,Õ¼¿Õ±È35%£
 };		
 
 const static uint8_t PN[8] = {1,6,7,3,8,2,4,5};  // Ëæ»úÐòÁÐ
-const static TIM_FREQUENCE Single_Freq_Data[5] = {0,10000-1,3500-1,6500-1,12};
+const static TIM_FREQUENCE Single_Freq_Data[4] = {
+{0,13333-1,4667-1,8666-1,12},					// f1  9K 
+{0,  12000-1, 4200-1, 7800-1, 10},   // f2  10K 
+{0,  10909-1, 3818-1, 7091-1, 11},		// f3	 	11K
+{0,10000-1,3500-1,6500-1,12},						// f4	 	12K
+};
 
 
 void Delay_10ms(uint16_t cnt)   // ¶¨Ê±Æ÷13 ÑÓÊ±10ms
@@ -106,7 +111,7 @@ static void Time4_change_freq(TIM_FREQUENCE freq)  /**¸Ä±äT4ÆµÂÊ**/
 
 void Send_wakeup(void)  // ·¢ËÍ »½ÐÑÐÅºÅ
 {
-  Time4_change_freq(Single_Freq_Data);   // 12K ,35%
+  Time4_change_freq(Single_Freq_Data[3]);   // 12K ,35%
 	
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
@@ -197,6 +202,59 @@ void Send_single_frequency(bool* order_data)
 }
 
 
+// ·¢ËÍÒ»Ö¡4¸öÆµµãµ¥ÆµÐÅºÅ
+void Send_aframe1(void)  // ·¢ËÍ »½ÐÑÐÅºÅ
+{
+  Time4_change_freq(Single_Freq_Data[0]);   // 9K ,35%
+	
+	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
+	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
+	
+	Delay_10ms(20);  // ·¢ËÍ20ms
+		
+	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_3);
+	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_1); 
+	
+	Delay_10ms(30);  // ¿ÕÏÐ30ms
+	
+	Time4_change_freq(Single_Freq_Data[1]);   // 10K ,35%
+	
+	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
+	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
+	
+	Delay_10ms(20);  // ·¢ËÍ20ms
+		
+	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_3);
+	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_1); 
+	
+	Delay_10ms(30);  // ¿ÕÏÐ30ms
+	
+	  Time4_change_freq(Single_Freq_Data[2]);   // 11K ,35%
+	
+	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
+	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
+	
+	Delay_10ms(20);  // ·¢ËÍ20ms
+		
+	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_3);
+	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_1); 
+	
+	Delay_10ms(30);  // ¿ÕÏÐ30ms
+	
+	  Time4_change_freq(Single_Freq_Data[3]);   // 12K ,35%
+	
+	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
+	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
+	
+	Delay_10ms(20);  // ·¢ËÍ20ms
+		
+	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_3);
+	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_1); 
+	
+	Delay_10ms(30);  // ¿ÕÏÐ30ms
+}
+
+
 
 
 
@@ -222,6 +280,26 @@ void Deck_Send_frame(bool* order_data)   // ¼×°åµ¥Ôª·¢ËÍÒ»Ö¡Êý¾Ý £º»½ÐÑ + ÏßÐÔµ÷
 	
 	Reset_Pin(POWER_CAP);   // ¹Ø±Õ·¢Éä
 }
+
+
+
+void Serial_Send_frame(bool* order_data)   // ¼×°åµ¥Ôª·¢ËÍÒ»Ö¡Êý¾Ý £º»½ÐÑ + ÏßÐÔµ÷Æµ + µ÷ÖÆÐÅºÅ*/
+{
+	Set_Pin(POWER_CAP);   // ¿ªÆô·¢Éä
+	HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);  // ¹Ø±Õ½ÓÊÕ
+  Reset_Pin(IR2110S_SD);     //¿ªÆôÊä³ö£¬µÍÓÐÐ§  // ×°ÉÏ±äÑ¹Æ÷ÒÔºó¿ªÆô
+	
+	Send_aframe1();   // 12K»½ÐÑÐÅºÅ  ³ÖÐø1Ãë
+	Set_Pin(IR2110S_SD);   // ½áÊøÊä³ö
+	Delay_10ms(50);  // ¿ÕÏÐ500ms
+	
+
+	Reset_Pin(POWER_CAP);   // ¹Ø±Õ·¢Éä
+}
+
+
+
+
 
 
 

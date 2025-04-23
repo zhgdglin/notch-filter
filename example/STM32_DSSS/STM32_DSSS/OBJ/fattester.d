@@ -4,7 +4,7 @@
 ..\obj\fattester.o: ..\USER\stm32h7xx.h
 ..\obj\fattester.o: ..\USER\stm32h743xx.h
 ..\obj\fattester.o: ..\CORE\core_cm7.h
-..\obj\fattester.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\fattester.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdint.h
 ..\obj\fattester.o: ..\CORE\cmsis_compiler.h
 ..\obj\fattester.o: ..\CORE\cmsis_armcc.h
 ..\obj\fattester.o: ..\USER\system_stm32h7xx.h
@@ -14,7 +14,7 @@
 ..\obj\fattester.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_def.h
 ..\obj\fattester.o: ..\USER\stm32h7xx.h
 ..\obj\fattester.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h
-..\obj\fattester.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\fattester.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdio.h
 ..\obj\fattester.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_rcc_ex.h
 ..\obj\fattester.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_gpio.h
 ..\obj\fattester.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_gpio_ex.h
@@ -99,12 +99,12 @@
 ..\obj\fattester.o: ..\HARDWARE\SDMMC\sdmmc.h
 ..\obj\fattester.o: ..\HARDWARE\USART\usart.h
 ..\obj\fattester.o: ..\SOFTWARE\system.h
-..\obj\fattester.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\string.h
-..\obj\fattester.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
-..\obj\fattester.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\complex.h
-..\obj\fattester.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\complex.h
-..\obj\fattester.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\complex.h
-..\obj\fattester.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\fattester.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\string.h
+..\obj\fattester.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdbool.h
+..\obj\fattester.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\complex.h
+..\obj\fattester.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\complex.h
+..\obj\fattester.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\complex.h
+..\obj\fattester.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdlib.h
 ..\obj\fattester.o: ..\HARDWARE\LED\led.h
 ..\obj\fattester.o: ..\SOFTWARE\system.h
 ..\obj\fattester.o: ..\HARDWARE\KEY\key.h
@@ -130,7 +130,7 @@
 ..\obj\fattester.o: ..\SOFTWARE\demodulate.h
 ..\obj\fattester.o: ..\DSPLIB\Include\arm_math.h
 ..\obj\fattester.o: ..\CORE\core_cm7.h
-..\obj\fattester.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\math.h
+..\obj\fattester.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\math.h
 ..\obj\fattester.o: ..\CORE\core_cm7.h
 ..\obj\fattester.o: ..\DSPLIB\Include\arm_const_structs.h
 ..\obj\fattester.o: ..\DSPLIB\Include\arm_common_tables.h

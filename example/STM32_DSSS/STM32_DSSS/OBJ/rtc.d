@@ -4,7 +4,7 @@
 ..\obj\rtc.o: ..\USER\stm32h7xx.h
 ..\obj\rtc.o: ..\USER\stm32h743xx.h
 ..\obj\rtc.o: ..\CORE\core_cm7.h
-..\obj\rtc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\rtc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdint.h
 ..\obj\rtc.o: ..\CORE\cmsis_compiler.h
 ..\obj\rtc.o: ..\CORE\cmsis_armcc.h
 ..\obj\rtc.o: ..\USER\system_stm32h7xx.h
@@ -14,7 +14,7 @@
 ..\obj\rtc.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_def.h
 ..\obj\rtc.o: ..\USER\stm32h7xx.h
 ..\obj\rtc.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h
-..\obj\rtc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\rtc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdio.h
 ..\obj\rtc.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_rcc_ex.h
 ..\obj\rtc.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_gpio.h
 ..\obj\rtc.o: ..\HALLIB\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_gpio_ex.h
@@ -96,12 +96,12 @@
 ..\obj\rtc.o: ..\SYSTEM\delay\delay.h
 ..\obj\rtc.o: ..\HARDWARE\LED\led.h
 ..\obj\rtc.o: ..\SOFTWARE\system.h
-..\obj\rtc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\string.h
-..\obj\rtc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
-..\obj\rtc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\complex.h
-..\obj\rtc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\complex.h
-..\obj\rtc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\complex.h
-..\obj\rtc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\rtc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\string.h
+..\obj\rtc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdbool.h
+..\obj\rtc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\complex.h
+..\obj\rtc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\complex.h
+..\obj\rtc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\complex.h
+..\obj\rtc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdlib.h
 ..\obj\rtc.o: ..\HARDWARE\LED\led.h
 ..\obj\rtc.o: ..\HARDWARE\KEY\key.h
 ..\obj\rtc.o: ..\HARDWARE\QSPI\qspi.h
@@ -129,7 +129,7 @@
 ..\obj\rtc.o: ..\SOFTWARE\demodulate.h
 ..\obj\rtc.o: ..\DSPLIB\Include\arm_math.h
 ..\obj\rtc.o: ..\CORE\core_cm7.h
-..\obj\rtc.o: D:\SoftWare\Keil\ARM\ARMCC\Bin\..\include\math.h
+..\obj\rtc.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\math.h
 ..\obj\rtc.o: ..\CORE\core_cm7.h
 ..\obj\rtc.o: ..\DSPLIB\Include\arm_const_structs.h
 ..\obj\rtc.o: ..\DSPLIB\Include\arm_common_tables.h
