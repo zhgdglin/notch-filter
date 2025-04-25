@@ -22,7 +22,7 @@
 
 /* USER CODE BEGIN 0 */
 //#define  USE_RS232
-uint8_t uart1_rxbuf[10];  // 确保数组长度大于等于 10
+uint8_t uart1_rxbuf[1];  // 确保数组长度大于等于 10
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;
@@ -68,7 +68,7 @@ void MX_USART1_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART1_Init 2 */
-	HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 10);
+	HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 1);
   /* USER CODE END USART1_Init 2 */
 
 }
@@ -153,7 +153,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
 
   /* USER CODE BEGIN USART1_MspInit 1 */
 		HAL_NVIC_EnableIRQ(USART1_IRQn);            //使能USART1中断通道
-		HAL_NVIC_SetPriority(USART1_IRQn,0,0);      //抢占优先级1,子优先级0
+		HAL_NVIC_SetPriority(USART1_IRQn,0,1);      //抢占优先级1,子优先级0
   /* USER CODE END USART1_MspInit 1 */
   }
   else if(uartHandle->Instance==USART3)
@@ -260,20 +260,26 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
             __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_FE);
         }
 
-        // 使用非阻塞发送
-        HAL_UART_Transmit_IT(&huart1, uart1_rxbuf, 10);
+        // 判断接收到的字符是否为 '1'
+        if (uart1_rxbuf[0] == '1')
+        {
+            // 打印 "我是帅哥"
+            char message[] = "我是帅哥\r\n";
+            HAL_UART_Transmit_IT(&huart1, (uint8_t *)message, sizeof(message)-1); // 发送字符串
+						Serial_Send_frame();
+        }
 
         // 重新开启 UART 接收中断
-        if (HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 10) != HAL_OK)
+        if (HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 1) != HAL_OK)
         {
             // 发生错误，重启 UART
             HAL_UART_DeInit(&huart1);
             HAL_UART_Init(&huart1);
-            HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 10);
+            HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 1);
         }
     }
-
 }
+
 
 
 

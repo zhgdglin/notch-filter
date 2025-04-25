@@ -57,6 +57,7 @@ void Send_aframe1(void);
 void Send_LFM(void); 
 void Send_single_frequency(bool* order_data);
 void Deck_Send_frame(bool* order_data);
+void Serial_Send_frame(void);
 
 bool*  order_convert(uint8_t CMD_data);
 void switch_cmd_do(void);

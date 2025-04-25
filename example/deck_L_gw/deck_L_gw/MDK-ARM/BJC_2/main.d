@@ -63,10 +63,11 @@ bjc_2\main.o: ../Core/Inc/spi.h
 bjc_2\main.o: ../Core/Inc/tim.h
 bjc_2\main.o: ../Core/Inc/usart.h
 bjc_2\main.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdio.h
-bjc_2\main.o: ../Core/Inc/gpio.h
+bjc_2\main.o: ../user/cmd.h
 bjc_2\main.o: ../Drivers/USER/APP/APP_Work.h
 bjc_2\main.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdbool.h
 bjc_2\main.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\string.h
+bjc_2\main.o: ../Core/Inc/gpio.h
 bjc_2\main.o: ../user/SDTest.h
 bjc_2\main.o: ../Drivers/USER/APP/APP_Work.h
 bjc_2\main.o: ../user/ad7767.h

@@ -88,11 +88,17 @@ void Delay_10ms(uint16_t cnt)   // 定时器13 延时10ms
 	__HAL_TIM_SET_COUNTER(&htim13, 0);   								 // 清零
 	HAL_TIM_Base_Start_IT (&htim13 );                    // 允许T13中断.
 	
-	while(cnt)
-	{	
-		while(TIM13_10ms_Flag == 0){};
-		cnt--;
-		TIM13_10ms_Flag=0;	
+uint32_t timeout = 0xFFFF;  // 超时阈值
+	while (cnt) {
+			timeout = 0xFFFF;
+			while (TIM13_10ms_Flag == 0 && timeout--) {
+					// 可选：插入 __NOP() 或轻量级任务
+			}
+			if (timeout == 0) {
+					break;  // 超时退出
+			}
+			cnt--;
+			TIM13_10ms_Flag = 0;
 	}
 	
 	HAL_TIM_Base_Stop_IT (&htim13 );              //关闭中断      
@@ -283,13 +289,13 @@ void Deck_Send_frame(bool* order_data)   // 甲板单元发送一帧数据 ：唤醒 + 线性调
 
 
 
-void Serial_Send_frame(bool* order_data)   // 甲板单元发送一帧数据 ：唤醒 + 线性调频 + 调制信号*/
+void Serial_Send_frame(void)   // 甲板单元发送一帧数据 ：唤醒 + 线性调频 + 调制信号*/
 {
 	Set_Pin(POWER_CAP);   // 开启发射
 	HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);  // 关闭接收
   Reset_Pin(IR2110S_SD);     //开启输出，低有效  // 装上变压器以后开启
 	
-	Send_aframe1();   // 12K唤醒信号  持续1秒
+	Send_aframe1();   // 9，10，11，12k单频信号 
 	Set_Pin(IR2110S_SD);   // 结束输出
 	Delay_10ms(50);  // 空闲500ms
 	

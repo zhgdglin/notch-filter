@@ -27,7 +27,19 @@ Project File Date:  04/25/2025
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\software\mdk\ARM\ARMAC5\Bin'
 Build target 'BJC_2'
-"BJC_2\BJC_2.axf" - 0 Error(s), 0 Warning(s).
+compiling usart.c...
+compiling cmd.c...
+..\user\cmd.c(692): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  					if(recorded_time > 3.3)
+..\user\cmd.c(697): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  					 voltage_temp = recorded_time*2.72; // 转成电压值 
+..\user\cmd.c(778): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  					posture_temp = recorded_time/0.05; // 转成角度
+..\user\cmd.c: 3 warnings, 0 errors
+linking...
+Program Size: Code=58434 RO-data=6462 RW-data=684 ZI-data=11132  
+FromELF: creating hex file...
+"BJC_2\BJC_2.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -50,7 +62,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@6.1.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

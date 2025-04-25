@@ -157,9 +157,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>251</LineNumber>
+          <LineNumber>264</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134255436</Address>
+          <Address>134257890</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -168,7 +168,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>D:\admin\妗岄潰\projiect\notch-filter\example\deck_L_gw\deck_L_gw\Core\Src\usart.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\BJC_2\../Core/Src/usart.c\251</Expression>
+          <Expression>\\BJC_2\../Core/Src/usart.c\264</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
