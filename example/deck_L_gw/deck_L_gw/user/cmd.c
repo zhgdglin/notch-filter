@@ -74,12 +74,27 @@ const static TIM_FREQUENCE Single_Freq_Data1 [8]=   // bit1¶ÔÓ¦µÄÆµÂÊ,Õ¼¿Õ±È35%£
 };		
 
 const static uint8_t PN[8] = {1,6,7,3,8,2,4,5};  // Ëæ»úÐòÁÐ
-const static TIM_FREQUENCE Single_Freq_Data[4] = {
+
+
+//Õ¼¿Õ±È35%
+const static TIM_FREQUENCE Single_Freq_Data2[5] = {
 {0,13333-1,4667-1,8666-1,12},					// f1  9K 
 {0,  12000-1, 4200-1, 7800-1, 10},   // f2  10K 
 {0,  10909-1, 3818-1, 7091-1, 11},		// f3	 	11K
 {0,10000-1,3500-1,6500-1,12},						// f4	 	12K
+{0,9230-1,3230-1,6000-1,13},						// f5	 	13K
 };
+
+
+//Õ¼¿Õ±È10%
+const static TIM_FREQUENCE Single_Freq_Data3[5] = {
+{0,13333-1,1333-1,8666-1,12},					// f1  9K 
+{0,  12000-1, 1200-1, 10800-1, 10},   // f2  10K 
+{0,  10909-1, 1090-1, 9819-1, 11},		// f3	 	11K
+{0,10000-1,1000-1,9000-1,12},						// f4	 	12K
+{0,9230-1,923-1,8307-1,12},						// f5	 	13K
+};
+
 
 
 void Delay_10ms(uint16_t cnt)   // ¶¨Ê±Æ÷13 ÑÓÊ±10ms
@@ -117,7 +132,7 @@ static void Time4_change_freq(TIM_FREQUENCE freq)  /**¸Ä±äT4ÆµÂÊ**/
 
 void Send_wakeup(void)  // ·¢ËÍ »½ÐÑÐÅºÅ
 {
-  Time4_change_freq(Single_Freq_Data[3]);   // 12K ,35%
+  Time4_change_freq(Single_Freq_Data3[3]);   // 12K ,10%
 	
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
@@ -211,7 +226,7 @@ void Send_single_frequency(bool* order_data)
 // ·¢ËÍÒ»Ö¡4¸öÆµµãµ¥ÆµÐÅºÅ
 void Send_aframe1(void)  // ·¢ËÍ »½ÐÑÐÅºÅ
 {
-  Time4_change_freq(Single_Freq_Data[0]);   // 9K ,35%
+  Time4_change_freq(Single_Freq_Data3[0]);   // 9K ,35%
 	
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
@@ -223,7 +238,7 @@ void Send_aframe1(void)  // ·¢ËÍ »½ÐÑÐÅºÅ
 	
 	Delay_10ms(30);  // ¿ÕÏÐ30ms
 	
-	Time4_change_freq(Single_Freq_Data[1]);   // 10K ,35%
+	Time4_change_freq(Single_Freq_Data3[1]);   // 10K ,35%
 	
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
@@ -235,7 +250,7 @@ void Send_aframe1(void)  // ·¢ËÍ »½ÐÑÐÅºÅ
 	
 	Delay_10ms(30);  // ¿ÕÏÐ30ms
 	
-	  Time4_change_freq(Single_Freq_Data[2]);   // 11K ,35%
+	  Time4_change_freq(Single_Freq_Data3[2]);   // 11K ,35%
 	
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
@@ -247,7 +262,7 @@ void Send_aframe1(void)  // ·¢ËÍ »½ÐÑÐÅºÅ
 	
 	Delay_10ms(30);  // ¿ÕÏÐ30ms
 	
-	  Time4_change_freq(Single_Freq_Data[3]);   // 12K ,35%
+	  Time4_change_freq(Single_Freq_Data3[3]);   // 12K ,35%
 	
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
@@ -502,7 +517,7 @@ void CMD_55(void)   /* ÊÍ·ÅÖ¸Áî */
 
 	/* ¿ªÊ¼¼ÆÊ±20S*/
 		adc7767_init();  //  ADC³õÊ¼»¯ ¿ªÊ¼½ÓÊÕ
-	time_mode = 20;
+	time_mode = 2000;
 	__HAL_TIM_CLEAR_IT (&htim13 ,TIM_IT_UPDATE );        
 	HAL_TIM_Base_Start_IT (&htim13 );                    
 	
@@ -519,7 +534,7 @@ void CMD_55(void)   /* ÊÍ·ÅÖ¸Áî */
 			// lcd_clear_row(4,3);
 			// lcd_DisStr(4,3,"µÈ´ýÓ¦´ð");
 			// printf("µÈ´ýÓ¦´ð\r\n");
-			if( 1 == receive_deal_9K() )                         // if(order_respond == 1)
+			if( 1 == receive_deal_9_5K() )                         // if(order_respond == 1)
 			{
 				  stop_cnt_flag = 1;  // Í£Ö¹¼ÆÊ±
 
@@ -529,7 +544,7 @@ void CMD_55(void)   /* ÊÍ·ÅÖ¸Áî */
 					printf("ÊÕµ½Ó¦´ð\r\n");
 				
 					/* ×ª»»³É10S¼ÆÊ± */
-					time_mode = 10;
+					time_mode = 1000;
 					stop_cnt_flag = 0;   // ÔÙ´Î¼ÆÊ±
 					while(TIM_10S_FLAG == 0)
 					{

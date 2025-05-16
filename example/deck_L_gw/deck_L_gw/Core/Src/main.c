@@ -135,8 +135,12 @@ int main(void)
   printf("\r\n 初始化完成\r\n");
 	printf("****进入用户程序****\r\n\r\n");
   APP_Init();
+	
+	CMD_55();
+
 
   /* USER CODE END 2 */
+
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */

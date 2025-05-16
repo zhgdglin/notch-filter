@@ -26,7 +26,8 @@ output = [];
 
 % 循环生成信号段和间隔
 for i = 1:num_signals
-    output = [output, signal1, gap_signal,signal2,gap_signal,signal3,gap_signal,signal4,gap_signal];
+%     output = [output, signal1, gap_signal,signal2,gap_signal,signal3,gap_signal,signal4,gap_signal];
+    output = [output, signal4, gap_signal];
 end
 
 % % 绘制生成的信号

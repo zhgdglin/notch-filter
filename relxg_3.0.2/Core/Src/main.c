@@ -68,6 +68,7 @@ static void MPU_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 uint8_t failure_cnt = 0;
+
 /* USER CODE END 0 */
 
 /**

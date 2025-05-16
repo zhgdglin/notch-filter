@@ -27,19 +27,31 @@ Project File Date:  04/25/2025
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\software\mdk\ARM\ARMAC5\Bin'
 Build target 'BJC_2'
-compiling usart.c...
 compiling cmd.c...
-..\user\cmd.c(692): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\user\cmd.c(85): warning:  #1278-D: excess initializers are ignored
+  {0,9230-1,3230-1,6000-1,13},						// f5	 	13K
+..\user\cmd.c(95): warning:  #1278-D: excess initializers are ignored
+  {0,9230-1,923-1,8307-1,12},						// f5	 	13K
+..\user\cmd.c(135): error:  #20: identifier "Single_Freq_Data" is undefined
+    Time4_change_freq(Single_Freq_Data[3]);   // 12K ,35%
+..\user\cmd.c(229): error:  #20: identifier "Single_Freq_Data" is undefined
+    Time4_change_freq(Single_Freq_Data[0]);   // 9K ,35%
+..\user\cmd.c(520): warning:  #69-D: integer conversion resulted in truncation
+  	time_mode = 2000;
+..\user\cmd.c(547): warning:  #69-D: integer conversion resulted in truncation
+  					time_mode = 1000;
+..\user\cmd.c(707): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   					if(recorded_time > 3.3)
-..\user\cmd.c(697): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\user\cmd.c(712): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   					 voltage_temp = recorded_time*2.72; // 转成电压值 
-..\user\cmd.c(778): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\user\cmd.c(793): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   					posture_temp = recorded_time/0.05; // 转成角度
-..\user\cmd.c: 3 warnings, 0 errors
-linking...
-Program Size: Code=58434 RO-data=6462 RW-data=684 ZI-data=11132  
-FromELF: creating hex file...
-"BJC_2\BJC_2.axf" - 0 Error(s), 3 Warning(s).
+..\user\cmd.c(80): warning:  #177-D: variable "Single_Freq_Data2"  was declared but never referenced
+  const static TIM_FREQUENCE Single_Freq_Data2[4] = {
+..\user\cmd.c(90): warning:  #177-D: variable "Single_Freq_Data3"  was declared but never referenced
+  const static TIM_FREQUENCE Single_Freq_Data3[4] = {
+..\user\cmd.c: 9 warnings, 2 errors
+"BJC_2\BJC_2.axf" - 2 Error(s), 9 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -62,7 +74,8 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@6.1.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:01
+Target not created.
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

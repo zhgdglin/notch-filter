@@ -27,28 +27,14 @@ Project File Date:  04/23/2025
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\software\mdk\ARM\ARMAC5\Bin'
 Build target 'BJC_2'
-compiling demodu.c...
-..\user\demodu.c(44): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-      filter->uc += LEARNING_RATE * e * xc;
-..\user\demodu.c(45): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-      filter->us += LEARNING_RATE * e * xs;
-..\user\demodu.c(55): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-              if (fv >= THRESHOLD) {
-..\user\demodu.c(64): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-              if (fv < THRESHOLD) {
-..\user\demodu.c(112): warning:  #223-D: function "memset" declared implicitly
-  							memset(da, 0, sizeof(da));  // 清空数组
-..\user\demodu.c(126): warning:  #223-D: function "memset" declared implicitly
-  							memset(da, 0, sizeof(da));  // 清空数组
-..\user\demodu.c(140): warning:  #223-D: function "memset" declared implicitly
-  							memset(da, 0, sizeof(da));  // 清空数组
-..\user\demodu.c(154): warning:  #223-D: function "memset" declared implicitly
-  							memset(da, 0, sizeof(da));  // 清空数组
-..\user\demodu.c: 8 warnings, 0 errors
+compiling APP_Work.c...
+..\Drivers\USER\APP\APP_Work.c(544): warning:  #177-D: variable "data_temp"  was declared but never referenced
+  	static uint8_t data_temp = 0;
+..\Drivers\USER\APP\APP_Work.c: 1 warning, 0 errors
 linking...
-Program Size: Code=74876 RO-data=2956 RW-data=452 ZI-data=15652  
+Program Size: Code=67676 RO-data=2012 RW-data=452 ZI-data=15644  
 FromELF: creating hex file...
-"BJC_2\BJC_2.axf" - 0 Error(s), 8 Warning(s).
+"BJC_2\BJC_2.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -71,7 +57,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@6.1.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

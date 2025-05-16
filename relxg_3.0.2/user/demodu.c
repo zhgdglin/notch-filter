@@ -17,6 +17,7 @@ uint8_t da[MAX_COUNT];
 uint8_t hex[HEX_SIZE] = {0};
 int da_index = 0;
 uint16_t TIM7_cnt = 0;
+uint8_t StartT = 0;
 
 AdaptiveNotchFilter filter1 = {0, 0, 2.0 * PI * 9000 / 62500};
 AdaptiveNotchFilter filter2 = {0, 0, 2.0 * PI * 10000 / 62500};
@@ -24,15 +25,27 @@ AdaptiveNotchFilter filter3 = {0, 0, 2.0 * PI * 11000 / 62500};
 AdaptiveNotchFilter filter4 = {0, 0, 2.0 * PI * 12000 / 62500};
 
 
-//将二进制数组（int 类型）转换为十六进制数组（int）
+////将二进制数组（int 类型）转换为十六进制数组（int）
+//void binary_to_hex(uint8_t binary_array[MAX_COUNT], uint8_t hex_array[HEX_SIZE]) {
+//    for (int i = 0; i < HEX_SIZE; i++) {
+//        hex_array[i] = 0;  // 初始化为 0
+//        for (int j = 0; j < 4; j++) {
+//            hex_array[i] = (hex_array[i] << 1) | binary_array[i * 4 + j];  // 依次左移并添加位
+//        }
+//    }
+//}
+
 void binary_to_hex(uint8_t binary_array[MAX_COUNT], uint8_t hex_array[HEX_SIZE]) {
     for (int i = 0; i < HEX_SIZE; i++) {
-        hex_array[i] = 0;  // 初始化为 0
-        for (int j = 0; j < 4; j++) {
-            hex_array[i] = (hex_array[i] << 1) | binary_array[i * 4 + j];  // 依次左移并添加位
+        hex_array[i] = 0;  // 初始化
+        for (int j = 0; j < 8; j++) {
+            hex_array[i] = (hex_array[i] << 1) | binary_array[i * 8 + j];
         }
     }
 }
+
+
+
 
 
 
@@ -88,6 +101,8 @@ int high_count3 = 0, low_count3 = 0;
 int high_count4 = 0, low_count4 = 0;
 
 void process_buffer_and_sum(float *input_buffer, int buffer_size) {
+	uint8_t ihex[HEX_SIZE] = {0x1B,0x1B,0x1B,0x1B,0x1b,0x1b,0x1b,0x1b,0x1b,0x1b};
+	
     for (int i = 0; i < buffer_size; i++) {
         float y1 = multiChannelNotchFilter(input_buffer[i], i, &filter1);
         float y2 = multiChannelNotchFilter(input_buffer[i], i, &filter2);
@@ -102,11 +117,18 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
         if (state1== SIGNAL_ENDED){
             da[da_index++] = 0;
 					  da[da_index++] = 0;
-            if (da_index >= 80) {
+            if (da_index >= MAX_COUNT) {
 							binary_to_hex(da,hex);
 							for (int j = 0; j < HEX_SIZE; j++){  // 每个字节转换为2个十六进制字符
 								printf("%X", hex[j]);
 							}
+							
+							if(memcmp(hex,ihex,HEX_SIZE)==0){
+								StartT = 1;
+//							HAL_Delay(5000);
+//							communication_process(Demodulation());
+							}
+							
 							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
@@ -116,11 +138,18 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
         if (state2 == SIGNAL_ENDED) {
             da[da_index++] = 0;
 						da[da_index++] = 1;			
-            if (da_index >= 80) {
+            if (da_index >= MAX_COUNT) {
 							binary_to_hex(da,hex);
 							for (int j = 0; j < HEX_SIZE; j++) {  // 每个字节转换为2个十六进制字符
 								printf("%X", hex[j]);
 							}
+							
+							if(memcmp(hex,ihex,HEX_SIZE)==0){
+								StartT = 1;
+//							HAL_Delay(5000);
+//							communication_process(Demodulation());
+							}
+							
 							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
@@ -130,11 +159,18 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
         if (state3 == SIGNAL_ENDED) {
             da[da_index++] = 1;
 						da[da_index++] = 0;
-            if (da_index >= 80) {
+            if (da_index >= MAX_COUNT) {
 							binary_to_hex(da,hex);
 							for (int j = 0; j < HEX_SIZE; j++) {  // 每个字节转换为2个十六进制字符
 								printf("%X", hex[j]);
 							}
+							
+							if(memcmp(hex,ihex,HEX_SIZE)==0){
+								StartT = 1;
+//							HAL_Delay(5000);
+//							communication_process(Demodulation());
+							}
+							
 							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
@@ -144,11 +180,18 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
         if (state4 == SIGNAL_ENDED) {
             da[da_index++] = 1;
 					  da[da_index++] = 1;
-            if (da_index >= 80) {
+            if (da_index >= MAX_COUNT) {
 							binary_to_hex(da,hex);
 							for (int j = 0; j < HEX_SIZE; j++) {  // 每个字节转换为2个十六进制字符
 								printf("%X", hex[j]);
 							}
+							
+							if(memcmp(hex,ihex,HEX_SIZE)==0){
+								StartT = 1;
+//							HAL_Delay(5000);
+//							communication_process(Demodulation());
+							}
+							
 							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组

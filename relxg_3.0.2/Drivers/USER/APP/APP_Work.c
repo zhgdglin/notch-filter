@@ -58,6 +58,7 @@ uint16_t Timer4_oc2_Pulse = 0;
 // 9.5KHz = 240 000 000/ 2 /9500 = 12631.5取 12632  oc1:12632*0.35 = 4421.2取 4421   oc2:12632- 4421 = 8211
 
 extern bool	volatile decode_finish;
+extern uint8_t StartT;
 
 const static TIM_FREQUENCE TIM4_Freq_Data [3]=  
 {
@@ -294,6 +295,29 @@ void Send_response_cmd(void)   /* 指令应答，9K 20ms */
 	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_1);  
 }
 
+void Send_response_12k(void)   /* 指令应答，9K 20ms */
+{
+	/*改变频率*/
+	Timer4_freq_Init(TIM4_Freq_Data[2]);  // 9K
+	
+	 SysTick->VAL   = 0UL;  // 清除系统定时器的计数
+	//	 TIM6->CNT  =  0; 
+	/*最后测试发射在开启   fun函数同理*/
+//	Reset_Pin(IR2110S_SD);   // 开启输出，低有效   
+
+	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
+	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);
+	
+	HAL_Delay(19);
+	//Delay_us(800);
+	Set_Pin(IR2110S_SD);   // 20ms，结束输出
+	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_3);
+	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_1);  
+}
+
+
+
+
 
 void Send_response_fun(void)   /* 功能应答，9.5K 20ms */
 {
@@ -393,40 +417,47 @@ void communication_process(ID_CMD message)    /* 指令通信过程 */
 	switch(message.CMDdata)   // 根据指令执行对应功能
 	{
 		case 0x55:  // 释放指令
-								Send_response_cmd();  				// 指令应答
+//								Send_response_cmd();  				// 指令应答
+								Send_response_12k();
 								printf("\r\n 释放指令应答 0x55 \r\n ");
 								Motor_rotate(Release);     	  // 释放钩子
 								while(release_done != 1);     // 等待释放完毕  开关2限位
 								release_done = 0;
 								Motor_rotate(Stop);		 				// 电机停止
-								Send_response_fun();  				// 功能应答
+//								Send_response_fun();  				// 功能应答
+								Send_response_12k();
 								printf("释放功能应答 \r\n ");
 				        Reset_Pin(POWER_CAP);      //关闭发射
 								break;
 		
 		case 0x49:  // 测距指令   （主要在甲板单元上计算）
-								Send_response_cmd();  // 指令应答
+//								Send_response_cmd();  // 指令应答
+								Send_response_12k();
 								printf("\r\n 测距指令应答 0x49 \r\n ");
 				        Reset_Pin(POWER_CAP);      //关闭发射
 								break;
 		
 		case 0x48:  // 查询水下单元电池电压指令
-								Send_response_cmd();  			  // 指令应答
+//								Send_response_cmd();  			  // 指令应答
+								Send_response_12k();
 								printf("\r\n 电池电压指令应答 0x48\r\n  ");
 								temporary = 1 * Read_battery(9);				 // 延时时间 = 电压*1 S  , 读取电池电压
 								printf("电池电压 = %0.3fV\r\n", Read_battery(9)); 
 								Cmd_delay(temporary);				  // 延时
-								Send_response_fun();  				// 功能应答
+//								Send_response_fun();  				// 功能应答
+								Send_response_12k();
 							  printf(" 电池功能应答 \r\n ");
 				        Reset_Pin(POWER_CAP);      //关闭发射
 								break;
 		
 		case 0x47:  // 查询姿态指令
-								Send_response_cmd();  				// 指令应答
+//								Send_response_cmd();  				// 指令应答
+								Send_response_12k();
 								printf("\r\n 姿态指令应答 0x47 \r\n ");
 								temporary = 0.05f * Read_mpu6050() ;   // 延时时间 = 角度*0.05 S,  读取俯仰
 								Cmd_delay(temporary); 				// 延时
-								Send_response_fun();  				// 功能应答
+//								Send_response_fun();  				// 功能应答
+								Send_response_12k();
 								printf("姿态功能应答 \r\n ");
 		            Reset_Pin(POWER_CAP);      //关闭发射
 								break;
@@ -491,7 +522,15 @@ void APP_Process (void)
 //	communication_process(Demodulation());
 
 	
-	SD_Write_Process();
+	if(StartT == 1)
+		{
+			StartT = 0;
+			printf("收到了\r\n");
+//			communication_process(Demodulation());
+		}
+	
+	
+//	SD_Write_Process();
 
 }
 

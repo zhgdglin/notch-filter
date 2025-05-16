@@ -4,7 +4,8 @@
 #include "usart.h"
 
 #define MAX_COUNT 80
-#define HEX_SIZE (MAX_COUNT / 4)  // 十六进制数组的大小
+//#define HEX_SIZE (MAX_COUNT / 4)  // 十六进制数组的大小
+#define HEX_SIZE (MAX_COUNT / 8)  // 十六进制数组的大小
 
 typedef struct {
     float uc, us;    // 正交权重
