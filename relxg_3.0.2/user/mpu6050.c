@@ -190,7 +190,7 @@ void MPU6050_ReturnTemp(float *Temperature)
 
 float Read_mpu6050(void)
 {
-  float ax,az;
+  float ax,ay,az;
 	float pitch;
 	
 		MPU6050ReadAcc(Acel);
@@ -198,7 +198,7 @@ float Read_mpu6050(void)
 		MPU6050_ReturnTemp(&Temp);
 	
 		ax=(float)Acel[0];
-		//ay=(float)Acel[1];
+		ay=(float)Acel[1];
 		az=(float)Acel[2];
 	
 		

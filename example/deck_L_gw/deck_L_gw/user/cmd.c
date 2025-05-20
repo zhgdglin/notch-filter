@@ -44,6 +44,7 @@ volatile  bool fun_respond 	 = 0;
 volatile  bool stop_cnt_flag = 0;
 volatile  uint8_t time_mode	 = 0;   // Ñ¡Ôñ µ¹¼ÆÊ±10s£¬µ¹¼ÆÊ±20s £¬Õý¼ÆÊ±
 
+
 /*----------------------------------------------------------------------------------------------------------  ·¢ÉäÐÅºÅ  ------------------------------------*/
 
 ////  Êý¾ÝËµÃ÷£º ÓÃÓÚ OCÄ£Ê½¶¨Ê±Æ÷ µÄÆµÂÊ¸Ä±ä  £¬ËÄÉáÎåÈë £¨ ¶¨Ê±Æ÷240M £©£¬Õ¼¿Õ±È35%£¬
@@ -88,11 +89,11 @@ const static TIM_FREQUENCE Single_Freq_Data2[5] = {
 
 //Õ¼¿Õ±È10%
 const static TIM_FREQUENCE Single_Freq_Data3[5] = {
-{0,13333-1,1333-1,8666-1,12},					// f1  9K 
+{0,13333-1,1333-1,8666-1,9},					// f1  9K 
 {0,  12000-1, 1200-1, 10800-1, 10},   // f2  10K 
 {0,  10909-1, 1090-1, 9819-1, 11},		// f3	 	11K
+{0,9230-1,923-1,8307-1,13},						// f5	 	13K
 {0,10000-1,1000-1,9000-1,12},						// f4	 	12K
-{0,9230-1,923-1,8307-1,12},						// f5	 	13K
 };
 
 
@@ -320,6 +321,38 @@ void Serial_Send_frame(void)   // ¼×°åµ¥Ôª·¢ËÍÒ»Ö¡Êý¾Ý £º»½ÐÑ + ÏßÐÔµ÷Æµ + µ÷ÖÆÐ
 
 
 
+#define SYMBOL_COUNT 40  // 10×Ö½Ú * 4¸ö2-bit ·ûºÅ
+
+
+
+void Send_frame_from_hex(uint8_t hex_array[10]) {
+    TIM_FREQUENCE freq_sequence[SYMBOL_COUNT];
+    int symbol_idx = 0;
+
+    // Step 1: ½«10×Ö½ÚÊý¾Ý²ð³É40¶Î2-bit²¢Ó³ÉäÎªÆµÂÊÅäÖÃ
+    for (int byte_idx = 0; byte_idx < 10; byte_idx++) {
+        uint8_t byte = hex_array[byte_idx];
+        for (int i = 0; i < 4; i++) {
+            uint8_t two_bits = (byte >> (6 - i * 2)) & 0x03;
+            freq_sequence[symbol_idx++] = Single_Freq_Data3[two_bits];
+        }
+    }
+
+    // Step 2: ÒÀ´Î·¢ËÍÃ¿¸öÆµÂÊÐÅºÅ
+    for (int i = 0; i < SYMBOL_COUNT; i++) {
+        Time4_change_freq(freq_sequence[i]);
+
+        HAL_TIM_OC_Start(&htim4, TIM_CHANNEL_3);
+        HAL_TIM_OC_Start(&htim4, TIM_CHANNEL_1);
+
+        Delay_10ms(20);  // ·¢ËÍ20ms
+
+        HAL_TIM_OC_Stop(&htim4, TIM_CHANNEL_3);
+        HAL_TIM_OC_Stop(&htim4, TIM_CHANNEL_1);
+
+        Delay_10ms(30);  // ¿ÕÏÐ30ms
+    }
+}
 
 
 
@@ -505,15 +538,32 @@ bool*  order_convert(uint8_t CMD_data)   // Êý×é×ª8Î»
 	return order_data;
 }
 
+void append_xor_checksum(uint8_t ihex[10]) {
+    uint8_t checksum = ihex[0];
+    for (int i = 1; i < 9; i++) {
+        checksum ^= ihex[i];
+    }
+    ihex[9] = checksum;
+}
+
+
+
+
+
 
 // Ê±¼ä  Âß¼­ ¶¼Ã»²â
 void CMD_55(void)   /* ÊÍ·ÅÖ¸Áî */
 {
+	uint8_t ihex[10] = {0x01,0x55,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
+	
+	append_xor_checksum(ihex);
+	
 	//lcd_DisStr(4,0,"ÊÍ·Å£º");
 	printf("ÊÍ·Å55\r\n");
 	lcd_DisStr(4,0,"ÊÍ·Å55£º");  //ÑéÖ¤ÃüÁî
 
-	Deck_Send_frame(order_convert(0x55));
+//	Deck_Send_frame(order_convert(0x55));
+	Send_frame_from_hex(ihex);
 
 	/* ¿ªÊ¼¼ÆÊ±20S*/
 		adc7767_init();  //  ADC³õÊ¼»¯ ¿ªÊ¼½ÓÊÕ

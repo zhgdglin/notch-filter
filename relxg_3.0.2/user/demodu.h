@@ -2,6 +2,7 @@
 #define __Demodu_H__
 
 #include "usart.h"
+#include "app_work.h"
 
 #define MAX_COUNT 80
 //#define HEX_SIZE (MAX_COUNT / 4)  // 十六进制数组的大小

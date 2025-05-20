@@ -2,11 +2,11 @@ bjc_2\complexmathfunctions.o: ..\CMSIS\Source\ComplexMathFunctions\ComplexMathFu
 bjc_2\complexmathfunctions.o: ..\CMSIS\Source\ComplexMathFunctions\arm_cmplx_conj_f32.c
 bjc_2\complexmathfunctions.o: ..\CMSIS\Include\arm_math.h
 bjc_2\complexmathfunctions.o: ..\CMSIS\Include\cmsis_compiler.h
-bjc_2\complexmathfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdint.h
+bjc_2\complexmathfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\stdint.h
 bjc_2\complexmathfunctions.o: ..\CMSIS\Include\cmsis_armcc.h
-bjc_2\complexmathfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\string.h
-bjc_2\complexmathfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\math.h
-bjc_2\complexmathfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\float.h
+bjc_2\complexmathfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\string.h
+bjc_2\complexmathfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\math.h
+bjc_2\complexmathfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\float.h
 bjc_2\complexmathfunctions.o: ..\CMSIS\Source\ComplexMathFunctions\arm_cmplx_conj_q15.c
 bjc_2\complexmathfunctions.o: ..\CMSIS\Source\ComplexMathFunctions\arm_cmplx_conj_q31.c
 bjc_2\complexmathfunctions.o: ..\CMSIS\Source\ComplexMathFunctions\arm_cmplx_dot_prod_f32.c

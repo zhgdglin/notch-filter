@@ -49,6 +49,9 @@ bool volatile TIM7_1s_Flag = 0;
 bool NEW_CMD_Flag = 0;  // 指令更新标志
 
 ID_CMD last_message;  // 上一次解调得到的数据
+extern ID_CMD message;
+float  Battery_Voltage   = 0;     // 电池电压
+uint8_t Battery_hex[10] = {0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
 
 // 频率变量
 uint16_t Timer4_Prescaler = 0;
@@ -261,6 +264,34 @@ float Read_battery(uint8_t	vref)  // 电池电压读取 最大3V
 }
 
 
+//float 转16进制
+void float_to_hex_bytes(float value, uint8_t hex_out[4]) {
+    uint32_t temp;
+    memcpy(&temp, &value, sizeof(float));  // 将 float 的二进制位拷贝为 uint32_t
+
+    // 大端输出：高字节在前（如 0x40, 0x2F, 0x5C, 0x29）
+    hex_out[0] = (temp >> 24) & 0xFF;
+    hex_out[1] = (temp >> 16) & 0xFF;
+    hex_out[2] = (temp >> 8) & 0xFF;
+    hex_out[3] = temp & 0xFF;
+}
+
+
+
+//异或校验函数
+void append_xor_checksum(uint8_t hex[HEX_SIZE]) {
+    uint8_t checksum = hex[0];
+    for (int i = 1; i < 9; i++) {
+        checksum ^= hex[i];
+    }
+    hex[9] = checksum;
+}
+
+
+
+
+
+
 /*----------------------------------------------------------  水下单元向甲板单元 发射应答信号  --------------------------------------------------------*/
  
 
@@ -340,7 +371,7 @@ void Send_response_fun(void)   /* 功能应答，9.5K 20ms */
 
 ID_CMD Demodulation(void)
 {
-	ID_CMD message;   		//本次解调得到的数据
+//	ID_CMD message;   		//本次解调得到的数据
 	
 	last_message.CMDdata = message.CMDdata;  // 获取上一次的命令
 	
@@ -349,8 +380,8 @@ ID_CMD Demodulation(void)
 	
 	
 	// 模拟解调出来的指令
-	message.IDdata  = Release_ID; 
-	message.CMDdata = 0x55;
+	message.IDdata  = hex[0]; 
+	message.CMDdata = hex[1];
 
 	return message;   // 可以存到一个FIFO中
 }
@@ -442,9 +473,12 @@ void communication_process(ID_CMD message)    /* 指令通信过程 */
 								Send_response_12k();
 								printf("\r\n 电池电压指令应答 0x48\r\n  ");
 								temporary = 1 * Read_battery(9);				 // 延时时间 = 电压*1 S  , 读取电池电压
-								printf("电池电压 = %0.3fV\r\n", Read_battery(9)); 
+								Battery_Voltage = Read_battery(9);
+								printf("电池电压 = %0.3fV\r\n", Battery_Voltage); 
 								Cmd_delay(temporary);				  // 延时
 //								Send_response_fun();  				// 功能应答
+								float_to_hex_bytes(Battery_Voltage,Battery_hex);
+								append_xor_checksum(Battery_hex);
 								Send_response_12k();
 							  printf(" 电池功能应答 \r\n ");
 				        Reset_Pin(POWER_CAP);      //关闭发射
@@ -526,7 +560,7 @@ void APP_Process (void)
 		{
 			StartT = 0;
 			printf("收到了\r\n");
-//			communication_process(Demodulation());
+			communication_process(Demodulation());
 		}
 	
 	

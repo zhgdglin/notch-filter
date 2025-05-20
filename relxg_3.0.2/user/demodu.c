@@ -1,5 +1,6 @@
 #include "demodu.h"
 
+
 #define PI 3.14159265358979323846
 #define SAMPLING_RATE 62500
 #define LEARNING_RATE 0.02
@@ -18,6 +19,7 @@ uint8_t hex[HEX_SIZE] = {0};
 int da_index = 0;
 uint16_t TIM7_cnt = 0;
 uint8_t StartT = 0;
+ID_CMD message;
 
 AdaptiveNotchFilter filter1 = {0, 0, 2.0 * PI * 9000 / 62500};
 AdaptiveNotchFilter filter2 = {0, 0, 2.0 * PI * 10000 / 62500};
@@ -35,6 +37,9 @@ AdaptiveNotchFilter filter4 = {0, 0, 2.0 * PI * 12000 / 62500};
 //    }
 //}
 
+
+
+//
 void binary_to_hex(uint8_t binary_array[MAX_COUNT], uint8_t hex_array[HEX_SIZE]) {
     for (int i = 0; i < HEX_SIZE; i++) {
         hex_array[i] = 0;  // 初始化
@@ -44,6 +49,23 @@ void binary_to_hex(uint8_t binary_array[MAX_COUNT], uint8_t hex_array[HEX_SIZE])
     }
 }
 
+//计算异或
+uint8_t calculate_checksum(uint8_t *data, int len) {
+    uint8_t checksum = data[0];
+    for (int i = 1; i < len; i++) {
+        checksum ^= data[i];
+    }
+    return checksum;
+}
+
+
+//辅助校验
+bool parse_frame(uint8_t *hex) {
+    if (hex[9] != calculate_checksum(hex, 9)) {
+        return false;  // 校验失败
+    }
+    return true;
+}
 
 
 
@@ -123,11 +145,19 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 								printf("%X", hex[j]);
 							}
 							
-							if(memcmp(hex,ihex,HEX_SIZE)==0){
-								StartT = 1;
-//							HAL_Delay(5000);
-//							communication_process(Demodulation());
-							}
+//							if(memcmp(hex,ihex,HEX_SIZE)==0){
+//								StartT = 1;
+////							HAL_Delay(5000);
+////							communication_process(Demodulation());
+//							}
+							
+							if (parse_frame(hex)) {
+											// 解帧成功，可使用 frame.IDdata 和 frame.CMDdata
+											StartT = 1;
+									} else {
+											// 校验失败，可记录错误次数或重传
+									}
+							
 							
 							TIM7_cnt = 0;
 							da_index = 0;
@@ -144,11 +174,19 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 								printf("%X", hex[j]);
 							}
 							
-							if(memcmp(hex,ihex,HEX_SIZE)==0){
-								StartT = 1;
-//							HAL_Delay(5000);
-//							communication_process(Demodulation());
-							}
+//							if(memcmp(hex,ihex,HEX_SIZE)==0){
+//								StartT = 1;
+////							HAL_Delay(5000);
+////							communication_process(Demodulation());
+//							}
+							
+							
+							if (parse_frame(hex)) {
+												// 解帧成功，可使用 frame.IDdata 和 frame.CMDdata
+												StartT = 1;
+										} else {
+												// 校验失败，可记录错误次数或重传
+										}
 							
 							TIM7_cnt = 0;
 							da_index = 0;
@@ -165,11 +203,19 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 								printf("%X", hex[j]);
 							}
 							
-							if(memcmp(hex,ihex,HEX_SIZE)==0){
-								StartT = 1;
-//							HAL_Delay(5000);
-//							communication_process(Demodulation());
-							}
+//							if(memcmp(hex,ihex,HEX_SIZE)==0){
+//								StartT = 1;
+////							HAL_Delay(5000);
+////							communication_process(Demodulation());
+//							}
+							
+							
+							if (parse_frame(hex)) {
+										// 解帧成功，可使用 frame.IDdata 和 frame.CMDdata
+										StartT = 1;
+								} else {
+										// 校验失败，可记录错误次数或重传
+								}
 							
 							TIM7_cnt = 0;
 							da_index = 0;
@@ -186,11 +232,21 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 								printf("%X", hex[j]);
 							}
 							
-							if(memcmp(hex,ihex,HEX_SIZE)==0){
-								StartT = 1;
-//							HAL_Delay(5000);
-//							communication_process(Demodulation());
-							}
+//							if(memcmp(hex,ihex,HEX_SIZE)==0){
+//								StartT = 1;
+////							HAL_Delay(5000);
+////							communication_process(Demodulation());
+//							}
+							
+							
+							if (parse_frame(hex)) {
+											// 解帧成功，可使用 frame.IDdata 和 frame.CMDdata
+											StartT = 1;
+									} else {
+											// 校验失败，可记录错误次数或重传
+									}
+							
+							
 							
 							TIM7_cnt = 0;
 							da_index = 0;

@@ -2,11 +2,11 @@ bjc_2\filteringfunctions.o: ..\CMSIS\Source\FilteringFunctions\FilteringFunction
 bjc_2\filteringfunctions.o: ..\CMSIS\Source\FilteringFunctions\arm_biquad_cascade_df1_32x64_init_q31.c
 bjc_2\filteringfunctions.o: ..\CMSIS\Include\arm_math.h
 bjc_2\filteringfunctions.o: ..\CMSIS\Include\cmsis_compiler.h
-bjc_2\filteringfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdint.h
+bjc_2\filteringfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\stdint.h
 bjc_2\filteringfunctions.o: ..\CMSIS\Include\cmsis_armcc.h
-bjc_2\filteringfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\string.h
-bjc_2\filteringfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\math.h
-bjc_2\filteringfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\float.h
+bjc_2\filteringfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\string.h
+bjc_2\filteringfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\math.h
+bjc_2\filteringfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\float.h
 bjc_2\filteringfunctions.o: ..\CMSIS\Source\FilteringFunctions\arm_biquad_cascade_df1_32x64_q31.c
 bjc_2\filteringfunctions.o: ..\CMSIS\Source\FilteringFunctions\arm_biquad_cascade_df1_f32.c
 bjc_2\filteringfunctions.o: ..\CMSIS\Source\FilteringFunctions\arm_biquad_cascade_df1_fast_q15.c

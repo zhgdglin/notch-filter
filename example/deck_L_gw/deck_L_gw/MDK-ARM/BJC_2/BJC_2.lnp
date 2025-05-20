@@ -60,6 +60,7 @@
 "bjc_2\key.o"
 "bjc_2\process.o"
 "bjc_2\chirp.o"
+"bjc_2\demodu.o"
 --library_type=microlib --strict --scatter "BJC_2\BJC_2.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

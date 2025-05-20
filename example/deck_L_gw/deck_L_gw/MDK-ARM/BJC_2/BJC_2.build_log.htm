@@ -3,79 +3,198 @@
 <pre>
 <h1>礦ision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: μVision V5.42.0.0
-Copyright (C) 2025 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: df d, s, LIC=YA39H-WSW9I-QDCKD-80XNC-19VM0-KDGNQ
+IDE-Version: μVision V5.26.2.0
+Copyright (C) 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: domin z, z, LIC=Y2B1Q-NLT28-BXWUY-IWWPG-NN00J-21A6C
  
 Tool Versions:
-Toolchain:       MDK-ARM Plus  Version: 5.42.0.0
-Toolchain Path:  D:\software\mdk\ARM\ARMAC5\Bin
-C Compiler:      Armcc.exe V5.06 update 7 (build 960)
-Assembler:       Armasm.exe V5.06 update 7 (build 960)
-Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
-Library Manager: ArmAr.exe V5.06 update 7 (build 960)
-Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
-CPU DLL:         SARMCM3.DLL V5.42.0.0
-Dialog DLL:      DCM.DLL V1.17.5.0
-Target DLL:      CMSIS_AGDI.dll V1.33.22.0
-Dialog DLL:      TCM.DLL V1.56.6.0
+Toolchain:       MDK-ARM Professional  Version: 5.26.2.0
+Toolchain Path:  E:\mdk\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.26.2.0
+Dialog DLL:      DCM.DLL V1.17.2.0
+Target DLL:      CMSIS_AGDI.dll V1.30.6.0
+Dialog DLL:      TCM.DLL V1.36.1.0
  
 <h2>Project:</h2>
-D:\admin\桌面\projiect\notch-filter\example\deck_L_gw\deck_L_gw\MDK-ARM\BJC_2.uvprojx
-Project File Date:  04/25/2025
+D:\Users\admin\Desktop\notch-filter\example\deck_L_gw\deck_L_gw\MDK-ARM\BJC_2.uvprojx
+Project File Date:  05/19/2025
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\software\mdk\ARM\ARMAC5\Bin'
-Build target 'BJC_2'
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\mdk\ARM\ARMCC\Bin'
+Rebuild target 'BJC_2'
+assembling startup_stm32h750xx.s...
+compiling mdma.c...
+compiling dma.c...
+compiling sdmmc.c...
+compiling adc.c...
+compiling gpio.c...
+compiling spi.c...
+compiling main.c...
+compiling tim.c...
+compiling usart.c...
+compiling sd_diskio.c...
+compiling bsp_driver_sd.c...
+compiling stm32h7xx_hal_msp.c...
+compiling fatfs_platform.c...
+compiling stm32h7xx_it.c...
+compiling fatfs.c...
+compiling stm32h7xx_hal_adc.c...
+compiling stm32h7xx_hal_rcc.c...
+compiling stm32h7xx_hal_adc_ex.c...
+compiling stm32h7xx_hal_flash.c...
+compiling stm32h7xx_hal_hsem.c...
+compiling stm32h7xx_hal_flash_ex.c...
+compiling stm32h7xx_hal_gpio.c...
+compiling stm32h7xx_hal_rcc_ex.c...
+compiling stm32h7xx_hal_dma.c...
+compiling stm32h7xx_hal_mdma.c...
+compiling stm32h7xx_hal_pwr_ex.c...
+compiling stm32h7xx_hal_dma_ex.c...
+compiling stm32h7xx_hal_pwr.c...
+compiling stm32h7xx_hal_cortex.c...
+compiling stm32h7xx_hal.c...
+compiling stm32h7xx_hal_i2c_ex.c...
+compiling stm32h7xx_hal_i2c.c...
+compiling stm32h7xx_hal_exti.c...
+compiling stm32h7xx_ll_sdmmc.c...
+compiling stm32h7xx_ll_delayblock.c...
+compiling stm32h7xx_hal_sd.c...
+compiling stm32h7xx_hal_tim_ex.c...
+compiling stm32h7xx_hal_tim.c...
+compiling stm32h7xx_hal_sd_ex.c...
+compiling stm32h7xx_hal_spi_ex.c...
+compiling stm32h7xx_hal_uart_ex.c...
+compiling diskio.c...
+compiling system_stm32h7xx.c...
+compiling stm32h7xx_hal_spi.c...
+compiling stm32h7xx_hal_uart.c...
+compiling syscall.c...
+compiling ff_gen_drv.c...
+compiling APP_Work.c...
+..\Drivers\USER\APP\APP_Work.c(86): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		return Battery_Voltage*2.72;  // 2.72= 9/3.3  ，转换成电池电压
+..\Drivers\USER\APP\APP_Work.c: 1 warning, 0 errors
+compiling ad7767.c...
+compiling ccsbcs.c...
+compiling SDTest.c...
+compiling ff.c...
+compiling max3221.c...
+compiling ds1302.c...
+compiling bsp_lcd12864.c...
+compiling UI.c...
+..\user\UI.c(37): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	if(Battery_remain>21.6)
+..\user\UI.c(39): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  			Battery_remain=Battery_remain-21.6;
+..\user\UI.c(40): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  			Battery_remain=Battery_remain/3.1;
+..\user\UI.c(41): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  			Battery_remain=Battery_remain*92.5+7.5;
+..\user\UI.c(49): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  			Battery_remain=Battery_remain-18.4;
+..\user\UI.c(50): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  			Battery_remain=Battery_remain/3.2;
+..\user\UI.c(51): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  			Battery_remain=Battery_remain*7.5;
+..\user\UI.c: 7 warnings, 0 errors
+compiling Key.c...
+..\user\Key.c(122): warning:  #111-D: statement is unreachable
+  				case 0x01: KeyValue = 0x0c; goto over;break;				// 0000 0001   
+..\user\Key.c(123): warning:  #111-D: statement is unreachable
+  				case 0x02: KeyValue = 0x0d; goto over;break;				// 0000 0010
+..\user\Key.c(124): warning:  #111-D: statement is unreachable
+  				case 0x04: KeyValue = 0x0e; goto over;break;				// 0000 0100
+..\user\Key.c(125): warning:  #111-D: statement is unreachable
+  				case 0x08: KeyValue = 0x0f; goto over;break;				// 0000 1000
+..\user\Key.c(126): warning:  #111-D: statement is unreachable
+  				case 0x10: KeyValue = 0x10; goto over;break;				// 0001 0000
+..\user\Key.c(136): warning:  #111-D: statement is unreachable
+  				case 0x01: KeyValue = 0x08; goto over;break;				// 0000 0001 
+..\user\Key.c(137): warning:  #111-D: statement is unreachable
+  				case 0x02: KeyValue = 0x09; goto over;break;				// 0000 0010
+..\user\Key.c(138): warning:  #111-D: statement is unreachable
+  				case 0x04: KeyValue = 0x0a; goto over;break;				// 0000 0100
+..\user\Key.c(139): warning:  #111-D: statement is unreachable
+  				case 0x08: KeyValue = 0x0b; goto over;break;				// 0000 1000
+..\user\Key.c(140): warning:  #111-D: statement is unreachable
+  				case 0x10: KeyValue = 0x20; goto over;break;				// 0001 0000
+..\user\Key.c(150): warning:  #111-D: statement is unreachable
+  				case 0x01: KeyValue = 0x04; goto over;break;				// 0000 0001 
+..\user\Key.c(151): warning:  #111-D: statement is unreachable
+  				case 0x02: KeyValue = 0x05; goto over;break;				// 0000 0010
+..\user\Key.c(152): warning:  #111-D: statement is unreachable
+  				case 0x04: KeyValue = 0x06; goto over;break;				// 0000 0100
+..\user\Key.c(153): warning:  #111-D: statement is unreachable
+  				case 0x08: KeyValue = 0x07; goto over;break;				// 0000 1000
+..\user\Key.c(154): warning:  #111-D: statement is unreachable
+  				case 0x10: KeyValue = 0x40; goto over;break;				// 0001 0000
+..\user\Key.c(164): warning:  #111-D: statement is unreachable
+  				case 0x01: KeyValue = 0x00; goto over;break;				// 0000 0001 
+..\user\Key.c(165): warning:  #111-D: statement is unreachable
+  				case 0x02: KeyValue = 0x01; goto over;break;				// 0000 0010
+..\user\Key.c(166): warning:  #111-D: statement is unreachable
+  				case 0x04: KeyValue = 0x02; goto over;break;				
+..\user\Key.c(167): warning:  #111-D: statement is unreachable
+  				case 0x08: KeyValue = 0x03; goto over;break;			
+..\user\Key.c: 19 warnings, 0 errors
+compiling chirp.c...
+compiling process.c...
 compiling cmd.c...
-..\user\cmd.c(85): warning:  #1278-D: excess initializers are ignored
-  {0,9230-1,3230-1,6000-1,13},						// f5	 	13K
-..\user\cmd.c(95): warning:  #1278-D: excess initializers are ignored
-  {0,9230-1,923-1,8307-1,12},						// f5	 	13K
-..\user\cmd.c(135): error:  #20: identifier "Single_Freq_Data" is undefined
-    Time4_change_freq(Single_Freq_Data[3]);   // 12K ,35%
-..\user\cmd.c(229): error:  #20: identifier "Single_Freq_Data" is undefined
-    Time4_change_freq(Single_Freq_Data[0]);   // 9K ,35%
-..\user\cmd.c(520): warning:  #69-D: integer conversion resulted in truncation
+..\user\cmd.c(552): warning:  #69-D: integer conversion resulted in truncation
   	time_mode = 2000;
-..\user\cmd.c(547): warning:  #69-D: integer conversion resulted in truncation
+..\user\cmd.c(579): warning:  #69-D: integer conversion resulted in truncation
   					time_mode = 1000;
-..\user\cmd.c(707): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\user\cmd.c(739): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   					if(recorded_time > 3.3)
-..\user\cmd.c(712): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\user\cmd.c(744): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   					 voltage_temp = recorded_time*2.72; // 转成电压值 
-..\user\cmd.c(793): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\user\cmd.c(825): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   					posture_temp = recorded_time/0.05; // 转成角度
 ..\user\cmd.c(80): warning:  #177-D: variable "Single_Freq_Data2"  was declared but never referenced
-  const static TIM_FREQUENCE Single_Freq_Data2[4] = {
-..\user\cmd.c(90): warning:  #177-D: variable "Single_Freq_Data3"  was declared but never referenced
-  const static TIM_FREQUENCE Single_Freq_Data3[4] = {
-..\user\cmd.c: 9 warnings, 2 errors
-"BJC_2\BJC_2.axf" - 2 Error(s), 9 Warning(s).
+  const static TIM_FREQUENCE Single_Freq_Data2[5] = {
+..\user\cmd.c: 6 warnings, 0 errors
+compiling demodu.c...
+..\user\demodu.c(57): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+      filter->uc += LEARNING_RATE * e * xc;
+..\user\demodu.c(58): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+      filter->us += LEARNING_RATE * e * xs;
+..\user\demodu.c(68): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+              if (fv >= THRESHOLD) {
+..\user\demodu.c(77): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+              if (fv < THRESHOLD) {
+..\user\demodu.c: 4 warnings, 0 errors
+linking...
+Program Size: Code=58474 RO-data=6534 RW-data=684 ZI-data=11132  
+FromELF: creating hex file...
+"BJC_2\BJC_2.axf" - 0 Error(s), 37 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: ARM
-                https://www.keil.com/pack/ARM.CMSIS.6.1.0.pack
-                ARM::CMSIS@6.1.0
-                CMSIS (Common Microcontroller Software Interface Standard)
-   * Component: CORE Version: 6.1.0
+                http://www.keil.com/pack/ARM.CMSIS.5.4.0.pack
+                ARM.CMSIS.5.4.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.1.2
 
 Package Vendor: Keil
-                https://www.keil.com/pack/Keil.STM32H7xx_DFP.4.0.0.pack
-                Keil::STM32H7xx_DFP@4.0.0
-                STMicroelectronics STM32H7 Series Device Support
+                https://www.keil.com/pack/Keil.STM32H7xx_DFP.3.1.1.pack
+                Keil.STM32H7xx_DFP.3.1.1
+                STMicroelectronics STM32H7 Series Device Support and Examples
 
 <h2>Collection of Component include folders:</h2>
-  ./RTE/_BJC_2
-  D:/software/mdk/packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include
+  .\RTE\_BJC_2
+  E:\mdk\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include
+  E:\mdk\ARM\PACK\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include
 
 <h2>Collection of Component Files used:</h2>
 
-   * Component: ARM::CMSIS:CORE@6.1.0
-      Include file:  CMSIS/Core/Include/tz_context.h
-Target not created.
-Build Time Elapsed:  00:00:00
+   * Component: ARM::CMSIS:CORE:5.1.2
+Build Time Elapsed:  00:00:14
 </pre>
 </body>
 </html>
