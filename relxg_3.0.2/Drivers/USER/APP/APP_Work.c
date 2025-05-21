@@ -383,6 +383,7 @@ ID_CMD Demodulation(void)
 	message.IDdata  = hex[0]; 
 	message.CMDdata = hex[1];
 
+	memset(hex, 0, sizeof(hex));  // 清空数组
 	return message;   // 可以存到一个FIFO中
 }
 
