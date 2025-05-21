@@ -142,7 +142,7 @@ void APP_Init(void)
 //	HAL_Delay(10);
 //	CMD_47();
 	
-//receive_deal(9);
+//receive_deal_9K();
 
 /*ADC*/
 //adc7767_init();
@@ -150,8 +150,7 @@ void APP_Init(void)
 
 
 
-
-
+//≤‚ ‘”¶¥
 // Deck_Send_frame(order_convert(0x55));
 
 // Deck_Send_frame(order_convert(0x48));

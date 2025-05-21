@@ -266,7 +266,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
             // 打印 "我是帅哥"
             char message[] = "我是帅哥\r\n";
             HAL_UART_Transmit_IT(&huart1, (uint8_t *)message, sizeof(message)-1); // 发送字符串
-						Serial_Send_frame();
+//						Serial_Send_frame();
         }
 
         // 重新开启 UART 接收中断
