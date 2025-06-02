@@ -162,7 +162,7 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
-							memset(hex, 0, sizeof(hex));  // 清空数组
+							
 						}
 						}
         if (state2 == SIGNAL_ENDED) {
@@ -191,7 +191,7 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
-							memset(hex, 0, sizeof(hex));  // 清空数组
+							
 						}
 				}
         if (state3 == SIGNAL_ENDED) {
@@ -220,7 +220,7 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
-							memset(hex, 0, sizeof(hex));  // 清空数组
+							
 						}
 				}
         if (state4 == SIGNAL_ENDED) {
@@ -251,7 +251,7 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
-							memset(hex, 0, sizeof(hex));  // 清空数组
+							
 						}
 				}
     }

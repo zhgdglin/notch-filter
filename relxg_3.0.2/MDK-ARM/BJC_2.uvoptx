@@ -310,6 +310,16 @@
           <WinNumber>1</WinNumber>
           <ItemText>StartT,0x0A</ItemText>
         </Ww>
+        <Ww>
+          <count>31</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>message,0x10</ItemText>
+        </Ww>
+        <Ww>
+          <count>32</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Battery_hex</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>

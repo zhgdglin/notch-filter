@@ -10,6 +10,8 @@
 // 电机
 #define MOTOR_REVERSE    Set_Pin(MOTOR)     // 电机反转 
 #define MOTOR_FORWARD    Reset_Pin(MOTOR)   // 电机正转
+//应答
+#define SYMBOL_COUNT 40  // 10字节 * 4个2-bit 符号
 
 
 enum 
@@ -68,7 +70,20 @@ const static TIM_FREQUENCE TIM4_Freq_Data [3]=
 		{ 0, 13333-1, 4667-1, 8666-1 },   // 9K    35%
 		{ 0, 12632-1, 4421-1, 8211-1 },		// 9.5K  35%
 		{ 0, 10000-1, 3500-1, 6500-1 }	  // 12K   35%
-};  
+};
+
+
+
+//占空比10%
+const static TIM_FREQUENCE TIM4_Freq_Data1 [5]=  
+{
+		{0,13333-1,1333-1,8666-1},					// f1  9K 
+		{0,  12000-1, 1200-1, 10800-1},   // f2  10K 
+		{0,  10909-1, 1090-1, 9819-1},		// f3	 	11K
+		{0,9230-1,923-1,8307-1},						// f5	 	13K
+		{0,10000-1,1000-1,9000-1},						// f4	 	12K
+};
+
 
 
 //占空比10%
@@ -288,6 +303,18 @@ void float_to_hex_bytes(float value, uint8_t hex_out[4]) {
 }
 
 
+//16进制转float
+float hex_bytes_to_float(uint8_t hex[4]) {
+    uint32_t temp = ((uint32_t)hex[0] << 24) |
+                    ((uint32_t)hex[1] << 16) |
+                    ((uint32_t)hex[2] << 8) |
+                    (uint32_t)hex[3];
+    float value;
+    memcpy(&value, &temp, sizeof(float));
+    return value;
+}
+
+
 
 //异或校验函数
 void append_xor_checksum(uint8_t hex[HEX_SIZE]) {
@@ -297,6 +324,9 @@ void append_xor_checksum(uint8_t hex[HEX_SIZE]) {
     }
     hex[9] = checksum;
 }
+
+
+
 
 
 
@@ -360,7 +390,6 @@ void Send_response_12k(void)   /* 指令应答，9K 20ms */
 
 
 
-
 void Send_response_fun(void)   /* 功能应答，9.5K 20ms */
 {
 	Timer4_freq_Init(TIM4_Freq_Data[1]);  // 9.5K
@@ -380,7 +409,29 @@ void Send_response_fun(void)   /* 功能应答，9.5K 20ms */
 }
 
 
+<<<<<<< HEAD
 #define SYMBOL_COUNT 40  // 10字节 * 4个2-bit 符号
+=======
+void Send_data(void)   /* 返回数据 */
+{
+	Timer4_freq_Init(TIM4_Freq_Data[1]);  // 9.5K
+	
+	 SysTick->VAL   = 0UL;  // 清除系统定时器的计数
+	//	 TIM6->CNT  =  0; 
+//	Reset_Pin(IR2110S_SD);   // 开启输出，低有效
+
+	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
+	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);
+	
+	HAL_Delay(19);
+	//Delay_us(800);
+	Set_Pin(IR2110S_SD);   // 20ms，结束输出
+	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_3);
+	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_1);  
+}
+
+
+>>>>>>> 4d8250293d3fc5cd5fd5d6a241d60af9ccab02b3
 
 void Send_frame_from_hex(uint8_t hex_array[10]) {
     TIM_FREQUENCE freq_sequence[SYMBOL_COUNT];
@@ -391,18 +442,32 @@ void Send_frame_from_hex(uint8_t hex_array[10]) {
         uint8_t byte = hex_array[byte_idx];
         for (int i = 0; i < 4; i++) {
             uint8_t two_bits = (byte >> (6 - i * 2)) & 0x03;
+<<<<<<< HEAD
             freq_sequence[symbol_idx++] = Single_Freq_Data3[two_bits];
+=======
+            freq_sequence[symbol_idx++] = TIM4_Freq_Data1[two_bits];
+>>>>>>> 4d8250293d3fc5cd5fd5d6a241d60af9ccab02b3
         }
     }
 
     // Step 2: 依次发送每个频率信号
     for (int i = 0; i < SYMBOL_COUNT; i++) {
         Timer4_freq_Init(freq_sequence[i]);
+<<<<<<< HEAD
+=======
+				SysTick->VAL   = 0UL;  // 清除系统定时器的计数
+			
+>>>>>>> 4d8250293d3fc5cd5fd5d6a241d60af9ccab02b3
 
         HAL_TIM_OC_Start(&htim4, TIM_CHANNEL_3);
         HAL_TIM_OC_Start(&htim4, TIM_CHANNEL_1);
 
+<<<<<<< HEAD
         HAL_Delay(20);  // 发送20ms
+=======
+        // 发送20ms
+				HAL_Delay(20);
+>>>>>>> 4d8250293d3fc5cd5fd5d6a241d60af9ccab02b3
 
         HAL_TIM_OC_Stop(&htim4, TIM_CHANNEL_3);
         HAL_TIM_OC_Stop(&htim4, TIM_CHANNEL_1);
@@ -413,6 +478,10 @@ void Send_frame_from_hex(uint8_t hex_array[10]) {
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4d8250293d3fc5cd5fd5d6a241d60af9ccab02b3
 ID_CMD Demodulation(void)
 {
 //	ID_CMD message;   		//本次解调得到的数据
@@ -427,6 +496,7 @@ ID_CMD Demodulation(void)
 	message.IDdata  = hex[0]; 
 	message.CMDdata = hex[1];
 
+	memset(hex, 0, sizeof(hex));  // 清空数组
 	return message;   // 可以存到一个FIFO中
 }
 
@@ -519,9 +589,12 @@ void communication_process(ID_CMD message)    /* 指令通信过程 */
 								temporary = 1 * Read_battery(9);				 // 延时时间 = 电压*1 S  , 读取电池电压
 								Battery_Voltage = Read_battery(9);
 								printf("电池电压 = %0.3fV\r\n", Battery_Voltage); 
+								float_to_hex_bytes(Battery_Voltage,Battery_hex);
+//								float Voltage = hex_bytes_to_float(Battery_hex);
+//								printf("电池电压测试 = %0.3fV\r\n", Voltage);
 								Cmd_delay(temporary);				  // 延时
 //								Send_response_fun();  				// 功能应答
-								float_to_hex_bytes(Battery_Voltage,Battery_hex);
+								
 								append_xor_checksum(Battery_hex);
 								Send_response_12k();
 							  printf(" 电池功能应答 \r\n ");

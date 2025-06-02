@@ -277,50 +277,6 @@ void Send_aframe1(void)  // 发送 唤醒信号
 }
 
 
-
-
-
-void Deck_Send_frame(bool* order_data)   // 甲板单元发送一帧数据 ：唤醒 + 线性调频 + 调制信号*/
-{
-	Set_Pin(POWER_CAP);   // 开启发射
-	HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);  // 关闭接收
-  Reset_Pin(IR2110S_SD);     //开启输出，低有效  // 装上变压器以后开启
-	
-	Send_wakeup();   // 12K唤醒信号  持续1秒
-	Set_Pin(IR2110S_SD);   // 结束输出
-	Delay_10ms(50);  // 空闲500ms
-	
-	Reset_Pin(IR2110S_SD);  
-	Send_LFM();      // 线性调频信号  持续40ms
-	Set_Pin(IR2110S_SD);   // 结束输出
-	Delay_10ms(50);  // 空闲500ms
-	
-	Reset_Pin(IR2110S_SD);  
-	Send_single_frequency(order_data);  // 发送16个数据 
-	Set_Pin(IR2110S_SD);   // 结束输出
-  Delay_10ms(200);  // 连续调用测试用
-	
-	Reset_Pin(POWER_CAP);   // 关闭发射
-}
-
-
-
-void Serial_Send_frame(void)   // 甲板单元发送一帧数据 ：唤醒 + 线性调频 + 调制信号*/
-{
-	Set_Pin(POWER_CAP);   // 开启发射
-	HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);  // 关闭接收
-  Reset_Pin(IR2110S_SD);     //开启输出，低有效  // 装上变压器以后开启
-	
-	Send_aframe1();   // 9，10，11，12k单频信号 
-	Set_Pin(IR2110S_SD);   // 结束输出
-	Delay_10ms(50);  // 空闲500ms
-	
-
-	Reset_Pin(POWER_CAP);   // 关闭发射
-}
-
-
-
 #define SYMBOL_COUNT 40  // 10字节 * 4个2-bit 符号
 
 
@@ -353,6 +309,59 @@ void Send_frame_from_hex(uint8_t hex_array[10]) {
         Delay_10ms(3);  // 空闲30ms
     }
 }
+
+
+
+
+
+void Deck_Send_frame(bool* order_data)   // 甲板单元发送一帧数据 ：唤醒 + 线性调频 + 调制信号*/
+{
+	Set_Pin(POWER_CAP);   // 开启发射
+	HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);  // 关闭接收
+	
+  Reset_Pin(IR2110S_SD);     //开启输出，低有效  // 装上变压器以后开启
+	Send_wakeup();   // 12K唤醒信号  持续1秒
+	Set_Pin(IR2110S_SD);   // 结束输出
+	Delay_10ms(50);  // 空闲500ms
+	
+	Reset_Pin(IR2110S_SD);  
+	Send_LFM();      // 线性调频信号  持续40ms
+	Set_Pin(IR2110S_SD);   // 结束输出
+	Delay_10ms(50);  // 空闲500ms
+	
+	Reset_Pin(IR2110S_SD);  
+	Send_single_frequency(order_data);  // 发送16个数据 
+	Set_Pin(IR2110S_SD);   // 结束输出
+  Delay_10ms(200);  // 连续调用测试用
+	
+	Reset_Pin(POWER_CAP);   // 关闭发射
+}
+
+
+
+void Deck_Send(uint8_t hex_array[10])   // 甲板单元发送一帧数据 ：唤醒 + 线性调频 + 调制信号*/
+{
+	Set_Pin(POWER_CAP);   // 开启发射
+	HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);  // 关闭接收
+	
+	
+	Reset_Pin(IR2110S_SD);     //开启输出，低有效  // 装上变压器以后开启
+	Send_wakeup();   // 12K唤醒信号  持续1秒
+	Set_Pin(IR2110S_SD);   // 结束输出
+	Delay_10ms(50);  // 空闲500ms
+	
+  Reset_Pin(IR2110S_SD);     //开启输出，低有效  // 装上变压器以后开启
+	Send_frame_from_hex(hex_array);   // 9，10，11，12k单频信号 
+	Set_Pin(IR2110S_SD);   // 结束输出
+	Delay_10ms(50);  // 空闲500ms
+	
+
+	Reset_Pin(POWER_CAP);   // 关闭发射
+}
+
+
+
+
 
 
 
@@ -538,6 +547,8 @@ bool*  order_convert(uint8_t CMD_data)   // 数组转8位
 	return order_data;
 }
 
+
+//异或
 void append_xor_checksum(uint8_t ihex[10]) {
     uint8_t checksum = ihex[0];
     for (int i = 1; i < 9; i++) {
@@ -554,8 +565,13 @@ void append_xor_checksum(uint8_t ihex[10]) {
 // 时间  逻辑 都没测
 void CMD_55(void)   /* 释放指令 */
 {
+<<<<<<< HEAD
 	//构造指令通信帧
 	uint8_t ihex[10] = {DEVICE_ID,0x55,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
+=======
+	uint8_t ihex[10] = {0x5A,0x55,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
+	
+>>>>>>> 4d8250293d3fc5cd5fd5d6a241d60af9ccab02b3
 	append_xor_checksum(ihex);
 	
 	//lcd_DisStr(4,0,"释放：");
@@ -563,7 +579,7 @@ void CMD_55(void)   /* 释放指令 */
 	lcd_DisStr(4,0,"释放55：");  //验证命令
 
 //	Deck_Send_frame(order_convert(0x55));
-	Send_frame_from_hex(ihex);
+	Deck_Send(ihex);
 
 	/* 开始计时20S*/
 		adc7767_init();  //  ADC初始化 开始接收
@@ -643,10 +659,18 @@ void CMD_55(void)   /* 释放指令 */
 
 void CMD_49(void)  /* 测距命令 */
 {
+<<<<<<< HEAD
 	//构造指令通信帧
 	uint8_t ihex[10] = {DEVICE_ID,0x49,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
 	append_xor_checksum(ihex);
 	
+=======
+	uint8_t ihex[10] = {0x5A,0x49,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
+	
+	append_xor_checksum(ihex);
+	
+	
+>>>>>>> 4d8250293d3fc5cd5fd5d6a241d60af9ccab02b3
 	float distance_temp = 0;
 	char  distance[4]={0};
 
@@ -655,7 +679,11 @@ void CMD_49(void)  /* 测距命令 */
 	lcd_DisStr(4,0,"测距49：");  //验证命令
 
 //	Deck_Send_frame(order_convert(0x49));
+<<<<<<< HEAD
 	Send_frame_from_hex(ihex);
+=======
+	Deck_Send(ihex);
+>>>>>>> 4d8250293d3fc5cd5fd5d6a241d60af9ccab02b3
 
 	/* 开始计时20S*/
 		adc7767_init();  //  ADC初始化 开始接收
@@ -715,10 +743,18 @@ void CMD_49(void)  /* 测距命令 */
  
 void CMD_48(void)  /* 查询电池电压 */
 {
+<<<<<<< HEAD
 	//构造指令通信帧
 	uint8_t ihex[10] = {DEVICE_ID,0x48,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
 	append_xor_checksum(ihex);
 	
+=======
+	uint8_t ihex[10] = {0x5A,0x48,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
+	
+	append_xor_checksum(ihex);
+	
+	
+>>>>>>> 4d8250293d3fc5cd5fd5d6a241d60af9ccab02b3
 	float voltage_temp = 0;
 	char  Battery_voltage[4]={0};
 
@@ -726,7 +762,8 @@ void CMD_48(void)  /* 查询电池电压 */
 	printf("电压48\r\n");
 	lcd_DisStr(4,0,"电压48：");  //验证命令
 
-	Deck_Send_frame(order_convert(0x48));
+//	Deck_Send_frame(order_convert(0x48));
+	Deck_Send(ihex);
 
 	/* 开始计时20S*/
 		adc7767_init();  //  ADC初始化 开始接收
@@ -797,10 +834,18 @@ void CMD_48(void)  /* 查询电池电压 */
 
 void CMD_47(void)   /* 查询姿态 */
 {
+<<<<<<< HEAD
 	//构造指令通信帧
 	uint8_t ihex[10] = {DEVICE_ID,0x47,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
 	append_xor_checksum(ihex);
 	
+=======
+	uint8_t ihex[10] = {0x5A,0x47,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
+	
+	append_xor_checksum(ihex);
+	
+	
+>>>>>>> 4d8250293d3fc5cd5fd5d6a241d60af9ccab02b3
 	float posture_temp = 0;
 	char  posture[4]={0};
 
@@ -808,7 +853,8 @@ void CMD_47(void)   /* 查询姿态 */
 	printf("姿态47\r\n");
 	lcd_DisStr(4,0,"姿态47：");  
 
-	Deck_Send_frame(order_convert(0x47));
+//	Deck_Send_frame(order_convert(0x47));
+	Deck_Send(ihex);
 
 	/* 开始计时20S*/
 	adc7767_init();  //  ADC初始化 开始接收
