@@ -345,12 +345,12 @@ void Send_frame_from_hex(uint8_t hex_array[10]) {
         HAL_TIM_OC_Start(&htim4, TIM_CHANNEL_3);
         HAL_TIM_OC_Start(&htim4, TIM_CHANNEL_1);
 
-        Delay_10ms(20);  // 发送20ms
+        Delay_10ms(2);  // 发送20ms
 
         HAL_TIM_OC_Stop(&htim4, TIM_CHANNEL_3);
         HAL_TIM_OC_Stop(&htim4, TIM_CHANNEL_1);
 
-        Delay_10ms(30);  // 空闲30ms
+        Delay_10ms(3);  // 空闲30ms
     }
 }
 
@@ -554,8 +554,8 @@ void append_xor_checksum(uint8_t ihex[10]) {
 // 时间  逻辑 都没测
 void CMD_55(void)   /* 释放指令 */
 {
-	uint8_t ihex[10] = {0x01,0x55,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
-	
+	//构造指令通信帧
+	uint8_t ihex[10] = {DEVICE_ID,0x55,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
 	append_xor_checksum(ihex);
 	
 	//lcd_DisStr(4,0,"释放：");
@@ -643,6 +643,10 @@ void CMD_55(void)   /* 释放指令 */
 
 void CMD_49(void)  /* 测距命令 */
 {
+	//构造指令通信帧
+	uint8_t ihex[10] = {DEVICE_ID,0x49,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
+	append_xor_checksum(ihex);
+	
 	float distance_temp = 0;
 	char  distance[4]={0};
 
@@ -650,7 +654,8 @@ void CMD_49(void)  /* 测距命令 */
 	printf("测距49\r\n");
 	lcd_DisStr(4,0,"测距49：");  //验证命令
 
-	Deck_Send_frame(order_convert(0x49));
+//	Deck_Send_frame(order_convert(0x49));
+	Send_frame_from_hex(ihex);
 
 	/* 开始计时20S*/
 		adc7767_init();  //  ADC初始化 开始接收
@@ -710,6 +715,10 @@ void CMD_49(void)  /* 测距命令 */
  
 void CMD_48(void)  /* 查询电池电压 */
 {
+	//构造指令通信帧
+	uint8_t ihex[10] = {DEVICE_ID,0x48,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
+	append_xor_checksum(ihex);
+	
 	float voltage_temp = 0;
 	char  Battery_voltage[4]={0};
 
@@ -788,6 +797,10 @@ void CMD_48(void)  /* 查询电池电压 */
 
 void CMD_47(void)   /* 查询姿态 */
 {
+	//构造指令通信帧
+	uint8_t ihex[10] = {DEVICE_ID,0x47,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
+	append_xor_checksum(ihex);
+	
 	float posture_temp = 0;
 	char  posture[4]={0};
 

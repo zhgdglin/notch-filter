@@ -11,10 +11,10 @@
 #include "ad7767.h"   // 包含前放增益
 
 
-//__align(4)  int32_t  AD7767_Ping[BUFF_SIZE] = {0};  
-//__align(4)  int32_t  AD7767_Pang[BUFF_SIZE] = {0};
-//int32_t  *p_ad_begin = NULL;  // 指示现在写入的是哪个数组  用于判断
-//int32_t  *p_sd = NULL;        // 实际SD卡写入的数组
+__align(4)  int32_t  AD7767_Ping[BUFF_SIZE] = {0};  
+__align(4)  int32_t  AD7767_Pang[BUFF_SIZE] = {0};
+int32_t  *p_ad_begin = NULL;  // 指示现在写入的是哪个数组  用于判断
+int32_t  *p_sd = NULL;        // 实际SD卡写入的数组
 volatile  int32_t    ad7767_data = 0;
 volatile  int16_t    ad7767_data_16B = 0;
 
@@ -22,8 +22,8 @@ int16_t  ADCdata_BUFF[4096] = {0};
 
 //int32_t    addata_int_temp = 0;
 
-//bool	volatile Ping_full_flag = 0;
-//bool	volatile Pang_full_flag = 0;
+bool	volatile Ping_full_flag = 0;
+bool	volatile Pang_full_flag = 0;
 	
 uint8_t SPI_Rx_buff[3] = {0,0,0};
 uint8_t SPI_Tx_buff[3] = {0xA0,0xA0,0xA0};
@@ -94,26 +94,26 @@ void adc7767_init(void)
 
 
 
-//void change_buff(void)
-//{
-//	if(addata_cnt >= BUFF_SIZE)
-//	{
-//			addata_cnt = 0;
-//		
-//			if(p_ad_begin == AD7767_Ping)
-//			{
-//					Ping_full_flag = 1;
-//					p_sd  		 = AD7767_Pang;   // SD卡写入数组移动到Pang   // 真正作用的数组
-//					p_ad_begin = AD7767_Pang;   														// 指示作用	
-//			}	
-//			else if(p_ad_begin == AD7767_Pang)
-//			{
-//					Pang_full_flag = 1;
-//					p_sd       = AD7767_Ping;
-//					p_ad_begin = AD7767_Ping; 
-//			}	
-//	}
-//}
+void change_buff(void)
+{
+	if(addata_cnt >= BUFF_SIZE)
+	{
+			addata_cnt = 0;
+		
+			if(p_ad_begin == AD7767_Ping)
+			{
+					Ping_full_flag = 1;
+					p_sd  		 = AD7767_Pang;   // SD卡写入数组移动到Pang   // 真正作用的数组
+					p_ad_begin = AD7767_Pang;   														// 指示作用	
+			}	
+			else if(p_ad_begin == AD7767_Pang)
+			{
+					Pang_full_flag = 1;
+					p_sd       = AD7767_Ping;
+					p_ad_begin = AD7767_Ping; 
+			}	
+	}
+}
 
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
@@ -170,9 +170,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 //					if(	 addata_cnt > 4096)
 //							 addata_cnt = 0;
 					
-//					*p_sd = ad7767_data;  // 获得AD数据
-//					 p_sd++; 							// 移动指针至下一个元素
-//				   change_buff();
+					*p_sd = ad7767_data;  // 获得AD数据
+					 p_sd++; 							// 移动指针至下一个元素
+				   change_buff();
 							 
 				}
 		}

@@ -136,7 +136,7 @@ int main(void)
 	printf("****进入用户程序****\r\n\r\n");
   APP_Init();
 	
-	CMD_55();
+//	CMD_55();
 
 
   /* USER CODE END 2 */

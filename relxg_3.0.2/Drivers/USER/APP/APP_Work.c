@@ -71,6 +71,17 @@ const static TIM_FREQUENCE TIM4_Freq_Data [3]=
 };  
 
 
+//占空比10%
+const static TIM_FREQUENCE Single_Freq_Data3[5] = {
+{0,13333-1,1333-1,8666-1},					// f1  9K 
+{0,  12000-1, 1200-1, 10800-1},   // f2  10K 
+{0,  10909-1, 1090-1, 9819-1},		// f3	 	11K
+{0,9230-1,923-1,8307-1},						// f5	 	13K
+{0,10000-1,1000-1,9000-1},						// f4	 	12K
+};
+
+
+
 /*  数值 转换成 字符串显示
 // num    输入数(可输入负数)
 // str		目标字符
@@ -367,6 +378,39 @@ void Send_response_fun(void)   /* 功能应答，9.5K 20ms */
 	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_3);
 	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_1);  
 }
+
+
+#define SYMBOL_COUNT 40  // 10字节 * 4个2-bit 符号
+
+void Send_frame_from_hex(uint8_t hex_array[10]) {
+    TIM_FREQUENCE freq_sequence[SYMBOL_COUNT];
+    int symbol_idx = 0;
+
+    // Step 1: 将10字节数据拆成40段2-bit并映射为频率配置
+    for (int byte_idx = 0; byte_idx < 10; byte_idx++) {
+        uint8_t byte = hex_array[byte_idx];
+        for (int i = 0; i < 4; i++) {
+            uint8_t two_bits = (byte >> (6 - i * 2)) & 0x03;
+            freq_sequence[symbol_idx++] = Single_Freq_Data3[two_bits];
+        }
+    }
+
+    // Step 2: 依次发送每个频率信号
+    for (int i = 0; i < SYMBOL_COUNT; i++) {
+        Timer4_freq_Init(freq_sequence[i]);
+
+        HAL_TIM_OC_Start(&htim4, TIM_CHANNEL_3);
+        HAL_TIM_OC_Start(&htim4, TIM_CHANNEL_1);
+
+        HAL_Delay(20);  // 发送20ms
+
+        HAL_TIM_OC_Stop(&htim4, TIM_CHANNEL_3);
+        HAL_TIM_OC_Stop(&htim4, TIM_CHANNEL_1);
+
+        HAL_Delay(30);  // 空闲30ms
+    }
+}
+
 
 
 ID_CMD Demodulation(void)
