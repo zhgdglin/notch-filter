@@ -2,11 +2,11 @@ bjc_2\basicmathfunctions.o: ..\CMSIS\Source\BasicMathFunctions\BasicMathFunction
 bjc_2\basicmathfunctions.o: ..\CMSIS\Source\BasicMathFunctions\arm_abs_f32.c
 bjc_2\basicmathfunctions.o: ..\CMSIS\Include\arm_math.h
 bjc_2\basicmathfunctions.o: ..\CMSIS\Include\cmsis_compiler.h
-bjc_2\basicmathfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdint.h
+bjc_2\basicmathfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\stdint.h
 bjc_2\basicmathfunctions.o: ..\CMSIS\Include\cmsis_armcc.h
-bjc_2\basicmathfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\string.h
-bjc_2\basicmathfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\math.h
-bjc_2\basicmathfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\float.h
+bjc_2\basicmathfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\string.h
+bjc_2\basicmathfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\math.h
+bjc_2\basicmathfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\float.h
 bjc_2\basicmathfunctions.o: ..\CMSIS\Source\BasicMathFunctions\arm_abs_q15.c
 bjc_2\basicmathfunctions.o: ..\CMSIS\Source\BasicMathFunctions\arm_abs_q31.c
 bjc_2\basicmathfunctions.o: ..\CMSIS\Source\BasicMathFunctions\arm_abs_q7.c

@@ -565,13 +565,11 @@ void append_xor_checksum(uint8_t ihex[10]) {
 // 时间  逻辑 都没测
 void CMD_55(void)   /* 释放指令 */
 {
-<<<<<<< HEAD
+
 	//构造指令通信帧
 	uint8_t ihex[10] = {DEVICE_ID,0x55,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
-=======
-	uint8_t ihex[10] = {0x5A,0x55,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
+
 	
->>>>>>> 4d8250293d3fc5cd5fd5d6a241d60af9ccab02b3
 	append_xor_checksum(ihex);
 	
 	//lcd_DisStr(4,0,"释放：");
@@ -659,18 +657,13 @@ void CMD_55(void)   /* 释放指令 */
 
 void CMD_49(void)  /* 测距命令 */
 {
-<<<<<<< HEAD
+
 	//构造指令通信帧
 	uint8_t ihex[10] = {DEVICE_ID,0x49,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
 	append_xor_checksum(ihex);
 	
-=======
-	uint8_t ihex[10] = {0x5A,0x49,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
 	
-	append_xor_checksum(ihex);
-	
-	
->>>>>>> 4d8250293d3fc5cd5fd5d6a241d60af9ccab02b3
+
 	float distance_temp = 0;
 	char  distance[4]={0};
 
@@ -679,11 +672,11 @@ void CMD_49(void)  /* 测距命令 */
 	lcd_DisStr(4,0,"测距49：");  //验证命令
 
 //	Deck_Send_frame(order_convert(0x49));
-<<<<<<< HEAD
+
 	Send_frame_from_hex(ihex);
-=======
+
 	Deck_Send(ihex);
->>>>>>> 4d8250293d3fc5cd5fd5d6a241d60af9ccab02b3
+
 
 	/* 开始计时20S*/
 		adc7767_init();  //  ADC初始化 开始接收
@@ -743,18 +736,16 @@ void CMD_49(void)  /* 测距命令 */
  
 void CMD_48(void)  /* 查询电池电压 */
 {
-<<<<<<< HEAD
+
 	//构造指令通信帧
 	uint8_t ihex[10] = {DEVICE_ID,0x48,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
 	append_xor_checksum(ihex);
 	
-=======
-	uint8_t ihex[10] = {0x5A,0x48,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
-	
-	append_xor_checksum(ihex);
+
+
 	
 	
->>>>>>> 4d8250293d3fc5cd5fd5d6a241d60af9ccab02b3
+
 	float voltage_temp = 0;
 	char  Battery_voltage[4]={0};
 
@@ -834,18 +825,14 @@ void CMD_48(void)  /* 查询电池电压 */
 
 void CMD_47(void)   /* 查询姿态 */
 {
-<<<<<<< HEAD
+
 	//构造指令通信帧
 	uint8_t ihex[10] = {DEVICE_ID,0x47,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
 	append_xor_checksum(ihex);
 	
-=======
-	uint8_t ihex[10] = {0x5A,0x47,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
-	
-	append_xor_checksum(ihex);
-	
-	
->>>>>>> 4d8250293d3fc5cd5fd5d6a241d60af9ccab02b3
+
+
+
 	float posture_temp = 0;
 	char  posture[4]={0};
 
