@@ -424,7 +424,7 @@ uint8_t receive_deal_9K(void)   // 识别9K 指令应答
 		enter_cnt = 1;
 	}
 
-		ack_9K_temp  = ad7767_data_16B;
+		ack_9K_temp  = ad7767_data;
 		ack_9K_temp *= ack_9K_tlabe[addata_cnt];   // 乘积
 		ack_9K_sum  += ack_9K_temp;   // 累加
 
@@ -478,7 +478,7 @@ uint8_t receive_deal_9_5K(void)    // 识别9.5K 功能应答
 		enter_cnt = 1;
 	}
 
-		ack_9_5K_temp  = ad7767_data_16B;
+		ack_9_5K_temp  = ad7767_data;
 		ack_9_5K_temp *= ack_9_5K_tlabe[addata_cnt];     // 乘积
 		ack_9_5K_sum  += ack_9_5K_temp;   						   // 累加
 
@@ -792,8 +792,8 @@ void CMD_48(void)  /* 查询电池电压 */
 					/* 等待功能应答 */
 					//while(fun_respond == 0);
 				  //					fun_respond = 0;  /* 是否在这清零未知 */
-//					while(0 == receive_deal_9_5K());
-					while(0 == StartT);
+					while(0 == receive_deal_9_5K());
+//					while(0 == StartT);
 					recorded_time =  (float)(TIM13_1s_cnt*100 + TIM13_100ms_cnt*10 + TIM13_10ms_cnt) / 100;  // 单位 S
 					voltage_temp = hex_bytes_to_float(hex);
 				  stop_cnt_flag = 1;  // 停止计时

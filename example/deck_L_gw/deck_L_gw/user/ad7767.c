@@ -20,7 +20,7 @@ volatile  int16_t    ad7767_data_16B = 0;
 
 int16_t  ADCdata_BUFF[4096] = {0};
 
-//int32_t    addata_int_temp = 0;
+int32_t    addata_int_temp = 0;
 
 bool	volatile Ping_full_flag = 0;
 bool	volatile Pang_full_flag = 0;
@@ -29,6 +29,7 @@ uint8_t SPI_Rx_buff[3] = {0,0,0};
 uint8_t SPI_Tx_buff[3] = {0xA0,0xA0,0xA0};
 
 volatile  uint16_t   addata_cnt = 0;  		// 用于数组元素个数计数
+
 
 
 
@@ -105,17 +106,82 @@ void change_buff(void)
 					Ping_full_flag = 1;
 					p_sd  		 = AD7767_Pang;   // SD卡写入数组移动到Pang   // 真正作用的数组
 					p_ad_begin = AD7767_Pang;   														// 指示作用	
-				process_buffer_and_sum(AD7767_Ping,BUFF_SIZE);
+				   process_buffer_and_sum(AD7767_Ping,BUFF_SIZE);
 			}	
 			else if(p_ad_begin == AD7767_Pang)
 			{
 					Pang_full_flag = 1;
 					p_sd       = AD7767_Ping;
 					p_ad_begin = AD7767_Ping; 
-				process_buffer_and_sum(AD7767_Ping,BUFF_SIZE);
+				process_buffer_and_sum(AD7767_Pang,BUFF_SIZE);
+					
 			}	
 	}
 }
+
+
+//void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+//{
+//		
+//   if(GPIO_Pin == ADC_DRDY_Pin) // ADC数据转换完成信号  下降沿触发
+//		{
+//			
+//			__nop();__nop();__nop();__nop();__nop();
+//			__nop();__nop();__nop();__nop();__nop();  
+//			
+//			if(Read_Pin(ADC_DRDY) == 1)
+//					return;   // 将DRDY的尖刺干扰滤除
+//			else 
+//			{
+//					/* 时序开始 */
+//					Set_Pin(ADC_CS);    
+////					Delay_us(3);   //延时3us
+//				for(int i=0; i<5; i++)
+//					{ __nop(); __nop(); __nop();}  //延时3us
+//				 
+//				  
+
+//					Reset_Pin(ADC_CS);
+//					HAL_SPI_Receive(&hspi1, SPI_Rx_buff , 3,2);  
+//					Set_Pin(ADC_CS);
+//					
+//					/*时序结束，处理数据*/
+//					ad7767_data = (SPI_Rx_buff[0]<<16) | (SPI_Rx_buff[1]<<8) |(SPI_Rx_buff[2]);  // 高位在前
+//					ad7767_data &= 0x00FFFF00; 
+//					ad7767_data_16B = ad7767_data>>8;    // 转换成16位数据
+//				
+////					ad7767_data &= 0x00FFFFFF;   // 确保是24位数据
+////					ad7767_data = S24toS32(ad7767_data);		//  将24位转成32位
+////					printf("%d\r\n",ad7767_data_16B);	
+
+
+//				
+//					// 自测 
+////					ad7767_data = 12599296;
+////					ad7767_data = (SPI_Rx_buff[0]<<16) | (SPI_Rx_buff[1]<<8) |(SPI_Rx_buff[2]);  // 高位在前
+////					ad7767_data &= 0x00FFFF00;
+////					if(ad7767_data & 0x00800000)  //判别第24位是否是1
+////						ad7767_data_16B = ad7767_data >> 8;
+////						ad7767_data_16B 
+////					ad7767_data = S24toS32(ad7767_data);		//  补全至32位，包含了符号位的处理
+////				  ad7767_data_16B = ad7767_data >> 16;
+//			
+//					/*数据缓存*/	
+////				
+////					ADCdata_BUFF[addata_cnt] = ad7767_data_16B;
+//					addata_cnt++;
+////					
+////					if(	 addata_cnt > 4096)
+////							 addata_cnt = 0;
+////					
+////					*p_sd = ad7767_data;  // 获得AD数据
+////					 p_sd++; 							// 移动指针至下一个元素
+////				   change_buff();
+//							 
+//				}
+//		}
+//	
+//}
 
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
@@ -133,45 +199,40 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 			{
 					/* 时序开始 */
 					Set_Pin(ADC_CS);    
-//					Delay_us(3);   //延时3us
-				for(int i=0; i<5; i++)
-					{ __nop(); __nop(); __nop();}  //延时3us
-				 
-				  
-
+					Delay_us(3);//延时3us
 					Reset_Pin(ADC_CS);
 					HAL_SPI_Receive(&hspi1, SPI_Rx_buff , 3,2);  
 					Set_Pin(ADC_CS);
 					
 					/*时序结束，处理数据*/
-					ad7767_data = (SPI_Rx_buff[0]<<16) | (SPI_Rx_buff[1]<<8) |(SPI_Rx_buff[2]);  // 高位在前
-					ad7767_data &= 0x00FFFF00; 
-					ad7767_data_16B = ad7767_data>>8;    // 转换成16位数据
-				
+//					ad7767_data = (SPI_Rx_buff[0]<<16) | (SPI_Rx_buff[1]<<8) |(SPI_Rx_buff[2]);  // 高位在前
 //					ad7767_data &= 0x00FFFFFF;   // 确保是24位数据
 //					ad7767_data = S24toS32(ad7767_data);		//  将24位转成32位
-//					printf("%d\r\n",ad7767_data_16B);	
-
+						
+					addata_int_temp = (SPI_Rx_buff[0]<<16) | (SPI_Rx_buff[1]<<8) |(SPI_Rx_buff[2]);  // 高位在前
+					addata_int_temp &= 0x00FFFFFF;   // 确保是24位数据
+					addata_int_temp = S24toS32(addata_int_temp);		//  将24位转成32位
+					ad7767_data =  ((float)(addata_int_temp))/8388608 *5;   // 16777216   8388608
+//					ad7767_data_16B = ad7767_data>>8;    // 转换成16位数据
+				
+				    
+			
 
 				
-					// 自测 
-//					ad7767_data = 12599296;
-//					ad7767_data = (SPI_Rx_buff[0]<<16) | (SPI_Rx_buff[1]<<8) |(SPI_Rx_buff[2]);  // 高位在前
-//					ad7767_data &= 0x00FFFF00;
-//					if(ad7767_data & 0x00800000)  //判别第24位是否是1
-//						ad7767_data_16B = ad7767_data >> 8;
-//						ad7767_data_16B 
-//					ad7767_data = S24toS32(ad7767_data);		//  补全至32位，包含了符号位的处理
-//				  ad7767_data_16B = ad7767_data >> 16;
-			
-					/*数据缓存*/	
-//				
-//					ADCdata_BUFF[addata_cnt] = ad7767_data_16B;
-					addata_cnt++;
-//					
-//					if(	 addata_cnt > 4096)
-//							 addata_cnt = 0;
+				
+				    //printf("%.4f ",ad7767_data);
+					//instantaneous_freq = calculate_instantaneous_frequency(ad7767_data, k);
+				    //printf("%.4f ",instantaneous_freq);
+				    //filtered_data = multiChannelNotchFilter(ad7767_data, k);
+					//printf("%.4f ",filtered_data);
+					//float instantaneous_freq1 = calculate_instantaneous_frequency(filtered_data, k);
+				    //printf("%.4f ",instantaneous_freq1);
 					
+					/*数据缓存*/	
+					 addata_cnt++;
+					 //k++;
+					 //printf("\r\n");
+					//printf("时间是%d\r\n",k);
 					*p_sd = ad7767_data;  // 获得AD数据
 					 p_sd++; 							// 移动指针至下一个元素
 				   change_buff();
