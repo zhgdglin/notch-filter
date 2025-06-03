@@ -105,12 +105,14 @@ void change_buff(void)
 					Ping_full_flag = 1;
 					p_sd  		 = AD7767_Pang;   // SD卡写入数组移动到Pang   // 真正作用的数组
 					p_ad_begin = AD7767_Pang;   														// 指示作用	
+				process_buffer_and_sum(AD7767_Ping,BUFF_SIZE);
 			}	
 			else if(p_ad_begin == AD7767_Pang)
 			{
 					Pang_full_flag = 1;
 					p_sd       = AD7767_Ping;
 					p_ad_begin = AD7767_Ping; 
+				process_buffer_and_sum(AD7767_Ping,BUFF_SIZE);
 			}	
 	}
 }

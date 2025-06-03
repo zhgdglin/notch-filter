@@ -5,7 +5,7 @@
 #include "tim.h"   // 用于使用us延时
 #include "spi.h"
 #include "dma.h"
-
+#include "demodu.h"
 
 
 

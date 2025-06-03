@@ -2,11 +2,11 @@ bjc_2\transformfunctions.o: ..\CMSIS\Source\TransformFunctions\TransformFunction
 bjc_2\transformfunctions.o: ..\CMSIS\Source\TransformFunctions\arm_bitreversal.c
 bjc_2\transformfunctions.o: ..\CMSIS\Include\arm_math.h
 bjc_2\transformfunctions.o: ..\CMSIS\Include\cmsis_compiler.h
-bjc_2\transformfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\stdint.h
+bjc_2\transformfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdint.h
 bjc_2\transformfunctions.o: ..\CMSIS\Include\cmsis_armcc.h
-bjc_2\transformfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\string.h
-bjc_2\transformfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\math.h
-bjc_2\transformfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\float.h
+bjc_2\transformfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\string.h
+bjc_2\transformfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\math.h
+bjc_2\transformfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\float.h
 bjc_2\transformfunctions.o: ..\CMSIS\Include\arm_common_tables.h
 bjc_2\transformfunctions.o: ..\CMSIS\Source\TransformFunctions\arm_bitreversal2.c
 bjc_2\transformfunctions.o: ..\CMSIS\Source\TransformFunctions\arm_cfft_f32.c

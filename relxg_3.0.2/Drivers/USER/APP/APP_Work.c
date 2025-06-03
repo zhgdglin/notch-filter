@@ -54,6 +54,7 @@ ID_CMD last_message;  // 上一次解调得到的数据
 extern ID_CMD message;
 float  Battery_Voltage   = 0;     // 电池电压
 uint8_t Battery_hex[10] = {0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
+uint8_t mpu_hex[10] = {0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
 
 // 频率变量
 uint16_t Timer4_Prescaler = 0;
@@ -410,7 +411,7 @@ void Send_response_fun(void)   /* 功能应答，9.5K 20ms */
 
 
 
-#define SYMBOL_COUNT 40  // 10字节 * 4个2-bit 符号
+
 
 void Send_data(void)   /* 返回数据 */
 {
@@ -431,7 +432,7 @@ void Send_data(void)   /* 返回数据 */
 }
 
 
-
+#define SYMBOL_COUNT 40  // 10字节 * 4个2-bit 符号
 
 void Send_frame_from_hex(uint8_t hex_array[10]) {
     TIM_FREQUENCE freq_sequence[SYMBOL_COUNT];
@@ -590,12 +591,12 @@ void communication_process(ID_CMD message)    /* 指令通信过程 */
 								Battery_Voltage = Read_battery(9);
 								printf("电池电压 = %0.3fV\r\n", Battery_Voltage); 
 								float_to_hex_bytes(Battery_Voltage,Battery_hex);
-//								float Voltage = hex_bytes_to_float(Battery_hex);
-//								printf("电池电压测试 = %0.3fV\r\n", Voltage);
+								append_xor_checksum(Battery_hex);
+								Send_frame_from_hex(Battery_hex);
+		
+		
 								Cmd_delay(temporary);				  // 延时
 //								Send_response_fun();  				// 功能应答
-								
-								append_xor_checksum(Battery_hex);
 								Send_response_12k();
 							  printf(" 电池功能应答 \r\n ");
 				        Reset_Pin(POWER_CAP);      //关闭发射
@@ -606,6 +607,10 @@ void communication_process(ID_CMD message)    /* 指令通信过程 */
 								Send_response_12k();
 								printf("\r\n 姿态指令应答 0x47 \r\n ");
 								temporary = 0.05f * Read_mpu6050() ;   // 延时时间 = 角度*0.05 S,  读取俯仰
+								float_to_hex_bytes(temporary,mpu_hex);
+								append_xor_checksum(mpu_hex);
+								Send_frame_from_hex(mpu_hex);
+		
 								Cmd_delay(temporary); 				// 延时
 //								Send_response_fun();  				// 功能应答
 								Send_response_12k();

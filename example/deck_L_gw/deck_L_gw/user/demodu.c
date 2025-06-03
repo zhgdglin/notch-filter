@@ -1,5 +1,6 @@
 #include "demodu.h"
 
+
 #define PI 3.14159265358979323846
 #define SAMPLING_RATE 62500
 #define LEARNING_RATE 0.02
@@ -19,11 +20,11 @@ int da_index = 0;
 uint16_t TIM7_cnt = 0;
 uint8_t StartT = 0;
 
+
 AdaptiveNotchFilter filter1 = {0, 0, 2.0 * PI * 9000 / 62500};
 AdaptiveNotchFilter filter2 = {0, 0, 2.0 * PI * 10000 / 62500};
 AdaptiveNotchFilter filter3 = {0, 0, 2.0 * PI * 11000 / 62500};
-AdaptiveNotchFilter filter4 = {0, 0, 2.0 * PI * 13000 / 62500};
-AdaptiveNotchFilter filter5 = {0, 0, 2.0 * PI * 12000 / 62500};
+AdaptiveNotchFilter filter4 = {0, 0, 2.0 * PI * 12000 / 62500};
 
 
 ////将二进制数组（int 类型）转换为十六进制数组（int）
@@ -36,6 +37,9 @@ AdaptiveNotchFilter filter5 = {0, 0, 2.0 * PI * 12000 / 62500};
 //    }
 //}
 
+
+
+//
 void binary_to_hex(uint8_t binary_array[MAX_COUNT], uint8_t hex_array[HEX_SIZE]) {
     for (int i = 0; i < HEX_SIZE; i++) {
         hex_array[i] = 0;  // 初始化
@@ -45,6 +49,23 @@ void binary_to_hex(uint8_t binary_array[MAX_COUNT], uint8_t hex_array[HEX_SIZE])
     }
 }
 
+//计算异或
+uint8_t calculate_checksum(uint8_t *data, int len) {
+    uint8_t checksum = data[0];
+    for (int i = 1; i < len; i++) {
+        checksum ^= data[i];
+    }
+    return checksum;
+}
+
+
+//辅助校验
+bool parse_frame(uint8_t *hex) {
+    if (hex[9] != calculate_checksum(hex, 9)) {
+        return false;  // 校验失败
+    }
+    return true;
+}
 
 
 
@@ -102,14 +123,12 @@ int high_count3 = 0, low_count3 = 0;
 int high_count4 = 0, low_count4 = 0;
 
 void process_buffer_and_sum(float *input_buffer, int buffer_size) {
-	uint8_t ihex[HEX_SIZE] = {0x1B,0x1B,0x1B,0x1B,0x1b,0x1b,0x1b,0x1b,0x1b,0x1b};
-	
+
     for (int i = 0; i < buffer_size; i++) {
         float y1 = multiChannelNotchFilter(input_buffer[i], i, &filter1);
         float y2 = multiChannelNotchFilter(input_buffer[i], i, &filter2);
         float y3 = multiChannelNotchFilter(input_buffer[i], i, &filter3);
         float y4 = multiChannelNotchFilter(input_buffer[i], i, &filter4);
-				float y5 = multiChannelNotchFilter(input_buffer[i], i, &filter4);
 				
 			envelope_detection_channel(y1, &state1, &high_count1, &low_count1);
 			envelope_detection_channel(y2, &state2, &high_count2, &low_count2);
@@ -125,16 +144,24 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 								printf("%X", hex[j]);
 							}
 							
-							if(memcmp(hex,ihex,HEX_SIZE)==0){
-								StartT = 1;
-//							HAL_Delay(5000);
-//							communication_process(Demodulation());
-							}
+//							if(memcmp(hex,ihex,HEX_SIZE)==0){
+//								StartT = 1;
+////							HAL_Delay(5000);
+////							communication_process(Demodulation());
+//							}
+							
+							if (parse_frame(hex)) {
+											// 解帧成功，可使用 frame.IDdata 和 frame.CMDdata
+											StartT = 1;
+									} else {
+											// 校验失败，可记录错误次数或重传
+									}
+							
 							
 							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
-							memset(hex, 0, sizeof(hex));  // 清空数组
+							
 						}
 						}
         if (state2 == SIGNAL_ENDED) {
@@ -146,16 +173,24 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 								printf("%X", hex[j]);
 							}
 							
-							if(memcmp(hex,ihex,HEX_SIZE)==0){
-								StartT = 1;
-//							HAL_Delay(5000);
-//							communication_process(Demodulation());
-							}
+//							if(memcmp(hex,ihex,HEX_SIZE)==0){
+//								StartT = 1;
+////							HAL_Delay(5000);
+////							communication_process(Demodulation());
+//							}
+							
+							
+							if (parse_frame(hex)) {
+												// 解帧成功，可使用 frame.IDdata 和 frame.CMDdata
+												StartT = 1;
+										} else {
+												// 校验失败，可记录错误次数或重传
+										}
 							
 							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
-							memset(hex, 0, sizeof(hex));  // 清空数组
+							
 						}
 				}
         if (state3 == SIGNAL_ENDED) {
@@ -167,16 +202,24 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 								printf("%X", hex[j]);
 							}
 							
-							if(memcmp(hex,ihex,HEX_SIZE)==0){
-								StartT = 1;
-//							HAL_Delay(5000);
-//							communication_process(Demodulation());
-							}
+//							if(memcmp(hex,ihex,HEX_SIZE)==0){
+//								StartT = 1;
+////							HAL_Delay(5000);
+////							communication_process(Demodulation());
+//							}
+							
+							
+							if (parse_frame(hex)) {
+										// 解帧成功，可使用 frame.IDdata 和 frame.CMDdata
+										StartT = 1;
+								} else {
+										// 校验失败，可记录错误次数或重传
+								}
 							
 							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
-							memset(hex, 0, sizeof(hex));  // 清空数组
+							
 						}
 				}
         if (state4 == SIGNAL_ENDED) {
@@ -188,16 +231,26 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 								printf("%X", hex[j]);
 							}
 							
-							if(memcmp(hex,ihex,HEX_SIZE)==0){
-								StartT = 1;
-//							HAL_Delay(5000);
-//							communication_process(Demodulation());
-							}
+//							if(memcmp(hex,ihex,HEX_SIZE)==0){
+//								StartT = 1;
+////							HAL_Delay(5000);
+////							communication_process(Demodulation());
+//							}
+							
+							
+							if (parse_frame(hex)) {
+											// 解帧成功，可使用 frame.IDdata 和 frame.CMDdata
+											StartT = 1;
+									} else {
+											// 校验失败，可记录错误次数或重传
+									}
+							
+							
 							
 							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
-							memset(hex, 0, sizeof(hex));  // 清空数组
+							
 						}
 				}
     }

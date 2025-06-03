@@ -44,6 +44,8 @@ volatile  bool fun_respond 	 = 0;
 volatile  bool stop_cnt_flag = 0;
 volatile  uint8_t time_mode	 = 0;   // 选择 倒计时10s，倒计时20s ，正计时
 
+extern uint8_t StartT;
+
 
 /*----------------------------------------------------------------------------------------------------------  发射信号  ------------------------------------*/
 
@@ -558,6 +560,17 @@ void append_xor_checksum(uint8_t ihex[10]) {
 }
 
 
+//16进制转float
+float hex_bytes_to_float(uint8_t hex[4]) {
+    uint32_t temp = ((uint32_t)hex[0] << 24) |
+                    ((uint32_t)hex[1] << 16) |
+                    ((uint32_t)hex[2] << 8) |
+                    (uint32_t)hex[3];
+    float value;
+    memcpy(&value, &temp, sizeof(float));
+    return value;
+}
+
 
 
 
@@ -569,7 +582,6 @@ void CMD_55(void)   /* 释放指令 */
 	//构造指令通信帧
 	uint8_t ihex[10] = {DEVICE_ID,0x55,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
 
-	
 	append_xor_checksum(ihex);
 	
 	//lcd_DisStr(4,0,"释放：");
@@ -672,9 +684,6 @@ void CMD_49(void)  /* 测距命令 */
 	lcd_DisStr(4,0,"测距49：");  //验证命令
 
 //	Deck_Send_frame(order_convert(0x49));
-
-	Send_frame_from_hex(ihex);
-
 	Deck_Send(ihex);
 
 
@@ -783,20 +792,20 @@ void CMD_48(void)  /* 查询电池电压 */
 					/* 等待功能应答 */
 					//while(fun_respond == 0);
 				  //					fun_respond = 0;  /* 是否在这清零未知 */
-					while(0 == receive_deal_9_5K());
+//					while(0 == receive_deal_9_5K());
+					while(0 == StartT);
 					recorded_time =  (float)(TIM13_1s_cnt*100 + TIM13_100ms_cnt*10 + TIM13_10ms_cnt) / 100;  // 单位 S
+					voltage_temp = hex_bytes_to_float(hex);
 				  stop_cnt_flag = 1;  // 停止计时
 					lcd_clear_row(4,3);
 					lcd_DisStr(4,3,"功能应答");
 					printf("48功能应答\r\n");
 				
-					printf("电压时间 = %0.1f S\r\n",recorded_time );  // 正常范围 0-3.3S
-					if(recorded_time > 3.3)
-					{
-							printf("电压超出范围\r\n");	
-					}
+					StartT = 0;
+				
+					
 					/* 转换成水下单元的电池电压表示  /1V */
-					 voltage_temp = recorded_time*2.72; // 转成电压值 
+//					 voltage_temp = recorded_time*2.72; // 转成电压值 
 					 itoa( (int)(voltage_temp) , Battery_voltage, 10); 
 					 lcd_clear_row(3,3);
 					 lcd_DisStr(3,3,Battery_voltage);
