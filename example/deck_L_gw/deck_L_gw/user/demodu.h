@@ -3,6 +3,7 @@
 
 #include "usart.h"
 
+
 #define MAX_COUNT 80
 //#define HEX_SIZE (MAX_COUNT / 4)  // 十六进制数组的大小
 #define HEX_SIZE (MAX_COUNT / 8)  // 十六进制数组的大小
@@ -26,7 +27,7 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size);
 void frm_sych(void);
 void demodu_process(void);
 
-extern int da_index;
+extern uint32_t da_index;
 extern uint8_t da[MAX_COUNT];
 extern uint8_t hex[HEX_SIZE];
 extern uint16_t TIM7_cnt;

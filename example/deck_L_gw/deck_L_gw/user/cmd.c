@@ -23,10 +23,10 @@
 		#define  threshold_ack    17246978048  // 17179869184
 #endif
 #ifdef  ADC_PREAMP_3
-		#define  threshold_9K     25870467072  //25769803776   //   17179869184 * 1.5
+		#define  threshold_ack     25870467072  //25769803776   //   17179869184 * 1.5
 #endif
 #ifdef  ADC_PREAMP_11
-		#define  threshold_9K    94858379264  //94489280512      // 17179869184 * 5.5
+		#define  threshold_ack    94858379264  //94489280512      // 17179869184 * 5.5
 #endif
 #ifdef  ADC_PREAMP_30
 		#define  threshold_9K    258704670720   // 17179869184 * 15
@@ -478,40 +478,7 @@ uint8_t receive_deal_9_5K(void)    // 识别9.5K 功能应答
 		enter_cnt = 1;
 	}
 
-		ack_9_5K_temp  = ad7767_data;
-		ack_9_5K_temp *= ack_9_5K_tlabe[addata_cnt];     // 乘积
-		ack_9_5K_sum  += ack_9_5K_temp;   						   // 累加
 
-		
-	/* 计算 100次 */  
-	if (addata_cnt > 100){  		
-			addata_cnt = 0;
-//		  enter_cnt1++;
-			Receive_9_5K[index_100] = ack_9_5K_sum;
-			ack_9_5K_sum = 0;
-			if(Receive_9_5K[index_100] > threshold_ack)
-			{	
-				correct_cnt++;
-	
-			}
-			index_100++;
-			if(index_100 > 100)
-				index_100 = 0;
-		}
-	
-	
-	if(correct_cnt > 6)    // 正确次数需要根据 和水下单元一起测试修改
-	{
-		clear_receive();
-		enter_cnt = 0;
-
-//		printf("正确");
-//		TEST_20ms_Flag = 1; // 跳出循环
-
-		return 1;
-	}
-	else 
-		return 0;
 	
 }
 
@@ -610,7 +577,7 @@ void CMD_55(void)   /* 释放指令 */
 			// lcd_clear_row(4,3);
 			// lcd_DisStr(4,3,"等待应答");
 			// printf("等待应答\r\n");
-			if( 1 == receive_deal_9_5K() )                         // if(order_respond == 1)
+			if(1 == StartT )                         // if(order_respond == 1)
 			{
 				  stop_cnt_flag = 1;  // 停止计时
 
@@ -624,8 +591,9 @@ void CMD_55(void)   /* 释放指令 */
 					stop_cnt_flag = 0;   // 再次计时
 					while(TIM_10S_FLAG == 0)
 					{
-						if( 1 == receive_deal_9_5K() )               // if(fun_respond == 1)
+						if(1 == StartT )              // if(fun_respond == 1)
 						{
+							StartT = 0;
 							stop_cnt_flag = 1;  // 停止计时
 //							fun_respond = 0;  /* 是否在这清零未知 */
 							lcd_clear_row(4,3);
@@ -701,8 +669,10 @@ void CMD_49(void)  /* 测距命令 */
 			// lcd_clear_row(4,3);
 			// lcd_DisStr(4,3,"等待应答");
 			// printf("等待应答\r\n");
-		if(1 == receive_deal_9K())  //	if(order_respond == 1)
+		if(1 == StartT )  //	if(order_respond == 1)
+//				if(1 == 0)  //	if(order_respond == 1)
 			{
+					StartT = 0;
 					recorded_time =  (float)(TIM13_1s_cnt*100 + TIM13_100ms_cnt*10 + TIM13_10ms_cnt) / 100;  // 单位 S
 				  stop_cnt_flag = 1;  // 停止计时
 				
@@ -778,7 +748,7 @@ void CMD_48(void)  /* 查询电池电压 */
 	while(TIM_20S_FLAG == 0)  
 	{
 
-			if(1 == receive_deal_9K() )//			if(order_respond == 1)
+			if(1 == StartT )//			if(order_respond == 1)
 			{
 //				  order_respond = 0;  /* 是否在这清零未知 */
 				  stop_cnt_flag = 1;  // 停止计时
@@ -792,9 +762,8 @@ void CMD_48(void)  /* 查询电池电压 */
 					/* 等待功能应答 */
 					//while(fun_respond == 0);
 				  //					fun_respond = 0;  /* 是否在这清零未知 */
-					while(0 == receive_deal_9_5K());
+//					while(0 == receive_deal_9_5K());
 //					while(0 == StartT);
-					recorded_time =  (float)(TIM13_1s_cnt*100 + TIM13_100ms_cnt*10 + TIM13_10ms_cnt) / 100;  // 单位 S
 					voltage_temp = hex_bytes_to_float(hex);
 				  stop_cnt_flag = 1;  // 停止计时
 					lcd_clear_row(4,3);
@@ -867,8 +836,9 @@ void CMD_47(void)   /* 查询姿态 */
 			// lcd_clear_row(4,3);
 			// lcd_DisStr(4,3,"等待应答");
 			// printf("等待应答\r\n");
-			if(1 == receive_deal_9K())  //if(order_respond == 1)
+			if(1 == StartT )  //if(order_respond == 1)
 			{
+				StartT = 0;
 //				  order_respond = 0;  /* 是否在这清零未知 */
 					stop_cnt_flag = 1;  // 停止计时
 					lcd_clear_row(2,3);
@@ -881,7 +851,7 @@ void CMD_47(void)   /* 查询姿态 */
 					/* 等待功能应答 */
 //					while(fun_respond == 0);
 //					fun_respond = 0;  /* 是否在这清零未知 */
-					while(0 == receive_deal_9_5K());
+//					while(0 == receive_deal_9_5K());
 					recorded_time =  (float)(TIM13_1s_cnt*100 + TIM13_100ms_cnt*10 + TIM13_10ms_cnt) / 100;  // 单位 S
 				  stop_cnt_flag = 1;  // 停止计时
 					

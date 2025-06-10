@@ -26,9 +26,7 @@ float  *p_ad_begin = NULL;  // 指示现在写入的是哪个数组  用于判断
 float  *p_sd = NULL;        // 实际SD卡写入的数组
 //float  volatile  ad7767_data = 0;
 float  volatile  ad7767_data = 0;
-float  volatile  filtered_data = 0;
-float  volatile  instantaneous_freq = 0;
-float  volatile  instantaneous_freq1 = 0;
+
 
 int32_t    addata_int_temp = 0;
 

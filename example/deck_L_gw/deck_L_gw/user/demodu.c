@@ -10,15 +10,27 @@
 #define FREQ3 11000.0
 #define FREQ4 12000.0
 
-#define THRESHOLD 1.2
-#define MIN_HIGH_SAMPLES 10
+#define THRESHOLD 0.2
+#define MIN_HIGH_SAMPLES 20
 #define MIN_LOW_SAMPLES 200
 
 uint8_t da[MAX_COUNT];
 uint8_t hex[HEX_SIZE] = {0};
-int da_index = 0;
+uint32_t da_index = 0;
 uint16_t TIM7_cnt = 0;
 uint8_t StartT = 0;
+
+int sample_index = 0; // 全局变量定义在文件外部
+
+
+float y1;
+float y2;
+float y3;
+float y4;
+float y1_sum;
+float y2_sum;
+float y3_sum;
+float y4_sum;
 
 
 AdaptiveNotchFilter filter1 = {0, 0, 2.0 * PI * 9000 / 62500};
@@ -123,7 +135,8 @@ int high_count3 = 0, low_count3 = 0;
 int high_count4 = 0, low_count4 = 0;
 
 void process_buffer_and_sum(float *input_buffer, int buffer_size) {
-
+	uint8_t ihex[HEX_SIZE] = {0x1B,0x1B,0x1B,0x1B,0x1b,0x1b,0x1b,0x1b,0x1b,0x1b};
+	
     for (int i = 0; i < buffer_size; i++) {
         float y1 = multiChannelNotchFilter(input_buffer[i], i, &filter1);
         float y2 = multiChannelNotchFilter(input_buffer[i], i, &filter2);
@@ -164,7 +177,7 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							
 						}
 						}
-        if (state2 == SIGNAL_ENDED) {
+        else if (state2 == SIGNAL_ENDED) {
             da[da_index++] = 0;
 						da[da_index++] = 1;			
             if (da_index >= MAX_COUNT) {
@@ -193,7 +206,7 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							
 						}
 				}
-        if (state3 == SIGNAL_ENDED) {
+        else if (state3 == SIGNAL_ENDED) {
             da[da_index++] = 1;
 						da[da_index++] = 0;
             if (da_index >= MAX_COUNT) {
@@ -222,7 +235,7 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							
 						}
 				}
-        if (state4 == SIGNAL_ENDED) {
+        else if (state4 == SIGNAL_ENDED) {
             da[da_index++] = 1;
 					  da[da_index++] = 1;
             if (da_index >= MAX_COUNT) {
@@ -255,3 +268,4 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 				}
     }
 }
+

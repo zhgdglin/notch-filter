@@ -6,11 +6,13 @@
 char Project_name[30] = {"deck I3 3.0\r\n"};
 
 
-
+//键控CMD相关
 KEY exit_key;
 Menu menu ;
 Date ID;
 Date CMD;
+
+extern uint8_t StartT;
 
 
 // 频率变量
@@ -94,7 +96,7 @@ float Read_battery(uint8_t	vref)  // 电池电压读取 最大3V
 void APP_Init(void)
 {
 	
-  printf(Project_name);
+//  printf(Project_name);
 	Reset_Pin(POWER_CAP);  /* 关闭48V电源 */
 
  /* LCD */
@@ -102,7 +104,7 @@ void APP_Init(void)
   draw_main_page();
 	
 	/* RS232 */
-	// RS232_Init();
+//	 RS232_Init();
   
 	/* 电池电压 */
 	HAL_ADC_Start(&hadc3);
@@ -133,8 +135,8 @@ void APP_Init(void)
 
 
 /* 发射测试 */
-//	Set_Pin(LED1); // 绿灯
-//  CMD_55();
+	Set_Pin(LED1); // 绿灯
+  CMD_55();
 //  HAL_Delay(10);
 //	CMD_49();
 //	HAL_Delay(10);
@@ -186,12 +188,44 @@ void APP_Init(void)
 }
 
 
+////16进制转float
+//float hex_bytes_to_float(uint8_t hex[4]) {
+//    uint32_t temp = ((uint32_t)hex[0] << 24) |
+//                    ((uint32_t)hex[1] << 16) |
+//                    ((uint32_t)hex[2] << 8) |
+//                    (uint32_t)hex[3];
+//    float value;
+//    memcpy(&value, &temp, sizeof(float));
+//    return value;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void APP_Process (void)
 {
-	
+//	printf("检测变量及数组清空成功\r\n");
 //  get_adc();   // 单独测试ADC用
 	Matrix_Key_funtcion(Matrix_Key_Scan());
 	HOME_Scan();
+	if(StartT == 1)
+		{
+			StartT = 0;
+			printf("收到了\r\n");
+//			hex_bytes_to_float(hex);
+		}
+	
 }
 
 	volatile uint8_t TIM13_10ms_cnt = 0;
@@ -208,9 +242,22 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 //  static uint8_t TIM13_1s_cnt = 0;
   static uint16_t TIM17_16us_cnt = 0;
 
-  if(htim->Instance == TIM7)        /*  T7  1ms */
+  if(htim->Instance == TIM7){        /*  T7  1ms */
 			Key_Scan_flag = 1;  // 开启HOME键扫描
   
+	if(da_index>0)
+		{
+//			TIM7_cnt++;
+//			if(TIM7_cnt == 3)
+//			{
+//				TIM7_cnt = 0;
+//				da_index = 0;
+//				memset(da, 0, sizeof(da));  // 清空数组
+//				memset(hex, 0, sizeof(hex));  // 清空数组
+//				printf("\r\n 检测变量及数组清空成功\r\n");
+//			}
+		}
+	}
 	
 	  if(htim->Instance == TIM13)    /*  T13  10ms  */
   {

@@ -8,10 +8,10 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:野火 霸道 开发板 
-  * 论坛    :http://www.firebbs.cn
+    * 论坛    :http://www.firebbs.cn
   * 淘宝    :https://fire-stm32.taobao.com
   *
+* 实验平台:野火 霸道 开发板 
   ******************************************************************************
   */ 
 
@@ -22,7 +22,7 @@
 
 /* MPU6050数据 */
 short Acel[3];
-short Gyro[3];
+short Gyro[3]; 
 float Temp;
 
 
@@ -190,19 +190,29 @@ void MPU6050_ReturnTemp(float *Temperature)
 
 float Read_mpu6050(void)
 {
-  float ax,ay,az;
-	float pitch;
+  float ax,ay,az;	// 用于存储原始加速度数据
+	float gx, gy, gz;  // 用于存储原始陀螺仪数据
+	float pitch,roll;
 	
 		MPU6050ReadAcc(Acel);
 		MPU6050ReadGyro(Gyro);
 		MPU6050_ReturnTemp(&Temp);
 	
-		ax=(float)Acel[0];
-		ay=(float)Acel[1];
-		az=(float)Acel[2];
+		ax=(float)Acel[0];  //x轴加速度
+		ay=(float)Acel[1];	//y轴加速度
+		az=(float)Acel[2];	//z轴加速度
+	
+		gx=(float)Gyro[0];  //x轴加速度
+		gy=(float)Gyro[1];	//y轴加速度
+		gz=(float)Gyro[2];	//z轴加速度
+	
+		
+	
+	
 	
 		
 		pitch = -atan(ax/az)*57.2957f;  
+		roll = atan2(ay, az) * 57.2957f;  // 弧度转角度
 		
 		printf("		俯仰pitch: %.2f \r\n" , pitch);  
 

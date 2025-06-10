@@ -16,7 +16,7 @@
 
 uint8_t da[MAX_COUNT];
 uint8_t hex[HEX_SIZE] = {0};
-int da_index = 0;
+uint16_t da_index = 0;
 uint16_t TIM7_cnt = 0;
 uint8_t StartT = 0;
 ID_CMD message;

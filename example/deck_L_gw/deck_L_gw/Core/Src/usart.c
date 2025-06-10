@@ -22,7 +22,7 @@
 
 /* USER CODE BEGIN 0 */
 //#define  USE_RS232
-uint8_t uart1_rxbuf[1];  // 确保数组长度大于等于 10
+//uint8_t uart1_rxbuf[1];  // 确保数组长度大于等于 10
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;
@@ -68,7 +68,7 @@ void MX_USART1_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART1_Init 2 */
-	HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 1);
+//	HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 1);
   /* USER CODE END USART1_Init 2 */
 
 }
@@ -152,8 +152,8 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* USER CODE BEGIN USART1_MspInit 1 */
-		HAL_NVIC_EnableIRQ(USART1_IRQn);            //使能USART1中断通道
-		HAL_NVIC_SetPriority(USART1_IRQn,0,1);      //抢占优先级1,子优先级0
+//		HAL_NVIC_EnableIRQ(USART1_IRQn);            //使能USART1中断通道
+//		HAL_NVIC_SetPriority(USART1_IRQn,0,1);      //抢占优先级1,子优先级0
   /* USER CODE END USART1_MspInit 1 */
   }
   else if(uartHandle->Instance==USART3)
@@ -237,48 +237,51 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 int fputc(int ch, FILE *f)
 {
 	#ifdef USE_RS232
-		return HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, 0xFFFF);
+//		return HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, 0xFFFF);
+		while((USART3->ISR&0X40)==0);			//循环发送,直到发送完毕   
+		USART3->TDR=(uint8_t)ch;      
+		return ch;
 	#else 
-	while((USART1->ISR&0X40)==0);			//循环发送,直到发送完毕   
-	USART1->TDR=(uint8_t)ch;      
-	return ch;
+		while((USART1->ISR&0X40)==0);			//循环发送,直到发送完毕   
+		USART1->TDR=(uint8_t)ch;      
+		return ch;
 	#endif
 
 }
 
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-    if (huart->Instance == USART1)
-    {
-        // 检查 UART 是否有错误
-        if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_ORE) || 
-            __HAL_UART_GET_FLAG(&huart1, UART_FLAG_NE)  || 
-            __HAL_UART_GET_FLAG(&huart1, UART_FLAG_FE))
-        {
-            __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_ORE);
-            __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_NE);
-            __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_FE);
-        }
+//void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+//{
+//    if (huart->Instance == USART1)
+//    {
+//        // 检查 UART 是否有错误
+//        if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_ORE) || 
+//            __HAL_UART_GET_FLAG(&huart1, UART_FLAG_NE)  || 
+//            __HAL_UART_GET_FLAG(&huart1, UART_FLAG_FE))
+//        {
+//            __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_ORE);
+//            __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_NE);
+//            __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_FE);
+//        }
 
-        // 判断接收到的字符是否为 '1'
-        if (uart1_rxbuf[0] == '1')
-        {
-            // 打印 "我是帅哥"
-            char message[] = "我是帅哥\r\n";
-            HAL_UART_Transmit_IT(&huart1, (uint8_t *)message, sizeof(message)-1); // 发送字符串
-//						Serial_Send_frame();
-        }
+//        // 判断接收到的字符是否为 '1'
+//        if (uart1_rxbuf[0] == '1')
+//        {
+//            // 打印 "我是帅哥"
+//            char message[] = "我是帅哥\r\n";
+//            HAL_UART_Transmit_IT(&huart1, (uint8_t *)message, sizeof(message)-1); // 发送字符串
+////						Serial_Send_frame();
+//        }
 
-        // 重新开启 UART 接收中断
-        if (HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 1) != HAL_OK)
-        {
-            // 发生错误，重启 UART
-            HAL_UART_DeInit(&huart1);
-            HAL_UART_Init(&huart1);
-            HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 1);
-        }
-    }
-}
+//        // 重新开启 UART 接收中断
+//        if (HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 1) != HAL_OK)
+//        {
+//            // 发生错误，重启 UART
+//            HAL_UART_DeInit(&huart1);
+//            HAL_UART_Init(&huart1);
+//            HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 1);
+//        }
+//    }
+//}
 
 
 

@@ -27,26 +27,18 @@ Project File Date:  06/03/2025
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\software\mdk\ARM\ARMAC5\Bin'
 Build target 'BJC_2'
-compiling ad7767.c...
-..\user\ad7767.c(109): warning:  #167-D: argument of type "int32_t *" is incompatible with parameter of type "float *"
-  				   process_buffer_and_sum(AD7767_Ping,BUFF_SIZE);
-..\user\ad7767.c(116): warning:  #167-D: argument of type "int32_t *" is incompatible with parameter of type "float *"
-  				process_buffer_and_sum(AD7767_Pang,BUFF_SIZE);
-..\user\ad7767.c: 2 warnings, 0 errors
-compiling cmd.c...
-..\user\cmd.c(596): warning:  #69-D: integer conversion resulted in truncation
-  	time_mode = 2000;
-..\user\cmd.c(623): warning:  #69-D: integer conversion resulted in truncation
-  					time_mode = 1000;
-..\user\cmd.c(898): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  					posture_temp = recorded_time/0.05; // 转成角度
-..\user\cmd.c(83): warning:  #177-D: variable "Single_Freq_Data2"  was declared but never referenced
-  const static TIM_FREQUENCE Single_Freq_Data2[5] = {
-..\user\cmd.c: 4 warnings, 0 errors
+compiling APP_Work.c...
+..\Drivers\USER\APP\APP_Work.c(88): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		return Battery_Voltage*2.72;  // 2.72= 9/3.3  ，转换成电池电压
+..\Drivers\USER\APP\APP_Work.c: 1 warning, 0 errors
 linking...
-Program Size: Code=61950 RO-data=6874 RW-data=796 ZI-data=20220  
+BJC_2\BJC_2.sct(15): warning: L6314W: No section matches pattern *(.RAM_D1).
+BJC_2\BJC_2.sct(20): warning: L6314W: No section matches pattern *(.RAM_D2).
+BJC_2\BJC_2.sct(25): warning: L6314W: No section matches pattern *(.RAM_D3).
+Program Size: Code=58654 RO-data=6874 RW-data=824 ZI-data=12008  
+Finished: 0 information, 3 warning and 0 error messages.
 FromELF: creating hex file...
-"BJC_2\BJC_2.axf" - 0 Error(s), 6 Warning(s).
+"BJC_2\BJC_2.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
