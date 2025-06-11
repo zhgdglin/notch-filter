@@ -135,8 +135,8 @@ void APP_Init(void)
 
 
 /* 发射测试 */
-	Set_Pin(LED1); // 绿灯
-  CMD_55();
+//	Set_Pin(LED1); // 绿灯
+//  CMD_48();
 //  HAL_Delay(10);
 //	CMD_49();
 //	HAL_Delay(10);
@@ -219,12 +219,12 @@ void APP_Process (void)
 //  get_adc();   // 单独测试ADC用
 	Matrix_Key_funtcion(Matrix_Key_Scan());
 	HOME_Scan();
-	if(StartT == 1)
-		{
-			StartT = 0;
-			printf("收到了\r\n");
+//	if(StartT == 1)
+//		{
+//			StartT = 0;
+//			printf("收到了\r\n");
 //			hex_bytes_to_float(hex);
-		}
+//		}
 	
 }
 

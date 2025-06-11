@@ -31,14 +31,30 @@ compiling APP_Work.c...
 ..\Drivers\USER\APP\APP_Work.c(88): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   		return Battery_Voltage*2.72;  // 2.72= 9/3.3  ，转换成电池电压
 ..\Drivers\USER\APP\APP_Work.c: 1 warning, 0 errors
+compiling cmd.c...
+..\user\cmd.c(485): warning:  #940-D: missing return statement at end of non-void function "receive_deal_9_5K" 
+  }
+..\user\cmd.c(565): warning:  #69-D: integer conversion resulted in truncation
+  	time_mode = 2000;
+..\user\cmd.c(592): warning:  #69-D: integer conversion resulted in truncation
+  					time_mode = 1000;
+..\user\cmd.c(875): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  					posture_temp = recorded_time/0.05; // 转成角度
+..\user\cmd.c(85): warning:  #177-D: variable "Single_Freq_Data2"  was declared but never referenced
+  const static TIM_FREQUENCE Single_Freq_Data2[5] = {
+..\user\cmd.c(400): warning:  #177-D: variable "ack_9_5K_temp"  was declared but never referenced
+  	static  int32_t  ack_9_5K_temp = 0;
+..\user\cmd.c(402): warning:  #177-D: variable "ack_9_5K_sum"  was declared but never referenced
+    static  int64_t  ack_9_5K_sum = 0;
+..\user\cmd.c: 7 warnings, 0 errors
 linking...
 BJC_2\BJC_2.sct(15): warning: L6314W: No section matches pattern *(.RAM_D1).
 BJC_2\BJC_2.sct(20): warning: L6314W: No section matches pattern *(.RAM_D2).
 BJC_2\BJC_2.sct(25): warning: L6314W: No section matches pattern *(.RAM_D3).
-Program Size: Code=58654 RO-data=6874 RW-data=824 ZI-data=12008  
+Program Size: Code=58718 RO-data=6874 RW-data=824 ZI-data=12008  
 Finished: 0 information, 3 warning and 0 error messages.
 FromELF: creating hex file...
-"BJC_2\BJC_2.axf" - 0 Error(s), 4 Warning(s).
+"BJC_2\BJC_2.axf" - 0 Error(s), 11 Warning(s).
 
 <h2>Software Packages used:</h2>
 

@@ -46,6 +46,8 @@ volatile  uint8_t time_mode	 = 0;   // 选择 倒计时10s，倒计时20s ，正计时
 
 extern uint8_t StartT;
 
+uint8_t id_hex;
+
 
 /*----------------------------------------------------------------------------------------------------------  发射信号  ------------------------------------*/
 
@@ -528,7 +530,7 @@ void append_xor_checksum(uint8_t ihex[10]) {
 
 
 //16进制转float
-float hex_bytes_to_float(uint8_t hex[4]) {
+float hex_bytes_to_float(uint8_t hex[10]) {
     uint32_t temp = ((uint32_t)hex[0] << 24) |
                     ((uint32_t)hex[1] << 16) |
                     ((uint32_t)hex[2] << 8) |
@@ -547,7 +549,7 @@ void CMD_55(void)   /* 释放指令 */
 {
 
 	//构造指令通信帧
-	uint8_t ihex[10] = {DEVICE_ID,0x55,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
+	uint8_t ihex[10] = {id_hex,0x55,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
 
 	append_xor_checksum(ihex);
 	
@@ -639,7 +641,7 @@ void CMD_49(void)  /* 测距命令 */
 {
 
 	//构造指令通信帧
-	uint8_t ihex[10] = {DEVICE_ID,0x49,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
+	uint8_t ihex[10] = {id_hex,0x49,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
 	append_xor_checksum(ihex);
 	
 	
@@ -712,12 +714,16 @@ void CMD_49(void)  /* 测距命令 */
 			return;
 	}
 }
+
+
+//	float voltage_temp = 0;
+//	char  Battery_voltage[4]={0};
  
 void CMD_48(void)  /* 查询电池电压 */
 {
 
 	//构造指令通信帧
-	uint8_t ihex[10] = {DEVICE_ID,0x48,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
+	uint8_t ihex[10] = {id_hex,0x48,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
 	append_xor_checksum(ihex);
 	
 
@@ -726,7 +732,7 @@ void CMD_48(void)  /* 查询电池电压 */
 	
 
 	float voltage_temp = 0;
-	char  Battery_voltage[4]={0};
+	char  Battery_voltage[10]={0};
 
 			//lcd_DisStr(4,0,"释放：");
 	printf("电压48\r\n");
@@ -775,14 +781,15 @@ void CMD_48(void)  /* 查询电池电压 */
 					
 					/* 转换成水下单元的电池电压表示  /1V */
 //					 voltage_temp = recorded_time*2.72; // 转成电压值 
-					 itoa( (int)(voltage_temp) , Battery_voltage, 10); 
+//					 itoa( (int)(voltage_temp) , Battery_voltage, 10); 
+					 sprintf(Battery_voltage, "%.2fV", voltage_temp);  // 保留2位小数 + 单位"V"
 					 lcd_clear_row(3,3);
 					 lcd_DisStr(3,3,Battery_voltage);
 					 time_mode = 0;
 					 stop_cnt_flag = 0;
 					 clear_receive(); 
 					 HAL_TIM_Base_Stop_IT (&htim13 ); 
-					 printf("电池电压 = %s \r\n",Battery_voltage );
+					 printf("电池电压 = %s \r\n",Battery_voltage);
 					 return;
 			}
 	}
@@ -805,7 +812,7 @@ void CMD_47(void)   /* 查询姿态 */
 {
 
 	//构造指令通信帧
-	uint8_t ihex[10] = {DEVICE_ID,0x47,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
+	uint8_t ihex[10] = {id_hex,0x47,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
 	append_xor_checksum(ihex);
 	
 
@@ -897,6 +904,8 @@ void CMD_47(void)   /* 查询姿态 */
 
 void switch_cmd_do(void)  /* 命令选取 */
 {
+	
+	id_hex = ((CMD.date_value[0] & 0x0F) << 4) | (CMD.date_value[1] & 0x0F);
 	if(CMD.date_value[2]==5 && CMD.date_value[3]== 5)  // 按键输入55
 			CMD_55();    
 
