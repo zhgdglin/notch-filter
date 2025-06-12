@@ -456,24 +456,20 @@ void Send_frame_from_hex(uint8_t hex_array[10]) {
         Timer4_freq_Init(freq_sequence[i]);
 
 
-				SysTick->VAL   = 0UL;  // 清除系统定时器的计数
+			 SysTick->VAL   = 0UL;  // 清除系统定时器的计数
+			//	 TIM6->CNT  =  0; 
+		//	Reset_Pin(IR2110S_SD);   // 开启输出，低有效
+
+			HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
+			HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);
 			
+			HAL_Delay(19);
+			//Delay_us(800);
+			Set_Pin(IR2110S_SD);   // 20ms，结束输出
+			HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_3);
+			HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_1);
 
-
-        HAL_TIM_OC_Start(&htim4, TIM_CHANNEL_3);
-        HAL_TIM_OC_Start(&htim4, TIM_CHANNEL_1);
-
-
-        HAL_Delay(20);  // 发送20ms
-
-        // 发送20ms
-				HAL_Delay(20);
-
-
-        HAL_TIM_OC_Stop(&htim4, TIM_CHANNEL_3);
-        HAL_TIM_OC_Stop(&htim4, TIM_CHANNEL_1);
-
-        HAL_Delay(30);  // 空闲30ms
+        HAL_Delay(29);  // 空闲30ms
     }
 }
 
@@ -564,28 +560,28 @@ void communication_process(ID_CMD message)    /* 指令通信过程 */
 	{
 		case 0x55:  // 释放指令
 //								Send_response_cmd();  				// 指令应答
-								Send_response_12k();
+								Send_frame_from_hex(hex);
 								printf("\r\n 释放指令应答 0x55 \r\n ");
 								Motor_rotate(Release);     	  // 释放钩子
 								while(release_done != 1);     // 等待释放完毕  开关2限位
 								release_done = 0;
 								Motor_rotate(Stop);		 				// 电机停止
-//								Send_response_fun();  				// 功能应答
-								Send_response_12k();
+		
+//								Send_frame_from_hex(hex);
 								printf("释放功能应答 \r\n ");
 				        Reset_Pin(POWER_CAP);      //关闭发射
 								break;
 		
 		case 0x49:  // 测距指令   （主要在甲板单元上计算）
 //								Send_response_cmd();  // 指令应答
-								Send_response_12k();
+								Send_frame_from_hex(hex);
 								printf("\r\n 测距指令应答 0x49 \r\n ");
 				        Reset_Pin(POWER_CAP);      //关闭发射
 								break;
 		
 		case 0x48:  // 查询水下单元电池电压指令
 //								Send_response_cmd();  			  // 指令应答
-								Send_response_12k();
+//								Send_response_12k();
 								printf("\r\n 电池电压指令应答 0x48\r\n  ");
 								temporary = 1 * Read_battery(9);				 // 延时时间 = 电压*1 S  , 读取电池电压
 								Battery_Voltage = Read_battery(9);
@@ -597,23 +593,24 @@ void communication_process(ID_CMD message)    /* 指令通信过程 */
 		
 								Cmd_delay(temporary);				  // 延时
 //								Send_response_fun();  				// 功能应答
-								Send_response_12k();
+//								Send_response_12k();
 							  printf(" 电池功能应答 \r\n ");
 				        Reset_Pin(POWER_CAP);      //关闭发射
 								break;
 		
 		case 0x47:  // 查询姿态指令
 //								Send_response_cmd();  				// 指令应答
-								Send_response_12k();
+//								Send_response_12k();
 								printf("\r\n 姿态指令应答 0x47 \r\n ");
 								temporary = 0.05f * Read_mpu6050() ;   // 延时时间 = 角度*0.05 S,  读取俯仰
-								float_to_hex_bytes(temporary,mpu_hex);
+								float mpu_roll = Read_mpu6050();
+								float_to_hex_bytes(mpu_roll,mpu_hex);
 								append_xor_checksum(mpu_hex);
 								Send_frame_from_hex(mpu_hex);
 		
 								Cmd_delay(temporary); 				// 延时
 //								Send_response_fun();  				// 功能应答
-								Send_response_12k();
+//								Send_response_12k();
 								printf("姿态功能应答 \r\n ");
 		            Reset_Pin(POWER_CAP);      //关闭发射
 								break;

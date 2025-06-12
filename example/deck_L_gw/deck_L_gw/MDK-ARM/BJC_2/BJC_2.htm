@@ -3,11 +3,11 @@
 <title>Static Call Graph - [BJC_2\BJC_2.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image BJC_2\BJC_2.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Wed Jun 11 10:04:02 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Thu Jun 12 09:34:58 2025
 <BR><P>
-<H3>Maximum Stack Usage =        728 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        720 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-main &rArr; APP_Process &rArr; Matrix_Key_funtcion &rArr; control_page_proccess &rArr; cmd_key_do &rArr; enter_key_action &rArr; switch_cmd_do &rArr; CMD_47 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
+main &rArr; APP_Process &rArr; Matrix_Key_funtcion &rArr; control_page_proccess &rArr; cmd_key_do &rArr; enter_key_action &rArr; switch_cmd_do &rArr; CMD_49 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
 <P>
 <H3>
 Mutually Recursive functions
@@ -622,7 +622,7 @@ Global Symbols
 
 <P><STRONG><a name="[18e]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_Read
-<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;itoa
+<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;itoa
 </UL>
 
 <P><STRONG><a name="[1d8]"></a>__aeabi_memcpy8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text), UNUSED)
@@ -737,8 +737,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_47
-<LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetPowerValue
+<BR>[Called By]<UL><LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetPowerValue
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_battery
 <LI><a href="#[1a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_invalid
 <LI><a href="#[1ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
@@ -774,8 +773,8 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APP_Init
 <LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;multiChannelNotchFilter
 <LI><a href="#[1c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;envelope_detection_channel
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_47
 <LI><a href="#[1b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_battery_level
 <LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetPowerValue
@@ -801,7 +800,6 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;multiChannelNotchFilter
 <LI><a href="#[1c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;envelope_detection_channel
-<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_47
 <LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetPowerValue
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_battery
 </UL>
@@ -955,7 +953,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[cf]"></a>APP_Process</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, app_work.o(i.APP_Process))
-<BR><BR>[Stack]<UL><LI>Max Depth = 728<LI>Call Chain = APP_Process &rArr; Matrix_Key_funtcion &rArr; control_page_proccess &rArr; cmd_key_do &rArr; enter_key_action &rArr; switch_cmd_do &rArr; CMD_47 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
+<BR><BR>[Stack]<UL><LI>Max Depth = 720<LI>Call Chain = APP_Process &rArr; Matrix_Key_funtcion &rArr; control_page_proccess &rArr; cmd_key_do &rArr; enter_key_action &rArr; switch_cmd_do &rArr; CMD_49 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Matrix_Key_funtcion
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Matrix_Key_Scan
@@ -975,58 +973,57 @@ Global Symbols
 <P><STRONG><a name="[5]"></a>BusFault_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32h7xx_it.o(i.BusFault_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32h750xx.o(RESET)
 </UL>
-<P><STRONG><a name="[d7]"></a>CMD_47</STRONG> (Thumb, 506 bytes, Stack size 48 bytes, cmd.o(i.CMD_47))
-<BR><BR>[Stack]<UL><LI>Max Depth = 680<LI>Call Chain = CMD_47 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
+<P><STRONG><a name="[d7]"></a>CMD_47</STRONG> (Thumb, 438 bytes, Stack size 40 bytes, cmd.o(i.CMD_47))
+<BR><BR>[Stack]<UL><LI>Max Depth = 672<LI>Call Chain = CMD_47 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Stop_IT
+<BR>[Calls]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Stop_IT
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start_IT
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_receive
+<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hex_bytes_to_float
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_receive
 <LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;append_xor_checksum
 <LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Deck_Send
 <LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_clear_row
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_DisStr
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc7767_init
 <LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
-<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;itoa
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;switch_cmd_do
 </UL>
 
-<P><STRONG><a name="[e0]"></a>CMD_48</STRONG> (Thumb, 372 bytes, Stack size 40 bytes, cmd.o(i.CMD_48))
+<P><STRONG><a name="[e1]"></a>CMD_48</STRONG> (Thumb, 372 bytes, Stack size 40 bytes, cmd.o(i.CMD_48))
 <BR><BR>[Stack]<UL><LI>Max Depth = 672<LI>Call Chain = CMD_48 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Stop_IT
+<BR>[Calls]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Stop_IT
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start_IT
-<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hex_bytes_to_float
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_receive
+<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hex_bytes_to_float
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_receive
 <LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;append_xor_checksum
 <LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Deck_Send
 <LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_clear_row
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_DisStr
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc7767_init
 <LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
-<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;switch_cmd_do
 </UL>
 
-<P><STRONG><a name="[e3]"></a>CMD_49</STRONG> (Thumb, 416 bytes, Stack size 40 bytes, cmd.o(i.CMD_49))
+<P><STRONG><a name="[e2]"></a>CMD_49</STRONG> (Thumb, 416 bytes, Stack size 40 bytes, cmd.o(i.CMD_49))
 <BR><BR>[Stack]<UL><LI>Max Depth = 672<LI>Call Chain = CMD_49 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Stop_IT
+<BR>[Calls]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Stop_IT
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start_IT
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_receive
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_receive
 <LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;append_xor_checksum
 <LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Deck_Send
 <LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_clear_row
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_DisStr
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc7767_init
 <LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
-<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;itoa
+<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;itoa
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;switch_cmd_do
@@ -1035,9 +1032,9 @@ Global Symbols
 <P><STRONG><a name="[e4]"></a>CMD_55</STRONG> (Thumb, 340 bytes, Stack size 16 bytes, cmd.o(i.CMD_55))
 <BR><BR>[Stack]<UL><LI>Max Depth = 648<LI>Call Chain = CMD_55 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Stop_IT
+<BR>[Calls]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Stop_IT
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start_IT
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_receive
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_receive
 <LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;append_xor_checksum
 <LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Deck_Send
 <LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_clear_row
@@ -1090,15 +1087,15 @@ Global Symbols
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay_10ms
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_55
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_47
 </UL>
 
 <P><STRONG><a name="[ef]"></a>Delay_10ms</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, cmd.o(i.Delay_10ms))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = Delay_10ms
 </UL>
-<BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Stop_IT
+<BR>[Calls]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Stop_IT
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start_IT
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_wakeup
@@ -1421,7 +1418,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = HAL_NVIC_DisableIRQ
 </UL>
 <BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_receive
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_receive
 <LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Deck_Send
 </UL>
 
@@ -1747,8 +1744,8 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APP_Init
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay_10ms
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_55
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_47
 </UL>
 
@@ -1756,11 +1753,11 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[147]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
 </UL>
 
-<P><STRONG><a name="[df]"></a>HAL_TIM_Base_Stop_IT</STRONG> (Thumb, 62 bytes, Stack size 0 bytes, stm32h7xx_hal_tim.o(i.HAL_TIM_Base_Stop_IT))
+<P><STRONG><a name="[e0]"></a>HAL_TIM_Base_Stop_IT</STRONG> (Thumb, 62 bytes, Stack size 0 bytes, stm32h7xx_hal_tim.o(i.HAL_TIM_Base_Stop_IT))
 <BR><BR>[Called By]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay_10ms
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_55
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_47
 </UL>
 
@@ -2194,7 +2191,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[d1]"></a>Matrix_Key_funtcion</STRONG> (Thumb, 94 bytes, Stack size 8 bytes, key.o(i.Matrix_Key_funtcion))
-<BR><BR>[Stack]<UL><LI>Max Depth = 720<LI>Call Chain = Matrix_Key_funtcion &rArr; control_page_proccess &rArr; cmd_key_do &rArr; enter_key_action &rArr; switch_cmd_do &rArr; CMD_47 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
+<BR><BR>[Stack]<UL><LI>Max Depth = 712<LI>Call Chain = Matrix_Key_funtcion &rArr; control_page_proccess &rArr; cmd_key_do &rArr; enter_key_action &rArr; switch_cmd_do &rArr; CMD_49 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;version_message_page_proccess
 <LI><a href="#[188]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;singal_set_page_proccess
@@ -2257,7 +2254,7 @@ Global Symbols
 <LI><a href="#[190]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcat
 <LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 <LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DS1302_Read
-<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;itoa
+<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;itoa
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_Init
 </UL>
@@ -2513,8 +2510,8 @@ Global Symbols
 <LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmd_key_do
 <LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;switch_cmd_do
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_55
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_47
 <LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_buffer_and_sum
 <LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_Init
@@ -2531,10 +2528,11 @@ Global Symbols
 
 <P><STRONG><a name="[1e9]"></a>__1sprintf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0sprintf), UNUSED)
 
-<P><STRONG><a name="[e2]"></a>__2sprintf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0sprintf))
+<P><STRONG><a name="[de]"></a>__2sprintf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0sprintf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2sprintf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
+<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
+<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_47
 </UL>
 
 <P><STRONG><a name="[1ea]"></a>__c89sprintf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0sprintf), UNUSED)
@@ -2683,15 +2681,15 @@ Global Symbols
 <LI><a href="#[198]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay_us
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_55
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_47
 </UL>
 
 <P><STRONG><a name="[d8]"></a>append_xor_checksum</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, cmd.o(i.append_xor_checksum))
 <BR><BR>[Called By]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_55
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_47
 </UL>
 
@@ -2724,14 +2722,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmd_key_do
 </UL>
 
-<P><STRONG><a name="[de]"></a>clear_receive</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, cmd.o(i.clear_receive))
+<P><STRONG><a name="[df]"></a>clear_receive</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, cmd.o(i.clear_receive))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = clear_receive &rArr; HAL_NVIC_DisableIRQ
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_DisableIRQ
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_55
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_47
 </UL>
 
@@ -2740,7 +2738,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[18b]"></a>cmd_key_do</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, process.o(i.cmd_key_do))
-<BR><BR>[Stack]<UL><LI>Max Depth = 704<LI>Call Chain = cmd_key_do &rArr; enter_key_action &rArr; switch_cmd_do &rArr; CMD_47 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
+<BR><BR>[Stack]<UL><LI>Max Depth = 696<LI>Call Chain = cmd_key_do &rArr; enter_key_action &rArr; switch_cmd_do &rArr; CMD_49 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scroll_key_action
 <LI><a href="#[1b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;home_key_action
@@ -2753,7 +2751,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[187]"></a>control_page_proccess</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, process.o(i.control_page_proccess))
-<BR><BR>[Stack]<UL><LI>Max Depth = 712<LI>Call Chain = control_page_proccess &rArr; cmd_key_do &rArr; enter_key_action &rArr; switch_cmd_do &rArr; CMD_47 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
+<BR><BR>[Stack]<UL><LI>Max Depth = 704<LI>Call Chain = control_page_proccess &rArr; cmd_key_do &rArr; enter_key_action &rArr; switch_cmd_do &rArr; CMD_49 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;num_key_do
 <LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmd_key_do
@@ -2849,7 +2847,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1b4]"></a>enter_key_action</STRONG> (Thumb, 84 bytes, Stack size 8 bytes, process.o(i.enter_key_action))
-<BR><BR>[Stack]<UL><LI>Max Depth = 696<LI>Call Chain = enter_key_action &rArr; switch_cmd_do &rArr; CMD_47 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
+<BR><BR>[Stack]<UL><LI>Max Depth = 688<LI>Call Chain = enter_key_action &rArr; switch_cmd_do &rArr; CMD_49 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ID_int_to_string
@@ -2897,10 +2895,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ID_int_to_string
 </UL>
 
-<P><STRONG><a name="[e1]"></a>hex_bytes_to_float</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, cmd.o(i.hex_bytes_to_float))
+<P><STRONG><a name="[dd]"></a>hex_bytes_to_float</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, cmd.o(i.hex_bytes_to_float))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = hex_bytes_to_float
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
+<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
+<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_47
 </UL>
 
 <P><STRONG><a name="[1b6]"></a>home_key_action</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, process.o(i.home_key_action))
@@ -2928,13 +2927,12 @@ Global Symbols
 <LI><a href="#[1c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main_num_key_do
 </UL>
 
-<P><STRONG><a name="[dd]"></a>itoa</STRONG> (Thumb, 150 bytes, Stack size 80 bytes, app_work.o(i.itoa))
+<P><STRONG><a name="[e3]"></a>itoa</STRONG> (Thumb, 150 bytes, Stack size 80 bytes, app_work.o(i.itoa))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = itoa
 </UL>
 <BR>[Calls]<UL><LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
-<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_47
+<BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
 <LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_Read
 </UL>
 
@@ -2982,8 +2980,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[1b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enter_key_action
 <LI><a href="#[1b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_key_action
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_55
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_47
 <LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_version_message_page
 <LI><a href="#[1bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_set_singal_page
@@ -3013,8 +3011,8 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;singal_num_key_do
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_55
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_47
 <LI><a href="#[1bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_set_singal_page
 </UL>
@@ -3033,7 +3031,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[97]"></a>main</STRONG> (Thumb, 380 bytes, Stack size 0 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 728<LI>Call Chain = main &rArr; APP_Process &rArr; Matrix_Key_funtcion &rArr; control_page_proccess &rArr; cmd_key_do &rArr; enter_key_action &rArr; switch_cmd_do &rArr; CMD_47 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
+<BR><BR>[Stack]<UL><LI>Max Depth = 720<LI>Call Chain = main &rArr; APP_Process &rArr; Matrix_Key_funtcion &rArr; control_page_proccess &rArr; cmd_key_do &rArr; enter_key_action &rArr; switch_cmd_do &rArr; CMD_49 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART1_UART_Init
 <LI><a href="#[180]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_TIM7_Init
@@ -3128,7 +3126,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[189]"></a>running_cmd_page_proccess</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, process.o(i.running_cmd_page_proccess))
-<BR><BR>[Stack]<UL><LI>Max Depth = 704<LI>Call Chain = running_cmd_page_proccess &rArr; enter_key_action &rArr; switch_cmd_do &rArr; CMD_47 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
+<BR><BR>[Stack]<UL><LI>Max Depth = 696<LI>Call Chain = running_cmd_page_proccess &rArr; enter_key_action &rArr; switch_cmd_do &rArr; CMD_49 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scroll_key_action
 <LI><a href="#[1b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;home_key_action
@@ -3186,11 +3184,11 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1c1]"></a>switch_cmd_do</STRONG> (Thumb, 100 bytes, Stack size 8 bytes, cmd.o(i.switch_cmd_do))
-<BR><BR>[Stack]<UL><LI>Max Depth = 688<LI>Call Chain = switch_cmd_do &rArr; CMD_47 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
+<BR><BR>[Stack]<UL><LI>Max Depth = 680<LI>Call Chain = switch_cmd_do &rArr; CMD_49 &rArr; Deck_Send &rArr; Send_frame_from_hex &rArr; Time4_change_freq &rArr; MX_TIM4_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_55
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_49
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_48
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMD_47
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>

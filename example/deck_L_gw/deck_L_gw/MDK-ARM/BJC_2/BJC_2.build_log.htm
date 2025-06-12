@@ -27,7 +27,28 @@ Project File Date:  06/03/2025
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\software\mdk\ARM\ARMAC5\Bin'
 Build target 'BJC_2'
-"BJC_2\BJC_2.axf" - 0 Error(s), 0 Warning(s).
+compiling cmd.c...
+..\user\cmd.c(485): warning:  #940-D: missing return statement at end of non-void function "receive_deal_9_5K" 
+  }
+..\user\cmd.c(565): warning:  #69-D: integer conversion resulted in truncation
+  	time_mode = 2000;
+..\user\cmd.c(592): warning:  #69-D: integer conversion resulted in truncation
+  					time_mode = 1000;
+..\user\cmd.c(85): warning:  #177-D: variable "Single_Freq_Data2"  was declared but never referenced
+  const static TIM_FREQUENCE Single_Freq_Data2[5] = {
+..\user\cmd.c(400): warning:  #177-D: variable "ack_9_5K_temp"  was declared but never referenced
+  	static  int32_t  ack_9_5K_temp = 0;
+..\user\cmd.c(402): warning:  #177-D: variable "ack_9_5K_sum"  was declared but never referenced
+    static  int64_t  ack_9_5K_sum = 0;
+..\user\cmd.c: 6 warnings, 0 errors
+linking...
+BJC_2\BJC_2.sct(15): warning: L6314W: No section matches pattern *(.RAM_D1).
+BJC_2\BJC_2.sct(20): warning: L6314W: No section matches pattern *(.RAM_D2).
+BJC_2\BJC_2.sct(25): warning: L6314W: No section matches pattern *(.RAM_D3).
+Program Size: Code=58638 RO-data=6874 RW-data=824 ZI-data=12008  
+Finished: 0 information, 3 warning and 0 error messages.
+FromELF: creating hex file...
+"BJC_2\BJC_2.axf" - 0 Error(s), 9 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -50,7 +71,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@6.1.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

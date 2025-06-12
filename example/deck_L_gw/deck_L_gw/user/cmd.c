@@ -819,7 +819,7 @@ void CMD_47(void)   /* 查询姿态 */
 
 
 	float posture_temp = 0;
-	char  posture[4]={0};
+	char  posture[10]={0};
 
 				//lcd_DisStr(4,0,"释放：");
 	printf("姿态47\r\n");
@@ -859,7 +859,8 @@ void CMD_47(void)   /* 查询姿态 */
 //					while(fun_respond == 0);
 //					fun_respond = 0;  /* 是否在这清零未知 */
 //					while(0 == receive_deal_9_5K());
-					recorded_time =  (float)(TIM13_1s_cnt*100 + TIM13_100ms_cnt*10 + TIM13_10ms_cnt) / 100;  // 单位 S
+//					recorded_time =  (float)(TIM13_1s_cnt*100 + TIM13_100ms_cnt*10 + TIM13_10ms_cnt) / 100;  // 单位 S
+					posture_temp = hex_bytes_to_float(hex);
 				  stop_cnt_flag = 1;  // 停止计时
 					
 					lcd_clear_row(4,3);
@@ -872,8 +873,9 @@ void CMD_47(void)   /* 查询姿态 */
 						printf("姿态超出范围\r\n");	
 					}
 								
-					posture_temp = recorded_time/0.05; // 转成角度
-					itoa( (int)(posture_temp) , posture, 10); 
+//					posture_temp = recorded_time/0.05; // 转成角度
+//					itoa( (int)(posture_temp) , posture, 10);
+					sprintf(posture, "%.2f°", posture_temp);  // 保留2位小数 + 单位"V"
 					lcd_clear_row(3,3);
 					lcd_DisStr(3,3,posture);
 					clear_receive();
