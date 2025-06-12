@@ -100,6 +100,26 @@ const static TIM_FREQUENCE Single_Freq_Data3[5] = {
 {0,10000-1,1000-1,9000-1,12},						// f4	 	12K
 };
 
+//Õ¼¿Õ±È5%
+const static TIM_FREQUENCE Single_Freq_Data4[5] = {
+{0,13333-1,666-1,12667-1,9},					// f1  9K 
+{0,  12000-1, 600-1, 11400-1, 10},   // f2  10K 
+{0,  10909-1, 545-1, 10364-1, 11},		// f3	 	11K'
+{0,10000-1,500-1,9500-1,12},						// f4	 	12K
+{0,9230-1,923-1,8307-1,13},						// f5	 	13K
+};
+
+
+//Õ¼¿Õ±È2%
+const static TIM_FREQUENCE Single_Freq_Data5[5] = {
+{0,13333-1,266-1,13067-1,9},					// f1  9K 
+{0,  12000-1, 240-1, 11760-1, 10},   // f2  10K 
+{0,  10909-1, 218-1, 10691-1, 11},		// f3	 	11K'
+{0,10000-1,200-1,9800-1,12},						// f4	 	12K
+{0,9230-1,923-1,8307-1,13},						// f5	 	13K
+};
+
+
 
 
 void Delay_10ms(uint16_t cnt)   // ¶¨Ê±Æ÷13 ÑÓÊ±10ms
@@ -218,12 +238,12 @@ void Send_single_frequency(bool* order_data)
 				HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
 				HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1); 
 			
-				Delay_10ms(2);  // ÐÅºÅ³ÖÐø20ms
+				Delay_10ms(20);  // ÐÅºÅ³ÖÐø20ms
 
 				HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_3);
 				HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_1);  
 
-				Delay_10ms(2);  // ¿ÕÏÐ20ms
+				Delay_10ms(20);  // ¿ÕÏÐ20ms
 		}
 }
 
@@ -231,7 +251,7 @@ void Send_single_frequency(bool* order_data)
 // ·¢ËÍÒ»Ö¡4¸öÆµµãµ¥ÆµÐÅºÅ
 void Send_aframe1(void)  // ·¢ËÍ »½ÐÑÐÅºÅ
 {
-  Time4_change_freq(Single_Freq_Data3[0]);   // 9K ,35%
+  Time4_change_freq(Single_Freq_Data4[0]);   // 9K ,35%
 	
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
@@ -243,7 +263,7 @@ void Send_aframe1(void)  // ·¢ËÍ »½ÐÑÐÅºÅ
 	
 	Delay_10ms(30);  // ¿ÕÏÐ30ms
 	
-	Time4_change_freq(Single_Freq_Data3[1]);   // 10K ,35%
+	Time4_change_freq(Single_Freq_Data4[1]);   // 10K ,35%
 	
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
@@ -255,7 +275,7 @@ void Send_aframe1(void)  // ·¢ËÍ »½ÐÑÐÅºÅ
 	
 	Delay_10ms(30);  // ¿ÕÏÐ30ms
 	
-	  Time4_change_freq(Single_Freq_Data3[2]);   // 11K ,35%
+	  Time4_change_freq(Single_Freq_Data4[2]);   // 11K ,35%
 	
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
@@ -267,7 +287,7 @@ void Send_aframe1(void)  // ·¢ËÍ »½ÐÑÐÅºÅ
 	
 	Delay_10ms(30);  // ¿ÕÏÐ30ms
 	
-	  Time4_change_freq(Single_Freq_Data3[3]);   // 12K ,35%
+	  Time4_change_freq(Single_Freq_Data4[3]);   // 12K ,35%
 	
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
@@ -305,12 +325,12 @@ void Send_frame_from_hex(uint8_t hex_array[10]) {
         HAL_TIM_OC_Start(&htim4, TIM_CHANNEL_3);
         HAL_TIM_OC_Start(&htim4, TIM_CHANNEL_1);
 
-        Delay_10ms(2);  // ·¢ËÍ20ms
+        Delay_10ms(20);  // ·¢ËÍ20ms
 
         HAL_TIM_OC_Stop(&htim4, TIM_CHANNEL_3);
         HAL_TIM_OC_Stop(&htim4, TIM_CHANNEL_1);
 
-        Delay_10ms(3);  // ¿ÕÏÐ30ms
+        Delay_10ms(30);  // ¿ÕÏÐ30ms
     }
 }
 
@@ -349,13 +369,15 @@ void Deck_Send(uint8_t hex_array[10])   // ¼×°åµ¥Ôª·¢ËÍÒ»Ö¡Êý¾Ý £º»½ÐÑ + ÏßÐÔµ÷Æ
 	HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);  // ¹Ø±Õ½ÓÊÕ
 	
 	
-	Reset_Pin(IR2110S_SD);     //¿ªÆôÊä³ö£¬µÍÓÐÐ§  // ×°ÉÏ±äÑ¹Æ÷ÒÔºó¿ªÆô
-	Send_wakeup();   // 12K»½ÐÑÐÅºÅ  ³ÖÐø1Ãë
-	Set_Pin(IR2110S_SD);   // ½áÊøÊä³ö
-	Delay_10ms(50);  // ¿ÕÏÐ500ms
+//	Reset_Pin(IR2110S_SD);     //¿ªÆôÊä³ö£¬µÍÓÐÐ§  // ×°ÉÏ±äÑ¹Æ÷ÒÔºó¿ªÆô
+//	Send_wakeup();   // 12K»½ÐÑÐÅºÅ  ³ÖÐø1Ãë
+//	Set_Pin(IR2110S_SD);   // ½áÊøÊä³ö
+//	Delay_10ms(50);  // ¿ÕÏÐ500ms
 	
   Reset_Pin(IR2110S_SD);     //¿ªÆôÊä³ö£¬µÍÓÐÐ§  // ×°ÉÏ±äÑ¹Æ÷ÒÔºó¿ªÆô
-	Send_frame_from_hex(hex_array);   // 9£¬10£¬11£¬12kµ¥ÆµÐÅºÅ 
+//	Send_frame_from_hex(hex_array);   // 9£¬10£¬11£¬12kµ¥ÆµÐÅºÅ 
+	for(int i=0;i<10;i++){
+	Send_aframe1();}
 	Set_Pin(IR2110S_SD);   // ½áÊøÊä³ö
 	Delay_10ms(50);  // ¿ÕÏÐ500ms
 	
@@ -562,7 +584,7 @@ void CMD_55(void)   /* ÊÍ·ÅÖ¸Áî */
 
 	/* ¿ªÊ¼¼ÆÊ±20S*/
 		adc7767_init();  //  ADC³õÊ¼»¯ ¿ªÊ¼½ÓÊÕ
-	time_mode = 2000;
+	time_mode = 20;
 	__HAL_TIM_CLEAR_IT (&htim13 ,TIM_IT_UPDATE );        
 	HAL_TIM_Base_Start_IT (&htim13 );                    
 	
@@ -589,7 +611,7 @@ void CMD_55(void)   /* ÊÍ·ÅÖ¸Áî */
 					printf("ÊÕµ½Ó¦´ð\r\n");
 				
 					/* ×ª»»³É10S¼ÆÊ± */
-					time_mode = 1000;
+					time_mode = 10;
 					stop_cnt_flag = 0;   // ÔÙ´Î¼ÆÊ±
 					while(TIM_10S_FLAG == 0)
 					{
