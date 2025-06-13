@@ -19,10 +19,13 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "usart.h"
+#include "main.h"
+#include "gpio.h"
 
 /* USER CODE BEGIN 0 */
 //#define  USE_RS232
 uint8_t uart1_rxbuf[10];  // 确保数组长度大于等于 10
+	uint8_t StartT2 = 0;
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;
@@ -153,7 +156,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
 
   /* USER CODE BEGIN USART1_MspInit 1 */
 		HAL_NVIC_EnableIRQ(USART1_IRQn);            //使能USART1中断通道
-		HAL_NVIC_SetPriority(USART1_IRQn,1,1);      //抢占优先级1,子优先级0
+		HAL_NVIC_SetPriority(USART1_IRQn,0,0);      //抢占优先级1,子优先级0
   /* USER CODE END USART1_MspInit 1 */
   }
   else if(uartHandle->Instance==USART3)
@@ -257,11 +260,12 @@ void Uart1_Puts(uint8_t *data,uint32_t data_len)
 }
 
 
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) 
 {
+	uint8_t ihex[10] = {0x1B,0x1B,0x1B,0x1B,0x1b,0x1b,0x1b,0x1b,0x1b,0x1b};
     if (huart->Instance == USART1)
     {
-        // 检查 UART 是否有错误
+        // 错误处理（可选）
         if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_ORE) || 
             __HAL_UART_GET_FLAG(&huart1, UART_FLAG_NE)  || 
             __HAL_UART_GET_FLAG(&huart1, UART_FLAG_FE))
@@ -271,18 +275,18 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
             __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_FE);
         }
 
-        // 使用非阻塞发送
-        HAL_UART_Transmit_IT(&huart1, uart1_rxbuf, 10);
-
-        // 重新开启 UART 接收中断
-        if (HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 10) != HAL_OK)
+        // 判断是否收到字符 '1'
+        if (uart1_rxbuf[0] == '1')
         {
-            // 发生错误，重启 UART
-            HAL_UART_DeInit(&huart1);
-            HAL_UART_Init(&huart1);
-            HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 10);
+            char msg[] = "我是帅哥\r\n";
+            HAL_UART_Transmit(&huart1, (uint8_t*)msg, sizeof(msg)-1, HAL_MAX_DELAY);
+						StartT2 = 1;
+				
         }
-    }
 
+        // 重新开启下一次接收
+        HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 1);  // 接收1字节
+    }
 }
+
 /* USER CODE END 1 */

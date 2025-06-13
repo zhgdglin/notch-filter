@@ -2,11 +2,11 @@ bjc_2\matrixfunctions.o: ..\CMSIS\Source\MatrixFunctions\MatrixFunctions.c
 bjc_2\matrixfunctions.o: ..\CMSIS\Source\MatrixFunctions\arm_mat_add_f32.c
 bjc_2\matrixfunctions.o: ..\CMSIS\Include\arm_math.h
 bjc_2\matrixfunctions.o: ..\CMSIS\Include\cmsis_compiler.h
-bjc_2\matrixfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdint.h
+bjc_2\matrixfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\stdint.h
 bjc_2\matrixfunctions.o: ..\CMSIS\Include\cmsis_armcc.h
-bjc_2\matrixfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\string.h
-bjc_2\matrixfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\math.h
-bjc_2\matrixfunctions.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\float.h
+bjc_2\matrixfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\string.h
+bjc_2\matrixfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\math.h
+bjc_2\matrixfunctions.o: E:\mdk\ARM\ARMCC\Bin\..\include\float.h
 bjc_2\matrixfunctions.o: ..\CMSIS\Source\MatrixFunctions\arm_mat_add_q15.c
 bjc_2\matrixfunctions.o: ..\CMSIS\Source\MatrixFunctions\arm_mat_add_q31.c
 bjc_2\matrixfunctions.o: ..\CMSIS\Source\MatrixFunctions\arm_mat_cmplx_mult_f32.c

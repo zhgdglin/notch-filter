@@ -147,8 +147,8 @@ void APP_Init(void)
 //receive_deal_9K();
 
 /*ADC*/
-//adc7767_init();
-//HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);  // 打开ADC7767 触发
+adc7767_init();
+HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);  // 打开ADC7767 触发
 
 
 

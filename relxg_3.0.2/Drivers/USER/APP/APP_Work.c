@@ -11,7 +11,7 @@
 #define MOTOR_REVERSE    Set_Pin(MOTOR)     // 电机反转 
 #define MOTOR_FORWARD    Reset_Pin(MOTOR)   // 电机正转
 //应答
-#define SYMBOL_COUNT 40  // 10字节 * 4个2-bit 符号
+#define SYMBOL_COUNT 80  // 10字节 * 4个2-bit 符号
 
 
 enum 
@@ -52,6 +52,7 @@ bool NEW_CMD_Flag = 0;  // 指令更新标志
 
 ID_CMD last_message;  // 上一次解调得到的数据
 extern ID_CMD message;
+
 float  Battery_Voltage   = 0;     // 电池电压
 uint8_t Battery_hex[10] = {0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
 uint8_t mpu_hex[10] = {0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11};
@@ -65,12 +66,15 @@ uint16_t Timer4_oc2_Pulse = 0;
 
 extern bool	volatile decode_finish;
 extern uint8_t StartT;
+extern	uint8_t StartT2;
 
-const static TIM_FREQUENCE TIM4_Freq_Data [3]=  
-{
-		{ 0, 13333-1, 4667-1, 8666-1 },   // 9K    35%
-		{ 0, 12632-1, 4421-1, 8211-1 },		// 9.5K  35%
-		{ 0, 10000-1, 3500-1, 6500-1 }	  // 12K   35%
+//占空比35%
+const static TIM_FREQUENCE TIM4_Freq_Data[5] = {
+{0,13333-1,4667-1,8666-1},					// f1  9K 
+{0,  12000-1, 4200-1, 7800-1},   // f2  10K 
+{0,  10909-1, 3818-1, 7091-1},		// f3	 	11K
+{0,10000-1,3500-1,6500-1},						// f4	 	12K
+{0,9230-1,3230-1,6000-1},						// f5	 	13K
 };
 
 
@@ -81,19 +85,20 @@ const static TIM_FREQUENCE TIM4_Freq_Data1 [5]=
 		{0,13333-1,1333-1,8666-1},					// f1  9K 
 		{0,  12000-1, 1200-1, 10800-1},   // f2  10K 
 		{0,  10909-1, 1090-1, 9819-1},		// f3	 	11K
-		{0,9230-1,923-1,8307-1},						// f5	 	13K
 		{0,10000-1,1000-1,9000-1},						// f4	 	12K
+		{0,9230-1,923-1,8307-1},						// f5	 	13K
+		
 };
 
 
 
-//占空比10%
-const static TIM_FREQUENCE Single_Freq_Data3[5] = {
-{0,13333-1,1333-1,8666-1},					// f1  9K 
-{0,  12000-1, 1200-1, 10800-1},   // f2  10K 
-{0,  10909-1, 1090-1, 9819-1},		// f3	 	11K
+//占空比5%
+const static TIM_FREQUENCE TIM4_Freq_Data2[5] = {
+{0,13333-1,666-1,12667-1},					// f1  9K 
+{0,  12000-1, 600-1, 11400-1},   // f2  10K 
+{0,  10909-1, 545-1, 10364-1},		// f3	 	11K'
+{0,10000-1,500-1,9500-1},						// f4	 	12K
 {0,9230-1,923-1,8307-1},						// f5	 	13K
-{0,10000-1,1000-1,9000-1},						// f4	 	12K
 };
 
 
@@ -393,7 +398,7 @@ void Send_response_12k(void)   /* 指令应答，9K 20ms */
 
 void Send_response_fun(void)   /* 功能应答，9.5K 20ms */
 {
-	Timer4_freq_Init(TIM4_Freq_Data[1]);  // 9.5K
+	Timer4_freq_Init(TIM4_Freq_Data1[1]);  // 9.5K
 	
 	 SysTick->VAL   = 0UL;  // 清除系统定时器的计数
 	//	 TIM6->CNT  =  0; 
@@ -432,7 +437,6 @@ void Send_data(void)   /* 返回数据 */
 }
 
 
-#define SYMBOL_COUNT 40  // 10字节 * 4个2-bit 符号
 
 void Send_frame_from_hex(uint8_t hex_array[10]) {
     TIM_FREQUENCE freq_sequence[SYMBOL_COUNT];
@@ -444,33 +448,34 @@ void Send_frame_from_hex(uint8_t hex_array[10]) {
         for (int i = 0; i < 4; i++) {
             uint8_t two_bits = (byte >> (6 - i * 2)) & 0x03;
 
-            freq_sequence[symbol_idx++] = Single_Freq_Data3[two_bits];
+            freq_sequence[symbol_idx++] = TIM4_Freq_Data2[two_bits];
 
-            freq_sequence[symbol_idx++] = TIM4_Freq_Data1[two_bits];
+            freq_sequence[symbol_idx++] = TIM4_Freq_Data2[two_bits];
 
         }
     }
-
+		Reset_Pin(IR2110S_SD);     //开启输出，低有效  // 装上变压器以后开启
+		SysTick->VAL   = 0UL;  // 清除系统定时器的计数
+//		TIM6->CNT  =  0; 
     // Step 2: 依次发送每个频率信号
     for (int i = 0; i < SYMBOL_COUNT; i++) {
         Timer4_freq_Init(freq_sequence[i]);
 
-
-			 SysTick->VAL   = 0UL;  // 清除系统定时器的计数
-			//	 TIM6->CNT  =  0; 
-		//	Reset_Pin(IR2110S_SD);   // 开启输出，低有效
+//			SysTick->VAL   = 0UL;  // 清除系统定时器的计数
+			 
 
 			HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
 			HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);
 			
-			HAL_Delay(19);
+			HAL_Delay(20);
 			//Delay_us(800);
-			Set_Pin(IR2110S_SD);   // 20ms，结束输出
+//			Set_Pin(IR2110S_SD);   // 20ms，结束输出
 			HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_3);
 			HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_1);
 
-        HAL_Delay(29);  // 空闲30ms
+        HAL_Delay(30);  // 空闲30ms
     }
+		Set_Pin(IR2110S_SD);     //开启输出，低有效  // 装上变压器以后开启
 }
 
 
@@ -478,24 +483,6 @@ void Send_frame_from_hex(uint8_t hex_array[10]) {
 
 
 
-
-ID_CMD Demodulation(void)
-{
-//	ID_CMD message;   		//本次解调得到的数据
-	
-	last_message.CMDdata = message.CMDdata;  // 获取上一次的命令
-	
-	
-	/* 算法解调 返回命令*/
-	
-	
-	// 模拟解调出来的指令
-	message.IDdata  = hex[0]; 
-	message.CMDdata = hex[1];
-
-	memset(hex, 0, sizeof(hex));  // 清空数组
-	return message;   // 可以存到一个FIFO中
-}
 
 
 
@@ -544,7 +531,7 @@ void Cmd_delay(float time)  // 延时小数的时间 单位S
 }
 
 
-void communication_process(ID_CMD message)    /* 指令通信过程 */   
+void communication_process(void)    /* 指令通信过程 */   
 {
 	float temporary = 0;  // 临时变量
 	
@@ -555,12 +542,15 @@ void communication_process(ID_CMD message)    /* 指令通信过程 */
 	
 	/* 开启发射 */
 	Set_Pin(POWER_CAP);
+	HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);  // 关闭接收
 	
 	switch(message.CMDdata)   // 根据指令执行对应功能
 	{
 		case 0x55:  // 释放指令
+			
 //								Send_response_cmd();  				// 指令应答
 								Send_frame_from_hex(hex);
+//								Send_data();
 								printf("\r\n 释放指令应答 0x55 \r\n ");
 								Motor_rotate(Release);     	  // 释放钩子
 								while(release_done != 1);     // 等待释放完毕  开关2限位
@@ -569,6 +559,7 @@ void communication_process(ID_CMD message)    /* 指令通信过程 */
 		
 //								Send_frame_from_hex(hex);
 								printf("释放功能应答 \r\n ");
+								HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);  // 关闭接收
 				        Reset_Pin(POWER_CAP);      //关闭发射
 								break;
 		
@@ -576,6 +567,7 @@ void communication_process(ID_CMD message)    /* 指令通信过程 */
 //								Send_response_cmd();  // 指令应答
 								Send_frame_from_hex(hex);
 								printf("\r\n 测距指令应答 0x49 \r\n ");
+								HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);  // 关闭接收
 				        Reset_Pin(POWER_CAP);      //关闭发射
 								break;
 		
@@ -595,6 +587,7 @@ void communication_process(ID_CMD message)    /* 指令通信过程 */
 //								Send_response_fun();  				// 功能应答
 //								Send_response_12k();
 							  printf(" 电池功能应答 \r\n ");
+								HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);  // 关闭接收
 				        Reset_Pin(POWER_CAP);      //关闭发射
 								break;
 		
@@ -612,6 +605,7 @@ void communication_process(ID_CMD message)    /* 指令通信过程 */
 //								Send_response_fun();  				// 功能应答
 //								Send_response_12k();
 								printf("姿态功能应答 \r\n ");
+								HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);  // 关闭接收
 		            Reset_Pin(POWER_CAP);      //关闭发射
 								break;
 		
@@ -624,6 +618,7 @@ void communication_process(ID_CMD message)    /* 指令通信过程 */
 
 void APP_Init(void)
 {
+	uint8_t ihex[HEX_SIZE] = {0x1B,0x1B,0x1B,0x1B,0x1b,0x1b,0x1b,0x1b,0x1b,0x1b};
 	/* 关闭48V电源 */
 	Reset_Pin(POWER_CAP); 
 	/* RS232 */
@@ -656,13 +651,24 @@ void APP_Init(void)
 	Fatfs_SD_Init();
 	
 	/* ADC */
-	PREAMP_2;        // ADC 前放倍数选择
+	PREAMP_30;        // ADC 前放倍数选择
 	adc7767_init();
+	
+	
+	/* 发射信号侧式*/
+	/* 开启发射 */
+//	Set_Pin(POWER_CAP);
+//	HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);  // 关闭接收
+//	Send_frame_from_hex(ihex);
+//	
+//	HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);  // 关闭接收
+//	Reset_Pin(POWER_CAP);
 }
 
 
 void APP_Process (void)
 {
+		uint8_t ihex[HEX_SIZE] = {0x1B,0x1B,0x1B,0x1B,0x1b,0x1b,0x1b,0x1b,0x1b,0x1b};
 	
 //	 frm_sych();
 //	Scan_limit();
@@ -678,8 +684,23 @@ void APP_Process (void)
 	if(StartT == 1)
 		{
 			StartT = 0;
-			printf("收到了\r\n");
-			communication_process(Demodulation());
+//			printf("收到了\r\n");
+			communication_process();
+		}
+		
+		
+		if(StartT2 == 1)
+		{
+			StartT2 = 0;
+//			printf("收到了\r\n");
+				/* 发射信号侧式*/
+	/* 开启发射 */
+		Set_Pin(POWER_CAP);
+		HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);  // 关闭接收
+		Send_frame_from_hex(ihex);
+		
+		HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);  // 关闭接收
+		Reset_Pin(POWER_CAP);
 		}
 	
 	
@@ -719,7 +740,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		if(da_index>0)
 		{
 			TIM7_cnt++;
-			if(TIM7_cnt == 3)
+			if(TIM7_cnt == 15)
 			{
 				TIM7_cnt = 0;
 				da_index = 0;

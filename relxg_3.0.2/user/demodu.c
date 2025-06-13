@@ -21,6 +21,7 @@ uint16_t TIM7_cnt = 0;
 uint8_t StartT = 0;
 ID_CMD message;
 
+
 AdaptiveNotchFilter filter1 = {0, 0, 2.0 * PI * 9000 / 62500};
 AdaptiveNotchFilter filter2 = {0, 0, 2.0 * PI * 10000 / 62500};
 AdaptiveNotchFilter filter3 = {0, 0, 2.0 * PI * 11000 / 62500};
@@ -141,6 +142,8 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 					  da[da_index++] = 0;
             if (da_index >= MAX_COUNT) {
 							binary_to_hex(da,hex);
+								
+
 							for (int j = 0; j < HEX_SIZE; j++){  // 每个字节转换为2个十六进制字符
 								printf("%X", hex[j]);
 							}
@@ -153,6 +156,9 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							
 							if (parse_frame(hex)) {
 											// 解帧成功，可使用 frame.IDdata 和 frame.CMDdata
+								// 模拟解调出来的指令
+						message.IDdata  = hex[0]; 
+						message.CMDdata = hex[1];
 											StartT = 1;
 									} else {
 											// 校验失败，可记录错误次数或重传
@@ -162,6 +168,7 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
+							memset(hex, 0, sizeof(hex));  // 清空数组
 							
 						}
 						}
@@ -183,7 +190,11 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							
 							if (parse_frame(hex)) {
 												// 解帧成功，可使用 frame.IDdata 和 frame.CMDdata
+														// 模拟解调出来的指令
+												message.IDdata  = hex[0]; 
+												message.CMDdata = hex[1];
 												StartT = 1;
+								
 										} else {
 												// 校验失败，可记录错误次数或重传
 										}
@@ -191,6 +202,7 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
+										memset(hex, 0, sizeof(hex));  // 清空数组
 							
 						}
 				}
@@ -202,6 +214,7 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							for (int j = 0; j < HEX_SIZE; j++) {  // 每个字节转换为2个十六进制字符
 								printf("%X", hex[j]);
 							}
+									
 							
 //							if(memcmp(hex,ihex,HEX_SIZE)==0){
 //								StartT = 1;
@@ -212,7 +225,11 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							
 							if (parse_frame(hex)) {
 										// 解帧成功，可使用 frame.IDdata 和 frame.CMDdata
+										// 模拟解调出来的指令
+										message.IDdata  = hex[0]; 
+										message.CMDdata = hex[1];
 										StartT = 1;
+
 								} else {
 										// 校验失败，可记录错误次数或重传
 								}
@@ -220,6 +237,7 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
+								memset(hex, 0, sizeof(hex));  // 清空数组
 							
 						}
 				}
@@ -241,6 +259,9 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							
 							if (parse_frame(hex)) {
 											// 解帧成功，可使用 frame.IDdata 和 frame.CMDdata
+																// 模拟解调出来的指令
+										message.IDdata  = hex[0]; 
+										message.CMDdata = hex[1];
 											StartT = 1;
 									} else {
 											// 校验失败，可记录错误次数或重传
@@ -251,6 +272,7 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 							TIM7_cnt = 0;
 							da_index = 0;
 							memset(da, 0, sizeof(da));  // 清空数组
+							memset(hex, 0, sizeof(hex));  // 清空数组
 							
 						}
 				}

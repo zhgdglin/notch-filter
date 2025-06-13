@@ -96,8 +96,28 @@ const static TIM_FREQUENCE Single_Freq_Data3[5] = {
 {0,13333-1,1333-1,8666-1,9},					// f1  9K 
 {0,  12000-1, 1200-1, 10800-1, 10},   // f2  10K 
 {0,  10909-1, 1090-1, 9819-1, 11},		// f3	 	11K
-{0,9230-1,923-1,8307-1,13},						// f5	 	13K
 {0,10000-1,1000-1,9000-1,12},						// f4	 	12K
+{0,9230-1,923-1,8307-1,13},						// f5	 	13K
+
+};
+
+//Õ¼¿Õ±È8%
+const static TIM_FREQUENCE Single_Freq_Data_8[5] = {
+    {0, 13333-1, 1066-1, 12266-1, 9},    // 9 kHz (Pulse = round(13333 * 0.08) = 1066)
+    {0, 12000-1, 960-1, 11040-1, 10},    // 10 kHz (Pulse = round(12000 * 0.08) = 960)
+    {0, 10909-1, 873-1, 10036-1, 11},    // 11 kHz (Pulse = round(10909 * 0.08) = 873)
+    {0, 10000-1, 800-1, 9200-1, 12},     // 12 kHz (Pulse = round(10000 * 0.08) = 800)
+    {0,  9230-1, 738-1, 8492-1, 13},     // 13 kHz (Pulse = round(9230 * 0.08) = 738)
+};
+
+
+const static TIM_FREQUENCE Single_Freq_Data_9[5] = {
+    // Format: {0, ARR, Pulse, OffTime, Freq (kHz)}
+    {0, 13333-1, 1200-1, 12133-1, 9},    // 9 kHz (Pulse = round(13333 * 0.09) = 1200)
+    {0, 12000-1, 1080-1, 10920-1, 10},   // 10 kHz (Pulse = round(12000 * 0.09) = 1080)
+    {0, 10909-1, 982-1, 9927-1, 11},     // 11 kHz (Pulse = round(10909 * 0.09) = 982)
+    {0, 10000-1, 900-1, 9100-1, 12},     // 12 kHz (Pulse = round(10000 * 0.09) = 900)
+    {0,  9230-1, 831-1, 8399-1, 13},     // 13 kHz (Pulse = round(9230 * 0.09) = 831)
 };
 
 //Õ¼¿Õ±È5%
@@ -251,7 +271,7 @@ void Send_single_frequency(bool* order_data)
 // ·¢ËÍÒ»Ö¡4¸öÆµµãµ¥ÆµÐÅºÅ
 void Send_aframe1(void)  // ·¢ËÍ »½ÐÑÐÅºÅ
 {
-  Time4_change_freq(Single_Freq_Data4[0]);   // 9K ,35%
+  Time4_change_freq(Single_Freq_Data_9[0]);   // 9K ,35%
 	
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
@@ -263,7 +283,7 @@ void Send_aframe1(void)  // ·¢ËÍ »½ÐÑÐÅºÅ
 	
 	Delay_10ms(30);  // ¿ÕÏÐ30ms
 	
-	Time4_change_freq(Single_Freq_Data4[1]);   // 10K ,35%
+	Time4_change_freq(Single_Freq_Data_9[1]);   // 10K ,35%
 	
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
@@ -275,7 +295,7 @@ void Send_aframe1(void)  // ·¢ËÍ »½ÐÑÐÅºÅ
 	
 	Delay_10ms(30);  // ¿ÕÏÐ30ms
 	
-	  Time4_change_freq(Single_Freq_Data4[2]);   // 11K ,35%
+	  Time4_change_freq(Single_Freq_Data_9[2]);   // 11K ,35%
 	
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
@@ -287,7 +307,7 @@ void Send_aframe1(void)  // ·¢ËÍ »½ÐÑÐÅºÅ
 	
 	Delay_10ms(30);  // ¿ÕÏÐ30ms
 	
-	  Time4_change_freq(Single_Freq_Data4[3]);   // 12K ,35%
+	  Time4_change_freq(Single_Freq_Data_9[3]);   // 12K ,35%
 	
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
 	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);   
@@ -314,7 +334,7 @@ void Send_frame_from_hex(uint8_t hex_array[10]) {
         uint8_t byte = hex_array[byte_idx];
         for (int i = 0; i < 4; i++) {
             uint8_t two_bits = (byte >> (6 - i * 2)) & 0x03;
-            freq_sequence[symbol_idx++] = Single_Freq_Data3[two_bits];
+            freq_sequence[symbol_idx++] = Single_Freq_Data_9[two_bits];
         }
     }
 
@@ -375,9 +395,9 @@ void Deck_Send(uint8_t hex_array[10])   // ¼×°åµ¥Ôª·¢ËÍÒ»Ö¡Êý¾Ý £º»½ÐÑ + ÏßÐÔµ÷Æ
 //	Delay_10ms(50);  // ¿ÕÏÐ500ms
 	
   Reset_Pin(IR2110S_SD);     //¿ªÆôÊä³ö£¬µÍÓÐÐ§  // ×°ÉÏ±äÑ¹Æ÷ÒÔºó¿ªÆô
-//	Send_frame_from_hex(hex_array);   // 9£¬10£¬11£¬12kµ¥ÆµÐÅºÅ 
-	for(int i=0;i<10;i++){
-	Send_aframe1();}
+	Send_frame_from_hex(hex_array);   // 9£¬10£¬11£¬12kµ¥ÆµÐÅºÅ 
+//	for(int i=0;i<10;i++){
+//	Send_aframe1();}
 	Set_Pin(IR2110S_SD);   // ½áÊøÊä³ö
 	Delay_10ms(50);  // ¿ÕÏÐ500ms
 	
@@ -436,75 +456,75 @@ const  int16_t ack_9_5K_tlabe[ACK_SIGNAL_TABLE_NUM] =
 } 
 
  
-uint8_t receive_deal_9K(void)   // Ê¶±ð9K Ö¸ÁîÓ¦´ð
-{
-		static uint16_t 	enter_cnt = 0;
-//		static uint8_t  index_100 = 0;
-//	static uint16_t  correct_cnt = 0;
-	
-	if(enter_cnt == 0)
-	{		
-		HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);  // ´ò¿ªADC½ÓÊÕ
-		enter_cnt = 1;
-	}
-
-		ack_9K_temp  = ad7767_data;
-		ack_9K_temp *= ack_9K_tlabe[addata_cnt];   // ³Ë»ý
-		ack_9K_sum  += ack_9K_temp;   // ÀÛ¼Ó
-
-		
-	/* ¼ÆËã 100´Î */  
-	if (addata_cnt > 100){  		
-			addata_cnt = 0;
-			Receive_9K[index_100] = ack_9K_sum;
-			ack_9K_sum = 0;
-			if(Receive_9K[index_100] > threshold_ack)
-				correct_cnt++;
-			
-			index_100++;
-			if(index_100 > 100)
-				index_100 = 0;
-		}
-	
-
-//	{
-//			index_100 = 0;
-////			for(int i = 0 ; i<50 ;i++)
-////				final_temp += Receive_9K[i];
-////			final_temp /= 100;
-////			printf("Æ½¾ù´óÐ¡ = %llu",final_temp);
+//uint8_t receive_deal_9K(void)   // Ê¶±ð9K Ö¸ÁîÓ¦´ð
+//{
+//		static uint16_t 	enter_cnt = 0;
+////		static uint8_t  index_100 = 0;
+////	static uint16_t  correct_cnt = 0;
+//	
+//	if(enter_cnt == 0)
+//	{		
+//		HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);  // ´ò¿ªADC½ÓÊÕ
+//		enter_cnt = 1;
 //	}
-	
-	if(correct_cnt > 50)      // ÕýÈ·´ÎÊýÐèÒª¸ù¾Ý ºÍË®ÏÂµ¥ÔªÒ»Æð²âÊÔÐÞ¸Ä
-	{ 
-		correct_cnt = 0;
-		addata_cnt  = 0;
-		enter_cnt = 0;
-		index_100 = 0;
-		HAL_NVIC_DisableIRQ(EXTI9_5_IRQn); // ¹Ø±ÕADC
-		return 1;
-	}
-	else 
-		return 0;
-	
-}
+
+//		ack_9K_temp  = ad7767_data;
+//		ack_9K_temp *= ack_9K_tlabe[addata_cnt];   // ³Ë»ý
+//		ack_9K_sum  += ack_9K_temp;   // ÀÛ¼Ó
+
+//		
+//	/* ¼ÆËã 100´Î */  
+//	if (addata_cnt > 100){  		
+//			addata_cnt = 0;
+//			Receive_9K[index_100] = ack_9K_sum;
+//			ack_9K_sum = 0;
+//			if(Receive_9K[index_100] > threshold_ack)
+//				correct_cnt++;
+//			
+//			index_100++;
+//			if(index_100 > 100)
+//				index_100 = 0;
+//		}
+//	
+
+////	{
+////			index_100 = 0;
+//////			for(int i = 0 ; i<50 ;i++)
+//////				final_temp += Receive_9K[i];
+//////			final_temp /= 100;
+//////			printf("Æ½¾ù´óÐ¡ = %llu",final_temp);
+////	}
+//	
+//	if(correct_cnt > 50)      // ÕýÈ·´ÎÊýÐèÒª¸ù¾Ý ºÍË®ÏÂµ¥ÔªÒ»Æð²âÊÔÐÞ¸Ä
+//	{ 
+//		correct_cnt = 0;
+//		addata_cnt  = 0;
+//		enter_cnt = 0;
+//		index_100 = 0;
+//		HAL_NVIC_DisableIRQ(EXTI9_5_IRQn); // ¹Ø±ÕADC
+//		return 1;
+//	}
+//	else 
+//		return 0;
+//	
+//}
 
 //	volatile uint16_t 	enter_cnt1 = 0;   // ²âÊÔÓÃ  ×Ü¹²Âú×ã´¥·¢ãÐÖµµÄ´ÎÊý
-uint8_t receive_deal_9_5K(void)    // Ê¶±ð9.5K ¹¦ÄÜÓ¦´ð
-{
-	static uint16_t 	enter_cnt = 0;
+//uint8_t receive_deal_9_5K(void)    // Ê¶±ð9.5K ¹¦ÄÜÓ¦´ð
+//{
+//	static uint16_t 	enter_cnt = 0;
 
-//	static uint16_t   correct_cnt = 0;
-	
-	if(enter_cnt == 0)
-	{		
-		HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);   // ´ò¿ªADC½ÓÊÕ
-		enter_cnt = 1;
-	}
+////	static uint16_t   correct_cnt = 0;
+//	
+//	if(enter_cnt == 0)
+//	{		
+//		HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);   // ´ò¿ªADC½ÓÊÕ
+//		enter_cnt = 1;
+//	}
 
 
-	
-}
+//	
+//}
 
 
 
