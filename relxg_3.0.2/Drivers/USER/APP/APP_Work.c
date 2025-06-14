@@ -11,7 +11,7 @@
 #define MOTOR_REVERSE    Set_Pin(MOTOR)     // 电机反转 
 #define MOTOR_FORWARD    Reset_Pin(MOTOR)   // 电机正转
 //应答
-#define SYMBOL_COUNT 80  // 10字节 * 4个2-bit 符号
+#define SYMBOL_COUNT 40  // 10字节 * 4个2-bit 符号
 
 
 enum 
@@ -77,10 +77,30 @@ const static TIM_FREQUENCE TIM4_Freq_Data[5] = {
 {0,9230-1,3230-1,6000-1},						// f5	 	13K
 };
 
+// 占空比 20%
+const static TIM_FREQUENCE TIM4_Freq_Data_20[5] = {
+    {0, 13333-1, (uint16_t)(13333 * 0.2)-1, (uint16_t)(13333 * 0.8)-1},  // f1  9K  (原 4667-1, 8666-1 → 2666-1, 10666-1)
+    {0, 12000-1, (uint16_t)(12000 * 0.2)-1, (uint16_t)(12000 * 0.8)-1},  // f2  10K (原 4200-1, 7800-1 → 2400-1, 9600-1)
+    {0, 10909-1, (uint16_t)(10909 * 0.2)-1, (uint16_t)(10909 * 0.8)-1},  // f3  11K (原 3818-1, 7091-1 → 2181-1, 8727-1)
+    {0, 10000-1, (uint16_t)(10000 * 0.2)-1, (uint16_t)(10000 * 0.8)-1},  // f4  12K (原 3500-1, 6500-1 → 2000-1, 8000-1)
+    {0, 9230-1,  (uint16_t)(9230 * 0.2)-1,  (uint16_t)(9230 * 0.8)-1}   // f5  13K (原 3230-1, 6000-1 → 1846-1, 7384-1)
+};
+
+
+
+// 占空比 15%
+const static TIM_FREQUENCE TIM4_Freq_Data_15[5] = {
+    {0, 13333-1, (uint16_t)(13333 * 0.15)-1, (uint16_t)(13333 * 0.85)-1},  // f1  9K  (原 4667-1, 8666-1 → 2000-1, 11333-1)
+    {0, 12000-1, (uint16_t)(12000 * 0.15)-1, (uint16_t)(12000 * 0.85)-1},  // f2  10K (原 4200-1, 7800-1 → 1800-1, 10200-1)
+    {0, 10909-1, (uint16_t)(10909 * 0.15)-1, (uint16_t)(10909 * 0.85)-1},  // f3  11K (原 3818-1, 7091-1 → 1636-1, 9273-1)
+    {0, 10000-1, (uint16_t)(10000 * 0.15)-1, (uint16_t)(10000 * 0.85)-1},  // f4  12K (原 3500-1, 6500-1 → 1500-1, 8500-1)
+    {0, 9230-1,  (uint16_t)(9230 * 0.15)-1,  (uint16_t)(9230 * 0.85)-1}    // f5  13K (原 3230-1, 6000-1 → 1384-1, 7846-1)
+};
+
 
 
 //占空比10%
-const static TIM_FREQUENCE TIM4_Freq_Data1 [5]=  
+const static TIM_FREQUENCE TIM4_Freq_Data_10 [5]=  
 {
 		{0,13333-1,1333-1,8666-1},					// f1  9K 
 		{0,  12000-1, 1200-1, 10800-1},   // f2  10K 
@@ -90,7 +110,24 @@ const static TIM_FREQUENCE TIM4_Freq_Data1 [5]=
 		
 };
 
+// 占空比 19%
+const static TIM_FREQUENCE TIM4_Freq_Data_19[5] = {
+    {0, 13333-1, (uint16_t)(13333 * 0.19)-1, (uint16_t)(13333 * 0.81)-1},  // f1  9K  (原 4667-1, 8666-1 → 2533-1, 10800-1)
+    {0, 12000-1, (uint16_t)(12000 * 0.19)-1, (uint16_t)(12000 * 0.81)-1},  // f2  10K (原 4200-1, 7800-1 → 2280-1, 9720-1)
+    {0, 10909-1, (uint16_t)(10909 * 0.19)-1, (uint16_t)(10909 * 0.81)-1},  // f3  11K (原 3818-1, 7091-1 → 2073-1, 8836-1)
+    {0, 10000-1, (uint16_t)(10000 * 0.19)-1, (uint16_t)(10000 * 0.81)-1},  // f4  12K (原 3500-1, 6500-1 → 1900-1, 8100-1)
+    {0, 9230-1,  (uint16_t)(9230 * 0.19)-1,  (uint16_t)(9230 * 0.81)-1}    // f5  13K (原 3230-1, 6000-1 → 1754-1, 7476-1)
+};
 
+
+// 占空比18%
+const static TIM_FREQUENCE TIM4_Freq_Data_18[5] = {
+    {0, 13333-1, 2400-1, 10933-1},    // f1  9K  (原4667-1,8666-1 → 2400-1,10933-1)
+    {0, 12000-1, 2160-1, 9840-1},     // f2  10K (原4200-1,7800-1 → 2160-1,9840-1)
+    {0, 10909-1, 1964-1, 8945-1},     // f3  11K (原3818-1,7091-1 → 1964-1,8945-1)
+    {0, 10000-1, 1800-1, 8200-1},     // f4  12K (原3500-1,6500-1 → 1800-1,8200-1)
+    {0, 9230-1, 1661-1, 7569-1}       // f5  13K (原3230-1,6000-1 → 1661-1,7569-1)
+};
 
 //占空比5%
 const static TIM_FREQUENCE TIM4_Freq_Data2[5] = {
@@ -396,23 +433,23 @@ void Send_response_12k(void)   /* 指令应答，9K 20ms */
 
 
 
-void Send_response_fun(void)   /* 功能应答，9.5K 20ms */
-{
-	Timer4_freq_Init(TIM4_Freq_Data1[1]);  // 9.5K
-	
-	 SysTick->VAL   = 0UL;  // 清除系统定时器的计数
-	//	 TIM6->CNT  =  0; 
-//	Reset_Pin(IR2110S_SD);   // 开启输出，低有效
+//void Send_response_fun(void)   /* 功能应答，9.5K 20ms */
+//{
+//	Timer4_freq_Init(TIM4_Freq_Data1[1]);  // 9.5K
+//	
+//	 SysTick->VAL   = 0UL;  // 清除系统定时器的计数
+//	//	 TIM6->CNT  =  0; 
+////	Reset_Pin(IR2110S_SD);   // 开启输出，低有效
 
-	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
-	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);
-	
-	HAL_Delay(19);
-	//Delay_us(800);
-	Set_Pin(IR2110S_SD);   // 20ms，结束输出
-	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_3);
-	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_1);  
-}
+//	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
+//	HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);
+//	
+//	HAL_Delay(19);
+//	//Delay_us(800);
+//	Set_Pin(IR2110S_SD);   // 20ms，结束输出
+//	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_3);
+//	HAL_TIM_OC_Stop(&htim4,TIM_CHANNEL_1);  
+//}
 
 
 
@@ -448,9 +485,7 @@ void Send_frame_from_hex(uint8_t hex_array[10]) {
         for (int i = 0; i < 4; i++) {
             uint8_t two_bits = (byte >> (6 - i * 2)) & 0x03;
 
-            freq_sequence[symbol_idx++] = TIM4_Freq_Data2[two_bits];
-
-            freq_sequence[symbol_idx++] = TIM4_Freq_Data2[two_bits];
+            freq_sequence[symbol_idx++] = TIM4_Freq_Data_10[two_bits];
 
         }
     }

@@ -47,7 +47,7 @@
 
 #define BUFF_SIZE (100)  // ADC的缓存数组  
 
-#define ADC_PREAMP_30   // ADC前放倍数选择    ADC_PREAMP_2   ADC_PREAMP_3   ADC_PREAMP_11   ADC_PREAMP_30
+#define ADC_PREAMP_2   // ADC前放倍数选择    ADC_PREAMP_2   ADC_PREAMP_3   ADC_PREAMP_11   ADC_PREAMP_30
 
 #define DEVICE_ID  0x01
 

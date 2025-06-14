@@ -22,25 +22,35 @@ Dialog DLL:      TCM.DLL V1.36.1.0
  
 <h2>Project:</h2>
 D:\Users\admin\Desktop\notch-filter\relxg_3.0.2\MDK-ARM\BJC_2.uvprojx
-Project File Date:  06/13/2025
+Project File Date:  06/14/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\mdk\ARM\ARMCC\Bin'
 Build target 'BJC_2'
 compiling APP_Work.c...
-..\Drivers\USER\APP\APP_Work.c(547): warning:  #546-D: transfer of control bypasses initialization of:
-            variable "mpu_roll"  (declared at line 599)
+..\Drivers\USER\APP\APP_Work.c(582): warning:  #546-D: transfer of control bypasses initialization of:
+            variable "mpu_roll"  (declared at line 634)
   	switch(message.CMDdata)   // 根据指令执行对应功能
   	^
-..\Drivers\USER\APP\APP_Work.c(621): warning:  #177-D: variable "ihex"  was declared but never referenced
+..\Drivers\USER\APP\APP_Work.c(656): warning:  #177-D: variable "ihex"  was declared but never referenced
   	uint8_t ihex[HEX_SIZE] = {0x1B,0x1B,0x1B,0x1B,0x1b,0x1b,0x1b,0x1b,0x1b,0x1b};
-..\Drivers\USER\APP\APP_Work.c(718): warning:  #177-D: variable "data_temp"  was declared but never referenced
+..\Drivers\USER\APP\APP_Work.c(753): warning:  #177-D: variable "data_temp"  was declared but never referenced
   	static uint8_t data_temp = 0;
-..\Drivers\USER\APP\APP_Work.c: 3 warnings, 0 errors
+..\Drivers\USER\APP\APP_Work.c(81): warning:  #177-D: variable "TIM4_Freq_Data_20"  was declared but never referenced
+  const static TIM_FREQUENCE TIM4_Freq_Data_20[5] = {
+..\Drivers\USER\APP\APP_Work.c(92): warning:  #177-D: variable "TIM4_Freq_Data_15"  was declared but never referenced
+  const static TIM_FREQUENCE TIM4_Freq_Data_15[5] = {
+..\Drivers\USER\APP\APP_Work.c(114): warning:  #177-D: variable "TIM4_Freq_Data_19"  was declared but never referenced
+  const static TIM_FREQUENCE TIM4_Freq_Data_19[5] = {
+..\Drivers\USER\APP\APP_Work.c(124): warning:  #177-D: variable "TIM4_Freq_Data_18"  was declared but never referenced
+  const static TIM_FREQUENCE TIM4_Freq_Data_18[5] = {
+..\Drivers\USER\APP\APP_Work.c(133): warning:  #177-D: variable "TIM4_Freq_Data2"  was declared but never referenced
+  const static TIM_FREQUENCE TIM4_Freq_Data2[5] = {
+..\Drivers\USER\APP\APP_Work.c: 8 warnings, 0 errors
 linking...
-Program Size: Code=70924 RO-data=2292 RW-data=488 ZI-data=15640  
+Program Size: Code=70892 RO-data=2452 RW-data=488 ZI-data=15640  
 FromELF: creating hex file...
-"BJC_2\BJC_2.axf" - 0 Error(s), 3 Warning(s).
+"BJC_2\BJC_2.axf" - 0 Error(s), 8 Warning(s).
 
 <h2>Software Packages used:</h2>
 
