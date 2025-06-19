@@ -33,6 +33,20 @@ enum {   // 唤醒状态参数
 };
 
 
+
+
+typedef struct 
+{
+	uint16_t prescaler;    // 分频数
+	uint16_t period;			 // 计算值 
+	uint16_t H_IN;	 			 // 占空比1 =  H_IN / period
+	uint16_t L_IN;				 
+}TIM_FREQUENCE;          // 定时器的频率参数
+
+extern TIM_FREQUENCE TIM4_Freq_Data[5];
+
+
+
 static const char  * SystemTable[] = 
 {
 		"Normal",     /* 0 正常工作 */

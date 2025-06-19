@@ -21,13 +21,7 @@ enum
 	Recover = 2,  //钩子复位
 };               // 电机运行状态
 
-typedef struct 
-{
-	uint16_t prescaler;    // 分频数
-	uint16_t period;			 // 计算值 
-	uint16_t H_IN;	 			 // 占空比1 =  H_IN / period
-	uint16_t L_IN;				 
-}TIM_FREQUENCE;          // 定时器的频率参数
+
 
 
 
@@ -69,7 +63,7 @@ extern uint8_t StartT;
 extern	uint8_t StartT2;
 
 //占空比35%
-const static TIM_FREQUENCE TIM4_Freq_Data[5] = {
+TIM_FREQUENCE TIM4_Freq_Data[5] = {
 {0,13333-1,4667-1,8666-1},					// f1  9K 
 {0,  12000-1, 4200-1, 7800-1},   // f2  10K 
 {0,  10909-1, 3818-1, 7091-1},		// f3	 	11K
@@ -485,7 +479,7 @@ void Send_frame_from_hex(uint8_t hex_array[10]) {
         for (int i = 0; i < 4; i++) {
             uint8_t two_bits = (byte >> (6 - i * 2)) & 0x03;
 
-            freq_sequence[symbol_idx++] = TIM4_Freq_Data_10[two_bits];
+            freq_sequence[symbol_idx++] = TIM4_Freq_Data[two_bits];
 
         }
     }

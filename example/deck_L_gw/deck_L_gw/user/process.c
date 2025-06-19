@@ -1,4 +1,6 @@
 #include "process.h"
+#include "APP_Work.h"
+
 
 /* 按键的响应过程 */
 
@@ -65,38 +67,93 @@ void version_message_page_proccess(u8 key_value)   /* 显示版本号 */
 
 
 
-void singal_num_key_do(u8 key_value)  /*输出功率设置*/
-{
-	switch (key_value)
-	{
-		case 0x01: 	lcd_clear_row(2,4);lcd_clear_row(3,4);lcd_DisByte(1,4,0x1b); 
-								// 待加入具体的执行函数
-		break ;
-		case 0x02:  lcd_clear_row(1,4);lcd_clear_row(3,4);lcd_DisByte(2,4,0x1b); 
-								// 待加入具体的执行函数
-		break ;
-		case 0x03:  lcd_clear_row(1,4);lcd_clear_row(2,4);lcd_DisByte(3,4,0x1b); 
-							 // 待加入具体的执行函数
-		break ;
-	}	
-}
+//void singal_num_key_do(u8 key_value)  /*输出功率设置*/
+//{
+//	switch (key_value)
+//	{
+//		case 0x01: 	lcd_clear_row(2,4);lcd_clear_row(3,4);lcd_DisByte(1,4,0x1b); 
+//								// 待加入具体的执行函数
+//		break ;
+//		case 0x02:  lcd_clear_row(1,4);lcd_clear_row(3,4);lcd_DisByte(2,4,0x1b); 
+//								// 待加入具体的执行函数
+//		break ;
+//		case 0x03:  lcd_clear_row(1,4);lcd_clear_row(2,4);lcd_DisByte(3,4,0x1b); 
+//							 // 待加入具体的执行函数
+//		break ;
+//	}	
+//}
+
+
+//  void singal_set_page_proccess(u8 key_value)
+//  {
+//  //	if(key_value>=0x10){
+//  //	/***命令按键操作***/
+//  //		singal_cmd_key_do(key_value);
+//  //		return ;	
+//  //	}else 
+//  	if(key_value<0x10){
+//  	/***数字按键操作***/
+//  		singal_num_key_do(key_value);
+//  		return ;	
+//  	}
+//  	if(key_value == 0x80)
+//  		home_key_action();
+//  }
 
 
 void singal_set_page_proccess(u8 key_value)
 {
-//	if(key_value>=0x10){
-//	/***命令按键操作***/
-//		singal_cmd_key_do(key_value);
-//		return ;	
-//	}else 
-	if(key_value<0x10){
-	/***数字按键操作***/
-		singal_num_key_do(key_value);
-		return ;	
-	}
-	if(key_value == 0x80)
-		home_key_action();
+    if(key_value == 0x80) {
+        home_key_action();
+        return;
+    }
+    // 只要不是HOME，全部交给singal_num_key_do处理（包括数字、ENTER、CLEAR等）
+    singal_num_key_do(key_value);
 }
+
+
+// ...existing code...
+extern char duty_input[4];
+extern uint8_t duty_input_len;
+extern TIM_FREQUENCE Single_Freq_Data[5];
+
+void singal_num_key_do(u8 key_value)
+{
+    if(key_value >= 0x00 && key_value <= 0x09) // 数字键
+    {
+        if(duty_input_len < 3) // 最多输入3位
+        {
+            duty_input[duty_input_len++] = '0' + key_value;
+            duty_input[duty_input_len] = '\0';
+            draw_set_singal_page();
+        }
+    }
+    else if(key_value == 0x10) // ENTER键
+    {
+        int duty = atoi(duty_input); // 转为整数
+        if(duty > 0 && duty < 100)
+        {
+            for(int i = 0; i < 5; i++) {
+                Single_Freq_Data[i].CH1_high = (uint16_t)(Single_Freq_Data[i].period * duty / 100.0);
+                Single_Freq_Data[i].CH2_high = Single_Freq_Data[i].period - Single_Freq_Data[i].CH1_high;
+            }
+        }
+        // 清空输入
+        duty_input_len = 0;
+        duty_input[0] = '\0';
+        draw_set_singal_page();
+    }
+    else if(key_value == 0x20) // CLEAR键
+    {
+        duty_input_len = 0;
+        duty_input[0] = '\0';
+        draw_set_singal_page();
+    }
+}
+// ...existing code...
+
+
+
 
 
 void running_cmd_page_proccess(u8 key_value)

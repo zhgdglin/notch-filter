@@ -21,11 +21,16 @@
 #include "usart.h"
 #include "main.h"
 #include "gpio.h"
+#include "APP_Work.h"
+
+
 
 /* USER CODE BEGIN 0 */
 //#define  USE_RS232
-uint8_t uart1_rxbuf[10];  // 确保数组长度大于等于 10
-	uint8_t StartT2 = 0;
+#define UART1_RX_MAXLEN  32
+uint8_t uart1_rxbuf[UART1_RX_MAXLEN];
+uint8_t uart1_rx_index = 0;
+uint8_t StartT2 = 0;
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;
@@ -260,12 +265,22 @@ void Uart1_Puts(uint8_t *data,uint32_t data_len)
 }
 
 
+// ...existing code...
+
+// 统一设置所有频率组的占空比
+void Set_All_TIM4_Duty(float duty_percent) {
+    if (duty_percent < 0 || duty_percent > 100) return;
+    for (int i = 0; i < 5; i++) {
+        uint16_t period = TIM4_Freq_Data[i].period + 1;
+        TIM4_Freq_Data[i].H_IN = (uint16_t)(period * (duty_percent / 100.0f)) - 1;
+        TIM4_Freq_Data[i].L_IN = period - TIM4_Freq_Data[i].H_IN - 1;
+    }
+}
+
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) 
 {
-	uint8_t ihex[10] = {0x1B,0x1B,0x1B,0x1B,0x1b,0x1b,0x1b,0x1b,0x1b,0x1b};
-    if (huart->Instance == USART1)
-    {
-        // 错误处理（可选）
+    if (huart->Instance == USART1) {
+        // 清除错误标志
         if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_ORE) || 
             __HAL_UART_GET_FLAG(&huart1, UART_FLAG_NE)  || 
             __HAL_UART_GET_FLAG(&huart1, UART_FLAG_FE))
@@ -275,18 +290,58 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
             __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_FE);
         }
 
-        // 判断是否收到字符 '1'
-        if (uart1_rxbuf[0] == '1')
-        {
-            char msg[] = "我是帅哥\r\n";
-            HAL_UART_Transmit(&huart1, (uint8_t*)msg, sizeof(msg)-1, HAL_MAX_DELAY);
-						StartT2 = 1;
-				
+        // 简单协议：遇到回车或缓冲区满就解析
+        if (uart1_rxbuf[uart1_rx_index] == '\r' || uart1_rxbuf[uart1_rx_index] == '\n' || uart1_rx_index >= UART1_RX_MAXLEN-1) {
+            uart1_rxbuf[uart1_rx_index] = 0; // 字符串结束
+            if (strstr((char*)uart1_rxbuf, "SET_ALL_DUTY") != NULL) {
+                float duty;
+                if (sscanf((char*)uart1_rxbuf, "SET_ALL_DUTY %f", &duty) == 1) {
+                    Set_All_TIM4_Duty(duty);
+                    StartT2 = 1;   //发射
+                    printf("所有频率组占空比已统一设置为%.1f%%\r\n", duty);
+                }
+            }
+            uart1_rx_index = 0; // 重新开始接收
+        } else {
+            uart1_rx_index++;
         }
-
-        // 重新开启下一次接收
-        HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 1);  // 接收1字节
+        HAL_UART_Receive_IT(&huart1, &uart1_rxbuf[uart1_rx_index], 1); // 逐字节接收
     }
 }
+// ...existing code...
+
+
+
+
+
+
+// void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) 
+// {
+// 	uint8_t ihex[10] = {0x1B,0x1B,0x1B,0x1B,0x1b,0x1b,0x1b,0x1b,0x1b,0x1b};
+//     if (huart->Instance == USART1)
+//     {
+//         // 错误处理（可选）
+//         if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_ORE) || 
+//             __HAL_UART_GET_FLAG(&huart1, UART_FLAG_NE)  || 
+//             __HAL_UART_GET_FLAG(&huart1, UART_FLAG_FE))
+//         {
+//             __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_ORE);
+//             __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_NE);
+//             __HAL_UART_CLEAR_FLAG(&huart1, UART_FLAG_FE);
+//         }
+
+//         // 判断是否收到字符 '1'
+//         if (uart1_rxbuf[0] == '1')
+//         {
+//             char msg[] = "我是帅哥\r\n";
+//             HAL_UART_Transmit(&huart1, (uint8_t*)msg, sizeof(msg)-1, HAL_MAX_DELAY);
+// 						StartT2 = 1;
+				
+//         }
+
+//         // 重新开启下一次接收
+//         HAL_UART_Receive_IT(&huart1, uart1_rxbuf, 1);  // 接收1字节
+//     }
+// }
 
 /* USER CODE END 1 */

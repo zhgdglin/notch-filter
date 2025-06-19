@@ -127,21 +127,46 @@ void draw_control_page(void)  /**画操作界面**/
 	menu.Current_Page = CONTROL_PAGE;
 }
 
-void draw_set_singal_page(void)  /**画选择信号强度界面**/
+// void draw_set_singal_page(void)  /**画选择信号强度界面**/
+// {
+// 	lcd_clear();
+// 	HAL_Delay (1);
+	
+// 	lcd_DisStr(1,0,"1.195dB");
+// 	lcd_DisStr(2,0,"2.190dB");
+// 	lcd_DisStr(3,0,"3.185dB");
+// 	/*画箭头*/
+// 	lcd_clear_row(2,4);
+// 	lcd_clear_row(3,4);
+// 	lcd_DisByte(1,4,0x1b);
+	
+// 	menu.Current_Page = SINGAL_SET_PAGE;
+// }
+
+
+// ...existing code...
+
+char duty_input[4] = {0}; // 保存输入的占空比字符串
+uint8_t duty_input_len = 0;
+
+void draw_set_singal_page(void)
 {
-	lcd_clear();
-	HAL_Delay (1);
-	
-	lcd_DisStr(1,0,"1.195dB");
-	lcd_DisStr(2,0,"2.190dB");
-	lcd_DisStr(3,0,"3.185dB");
-	/*画箭头*/
-	lcd_clear_row(2,4);
-	lcd_clear_row(3,4);
-	lcd_DisByte(1,4,0x1b);
-	
-	menu.Current_Page = SINGAL_SET_PAGE;
+    lcd_clear();
+    HAL_Delay(1);
+
+    lcd_DisStr(1,0,"输入占空比(%)");
+    lcd_DisStr(3,0,duty_input); // 显示当前输入
+	// 	if(key_value == 0x80)
+// 		home_key_action();
+
+    menu.Current_Page = SINGAL_SET_PAGE;
 }
+
+// ...existing code...
+
+
+
+
 
 void draw_cmd_base_page(void)   /**画命令基础界面**/
 {
