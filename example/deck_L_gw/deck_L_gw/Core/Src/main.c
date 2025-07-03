@@ -112,9 +112,9 @@ int main(void)
   Set_Pin(POWER_CAP); 
   HAL_Delay(100);  // 为稳定开启
 	
-//  MX_MDMA_Init();        // SD卡对应的DMA
-//  MX_SDMMC1_SD_Init();   //SD卡没用到
-//  MX_FATFS_Init();
+  MX_MDMA_Init();        // SD卡对应的DMA
+  MX_SDMMC1_SD_Init();   //SD卡没用到
+  MX_FATFS_Init();
 
   MX_TIM6_Init();  // us级延时时钟
   MX_ADC3_Init();	// 电池电压

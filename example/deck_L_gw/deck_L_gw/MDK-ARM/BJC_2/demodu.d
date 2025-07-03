@@ -1,6 +1,6 @@
 bjc_2\demodu.o: ..\user\demodu.c
-bjc_2\demodu.o: ..\user\demodu.h
-bjc_2\demodu.o: ../Core/Inc/usart.h
+bjc_2\demodu.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdint.h
+bjc_2\demodu.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdbool.h
 bjc_2\demodu.o: ../Core/Inc/main.h
 bjc_2\demodu.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h
 bjc_2\demodu.o: ../Core/Inc/stm32h7xx_hal_conf.h
@@ -9,7 +9,6 @@ bjc_2\demodu.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h
 bjc_2\demodu.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h
 bjc_2\demodu.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h750xx.h
 bjc_2\demodu.o: ../Drivers/CMSIS/Include/core_cm7.h
-bjc_2\demodu.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdint.h
 bjc_2\demodu.o: ../Drivers/CMSIS/Include/cmsis_version.h
 bjc_2\demodu.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 bjc_2\demodu.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -47,10 +46,11 @@ bjc_2\demodu.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h
 bjc_2\demodu.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h
 bjc_2\demodu.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h
 bjc_2\demodu.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
+bjc_2\demodu.o: ..\user\demodu.h
+bjc_2\demodu.o: ../Core/Inc/usart.h
 bjc_2\demodu.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdio.h
 bjc_2\demodu.o: ../user/cmd.h
 bjc_2\demodu.o: ../Drivers/USER/APP/APP_Work.h
-bjc_2\demodu.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\stdbool.h
 bjc_2\demodu.o: D:\software\mdk\ARM\ARMAC5\Bin\..\include\string.h
 bjc_2\demodu.o: ../Core/Inc/gpio.h
 bjc_2\demodu.o: ../FATFS/App/fatfs.h

@@ -45,9 +45,9 @@
 
 #define LFM_LENGTH 2500  //   ADC_FS *  SINGAL_TIME
 
-#define BUFF_SIZE (100)  // ADC的缓存数组  
+#define BUFF_SIZE (200)  // ADC的缓存数组  
 
-#define ADC_PREAMP_2   // ADC前放倍数选择    ADC_PREAMP_2   ADC_PREAMP_3   ADC_PREAMP_11   ADC_PREAMP_30
+#define ADC_PREAMP_11   // ADC前放倍数选择    ADC_PREAMP_2   ADC_PREAMP_3   ADC_PREAMP_11   ADC_PREAMP_30
 
 #define DEVICE_ID  0x01
 
@@ -116,13 +116,13 @@ extern	volatile uint8_t TIM13_10ms_cnt;
 extern  volatile uint8_t TIM13_100ms_cnt;
 extern  volatile uint8_t TIM13_1s_cnt;
 	
-//extern  int32_t  AD7767_Ping[BUFF_SIZE];  
-//extern  int32_t  AD7767_Pang[BUFF_SIZE];
+extern  float  AD7767_Ping[BUFF_SIZE];  
+extern  float  AD7767_Pang[BUFF_SIZE];
 extern  volatile  float    ad7767_data;
 extern volatile  float     ad7767_data_16B;
 
-//extern  int32_t  *p_sd;     			//    SD卡写入
-//extern  int32_t  *p_ad_begin; 
+extern  float  *p_sd;     			//    SD卡写入
+extern  float  *p_ad_begin; 
 
 extern volatile bool Ping_full_flag;
 extern volatile bool Pang_full_flag;

@@ -12,9 +12,7 @@
 
 
 __align(4)  float  AD7767_Ping[BUFF_SIZE] = {0};  
-__align(4)  float  output_Ping[BUFF_SIZE] = {0}; 
 __align(4)  float  AD7767_Pang[BUFF_SIZE] = {0};
-__align(4)  float  output_Pang[BUFF_SIZE] = {0}; 
 __align(4)  float  fre_ping[BUFF_SIZE] = {0};
 __align(4)  float  fre_pang[BUFF_SIZE] = {0};
 

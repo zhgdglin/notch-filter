@@ -1,3 +1,6 @@
+#include <stdint.h>
+#include <stdbool.h>
+#include "main.h" // 假设有HAL_GetTick()
 #include "demodu.h"
 
 
@@ -19,6 +22,8 @@ uint8_t hex[HEX_SIZE] = {0};
 uint32_t da_index = 0;
 uint16_t TIM7_cnt = 0;
 uint8_t StartT = 0;
+
+uint32_t da_last_write_tick = 0; // 记录最后一次写入da的时间(ms)
 
 int sample_index = 0; // 全局变量定义在文件外部
 
@@ -80,7 +85,16 @@ bool parse_frame(uint8_t *hex) {
 }
 
 
-
+void check_da_timeout(void)
+{
+    if(da_index > 0) {
+        if(HAL_GetTick() - da_last_write_tick > 3000) { // 超过3秒
+						printf("da数组清空\r\n");
+            da_index = 0;
+            memset(da, 0, sizeof(da));
+        }
+    }
+}
 
 
 float multiChannelNotchFilter(float desired_signal, int k, AdaptiveNotchFilter *filter) {
@@ -151,6 +165,8 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
         if (state1== SIGNAL_ENDED){
             da[da_index++] = 0;
 					  da[da_index++] = 0;
+					
+					da_last_write_tick = HAL_GetTick(); // 更新时间戳
             if (da_index >= MAX_COUNT) {
 							binary_to_hex(da,hex);
 							for (int j = 0; j < HEX_SIZE; j++){  // 每个字节转换为2个十六进制字符
@@ -179,7 +195,8 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
 						}
         else if (state2 == SIGNAL_ENDED) {
             da[da_index++] = 0;
-						da[da_index++] = 1;			
+						da[da_index++] = 1;
+						da_last_write_tick = HAL_GetTick(); // 更新时间戳			
             if (da_index >= MAX_COUNT) {
 							binary_to_hex(da,hex);
 							for (int j = 0; j < HEX_SIZE; j++) {  // 每个字节转换为2个十六进制字符
@@ -209,6 +226,7 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
         else if (state3 == SIGNAL_ENDED) {
             da[da_index++] = 1;
 						da[da_index++] = 0;
+						da_last_write_tick = HAL_GetTick(); // 更新时间戳
             if (da_index >= MAX_COUNT) {
 							binary_to_hex(da,hex);
 							for (int j = 0; j < HEX_SIZE; j++) {  // 每个字节转换为2个十六进制字符
@@ -238,6 +256,7 @@ void process_buffer_and_sum(float *input_buffer, int buffer_size) {
         else if (state4 == SIGNAL_ENDED) {
             da[da_index++] = 1;
 					  da[da_index++] = 1;
+					  da_last_write_tick = HAL_GetTick(); // 更新时间戳
             if (da_index >= MAX_COUNT) {
 							binary_to_hex(da,hex);
 							for (int j = 0; j < HEX_SIZE; j++) {  // 每个字节转换为2个十六进制字符

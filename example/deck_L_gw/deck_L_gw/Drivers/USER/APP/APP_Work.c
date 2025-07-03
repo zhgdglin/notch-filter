@@ -100,8 +100,8 @@ void APP_Init(void)
 	Reset_Pin(POWER_CAP);  /* 关闭48V电源 */
 
  /* LCD */
-	InitDis();
-  draw_main_page();
+//	InitDis();
+//  draw_main_page();
 	
 	/* RS232 */
 //	 RS232_Init();
@@ -113,8 +113,8 @@ void APP_Init(void)
 
 	
 	/* 按键 */
-		__HAL_TIM_CLEAR_IT (&htim7 ,TIM_IT_UPDATE );        // 清除T7标志
-	HAL_TIM_Base_Start_IT (&htim7 );                    // 允许T7中断
+//		__HAL_TIM_CLEAR_IT (&htim7 ,TIM_IT_UPDATE );        // 清除T7标志
+//	HAL_TIM_Base_Start_IT (&htim7 );                    // 允许T7中断
 	
 	/* RTC */
 	RTC_Init();
@@ -126,9 +126,9 @@ void APP_Init(void)
 
 
 	/* SD卡测试 */
-//	Get_SD_information();
-//	Check_SD_Fatfs();
-//	Fatfs_SD_Init();
+	Get_SD_information();
+	Check_SD_Fatfs();
+	Fatfs_SD_Init();
 	
 	/* ADC */
 //	PREAMP_2;        // ADC 前放倍数选择
@@ -147,7 +147,7 @@ void APP_Init(void)
 //receive_deal_9K();
 
 /*ADC*/
-//adc7767_init();
+adc7767_init();
 //HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);  // 打开ADC7767 触发
 
 
@@ -219,6 +219,8 @@ void APP_Process (void)
 //  get_adc();   // 单独测试ADC用
 	Matrix_Key_funtcion(Matrix_Key_Scan());
 	HOME_Scan();
+	check_da_timeout();
+	SD_Write_Process();
 //	if(StartT == 1)
 //		{
 //			StartT = 0;
@@ -245,7 +247,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   if(htim->Instance == TIM7){        /*  T7  1ms */
 			Key_Scan_flag = 1;  // 开启HOME键扫描
   
-	if(da_index>0)
+//	if(da_index>0)
 		{
 //			TIM7_cnt++;
 //			if(TIM7_cnt == 3)

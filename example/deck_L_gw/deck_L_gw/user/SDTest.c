@@ -1,4 +1,5 @@
 #include "SDTest.h"
+#include "ad7767.h"
 #include <string.h>  
 
 #define  SD_WRITE_NUMBER  1   //SD卡写入量
@@ -57,10 +58,10 @@ void Get_SD_information(void)
 	
 	HAL_SD_DeInit(&hsd1);  // 为稳定先复位
 	
-  if(HAL_SD_Init (&hsd1) != HAL_OK)    
+	if(HAL_SD_Init (&hsd1) != HAL_OK)    
 	{	
-		printf(" SD卡初始化失败\r\n");
-		Error_Handler();
+			printf(" SD卡初始化失败，错误码: 0x%lX\r\n", HAL_SD_GetError(&hsd1));
+			Error_Handler();
 	}
 	printf("\r\nSD卡初始化成功\r\n");
   printf ("信息打印如下：\r\n");
@@ -118,7 +119,7 @@ void Fatfs_SD_Init (void)
 */
 void SD_Write_Process (void)
 {
-	#if 0
+	#if 1
 	if((Ping_full_flag == 1)||(Pang_full_flag == 1)){
 		/*判断是否SD卡传输成功*/
 		if(SD_GetCardState() == SD_TRANSFER_OK)
@@ -180,7 +181,7 @@ void SD_ctreate_new_file(void)
 
 void SD_Write_Dat(void)
 {
-#if 0
+#if 1
 	/* 乒乓写入数据 */		
 	if(Ping_full_flag == 1 && p_sd!=NULL)
 	{
@@ -289,8 +290,7 @@ void Check_SD_Fatfs (void)
     }
     else if(res_sd!=FR_OK)
     {
-      printf("！！SD卡挂载文件系统失败。(%d)\r\n",res_sd);
-      printf("！！可能原因：SD卡初始化不成功。\r\n");
+      printf("FatFs挂载失败: %d, 描述: %s\r\n", res_sd, FR_Table[res_sd]);
       while(1);
     }
     else

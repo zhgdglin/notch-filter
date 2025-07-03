@@ -5,20 +5,20 @@
 
 
 #define MAX_COUNT 80
-//#define HEX_SIZE (MAX_COUNT / 4)  // Ê®Áù½øÖÆÊý×éµÄ´óÐ¡
-#define HEX_SIZE (MAX_COUNT / 8)  // Ê®Áù½øÖÆÊý×éµÄ´óÐ¡
+//#define HEX_SIZE (MAX_COUNT / 4)  // Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½Ð¡
+#define HEX_SIZE (MAX_COUNT / 8)  // Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½Ð¡
 
 typedef struct {
-    float uc, us;    // Õý½»È¨ÖØ
-    float omega;     // ½ÇÆµÂÊ
+    float uc, us;    // ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½
+    float omega;     // ï¿½ï¿½Æµï¿½ï¿½
 } AdaptiveNotchFilter;
 
 
-// ×´Ì¬¶¨Òå
+// ×´Ì¬ï¿½ï¿½ï¿½ï¿½
 typedef enum {
-    SIGNAL_IDLE,     // ³õÊ¼×´Ì¬£¬ÎÞÐÅºÅ
-    SIGNAL_ACTIVE,   // ÐÅºÅ¼ì²âÖÐ
-    SIGNAL_ENDED     // ÐÅºÅ½áÊø
+    SIGNAL_IDLE,     // ï¿½ï¿½Ê¼×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½Åºï¿½
+    SIGNAL_ACTIVE,   // ï¿½ÅºÅ¼ï¿½ï¿½ï¿½ï¿½
+    SIGNAL_ENDED     // ï¿½ÅºÅ½ï¿½ï¿½ï¿½
 } SignalState;
 
 
@@ -26,6 +26,7 @@ typedef enum {
 void process_buffer_and_sum(float *input_buffer, int buffer_size);
 void frm_sych(void);
 void demodu_process(void);
+void check_da_timeout(void);
 
 extern uint32_t da_index;
 extern uint8_t da[MAX_COUNT];
