@@ -1,25 +1,37 @@
 # notch filter
 
 #### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+这是一个关于陷波滤波器的项目。陷波滤波器（Notch Filter）是一种特殊的带阻滤波器，它能够在某个特定频率点上提供非常高的衰减，而对该频率点之外的信号影响很小。这在许多应用中都非常有用，例如：
+*   **音频处理：** 消除特定频率的嗡嗡声或噪声。
+*   **通信系统：** 抑制窄带干扰。
+*   **生物医学信号处理：** 移除电源线噪声（如50Hz或60Hz）。
+*   **控制系统：** 滤除特定频率的振动或共振。
+
+本项目可能包含陷波滤波器的设计、实现、仿真以及在实际数据上的应用。
 
 #### 软件架构
-软件架构说明
-
+*   **MATLAB 脚本：** 用于滤波器设计、仿真和数据分析。主要文件位于 `matlab/` 目录下。
+*   **嵌入式C代码：** 可能用于在微控制器（如STM32系列）上实现实时滤波。相关代码可能位于 `relxg_3.0.2/user/` 或 `example/deck_L_gw/user/` 等目录下。
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  **克隆仓库：**
+    ```bash
+    git clone https://gitee.com/your-username/notch-filter.git
+    ```
+2.  **MATLAB 环境：** 确保您安装了 MATLAB，并且可能需要特定的工具箱（例如信号处理工具箱）。
+3.  **Keil MDK (MDK-ARM)：** 如果涉及嵌入式代码，您需要安装 Keil MDK 开发环境，并确保安装了相应的STM32器件支持包。
+4.  **STM32CubeMX：** 用于初始化STM32项目配置。
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  **MATLAB 仿真与分析：**
+    *   打开 `matlab/` 目录下的 `.m` 文件（例如 `doppler_notch_filter_with_noise.m`）进行仿真和数据处理。
+    *   根据脚本中的注释修改参数，运行以观察滤波效果。
+2.  **嵌入式项目开发：**
+    *   使用 Keil MDK 打开 `.uvprojx` 项目文件（例如 `relxg_3.0.2/MDK-ARM/BJC_2.uvprojx`）。
+    *   编译并烧录代码到您的STM32开发板。
+    *   根据项目需求，在 `user/` 目录下的C文件中修改和实现特定功能。
 
 #### 参与贡献
 
@@ -27,13 +39,3 @@ Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN�
 2.  新建 Feat_xxx 分支
 3.  提交代码
 4.  新建 Pull Request
-
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
